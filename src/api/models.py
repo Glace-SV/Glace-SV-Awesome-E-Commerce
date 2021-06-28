@@ -41,9 +41,6 @@ class User(db.Model, BasicMode):
     def check_password(self, password_param):
         return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
 
-    def __repr__(self):
-        return '<User %r>' % self.username
-
     def serialize(self):
         return {
             "id": self.id,
