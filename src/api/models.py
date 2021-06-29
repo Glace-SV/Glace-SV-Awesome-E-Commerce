@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class BasicMode():
+class BasicMode(db.Model):
     @classmethod
     def get_all(cls):
         return cls.query.all()
@@ -53,10 +53,10 @@ class User(db.Model, BasicMode):
 #  class
 
 class Glazed(db.Model, BasicMode):
-    __table__ = "glazed"
-    id_glazed = db.Column(db.Integer,unique = True, primary_key= True)
+    __tablename__ = "Glazed"
+    id_glazed = db.Column(db.Integer, unique=True, primary_key=True)
     image = db.Column(db.String) #Preguntar si es string.
-    name = db.Column(db.String(80), unique = True)
+    name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.String(20), nullable=False)
     size = db.Column(db.String(250), nullable=False)
@@ -82,8 +82,8 @@ class Glazed(db.Model, BasicMode):
         }
 
 class Treats(db.Model, BasicMode):
-    __table__ = "treats"
-    id_treat = db.Column(db.Integer,unique = True, primary_key= True)
+    __tablename__ = "Treats"
+    id_treat = db.Column(db.Integer, unique = True, primary_key= True)
     image = db.Column(db.String) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
@@ -112,8 +112,8 @@ class Treats(db.Model, BasicMode):
         }
 
 class Cakes(db.Model, BasicMode):
-    __table__ = "cakes"
-    id_cakes = db.Column(db.Integer,unique = True, primary_key= True)
+    __tablename__ = "Cakes"
+    id_cakes = db.Column(db.Integer, unique = True, primary_key= True)
     image = db.Column(db.String) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
@@ -142,12 +142,12 @@ class Cakes(db.Model, BasicMode):
         }
 
 class Gifts(db.Model, BasicMode):
-    __table__ = "gifts"
-    id_gifts = db.Column(db.Integer,unique = True, primary_key= True)
+    __tablename__ = "Gifts"
+    id_gifts = db.Column(db.Integer, unique = True, primary_key= True)
     image = db.Column(db.String)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.Integer(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
     def db_post(self):        
