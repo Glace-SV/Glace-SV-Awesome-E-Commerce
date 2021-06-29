@@ -18,6 +18,7 @@ class BasicMode():
 class User(db.Model, BasicMode):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -51,14 +52,14 @@ class User(db.Model, BasicMode):
 
 #  class
 
-class Glace(db.Model, BasicMode):
-    __table__ = "Glaced"
-    id_glace = db.Column(db.Integer,unique = True, primary_key= True)
-    image = db.Column(db.Integer)
+class Glazed(db.Model, BasicMode):
+    __table__ = "glazed"
+    id_glazed = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.Integer) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.Integer(20), nullable=False)
-    info_price = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
 
     def db_post(self):        
         db.session.add(self)
@@ -68,7 +69,7 @@ class Glace(db.Model, BasicMode):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
-        self.info.price = json["info.price"]
+        self.size = json["size"]
         return self
 
     def serialize(self):
@@ -76,18 +77,18 @@ class Glace(db.Model, BasicMode):
             "id_glace": self.id_glace,
             "description": self.description,
             "price": self.price,
-            "info_price": self.info_price
+            "size": self.size
             # do not serialize the password, its a security breach
         }
 
-class TreatYou(db.Model, BasicMode):
-    __table__ = "TreatYou"
+class Treats(db.Model, BasicMode):
+    __table__ = "treats"
     id_treat = db.Column(db.Integer,unique = True, primary_key= True)
-    image = db.Column(db.integer)
+    image = db.Column(db.Integer) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.Integer(20), nullable=False)
-    info_price = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
 
     def db_post(self):        
         db.session.add(self)
@@ -97,7 +98,7 @@ class TreatYou(db.Model, BasicMode):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
-        self.info.price = json["info.price"]
+        self.size = json["size"]
         return self
 
     def serialize(self):
@@ -106,18 +107,18 @@ class TreatYou(db.Model, BasicMode):
             "image": self.image,
             "description": self.description,
             "price": self.price,
-            "info_price": self.info_price
+            "size": self.size
             # do not serialize the password, its a security breach
         }
 
 class Cakes(db.Model, BasicMode):
-    __table__ = "Cakes"
+    __table__ = "cakes"
     id_cakes = db.Column(db.Integer,unique = True, primary_key= True)
-    image = db.Column(db.Integer)
+    image = db.Column(db.Integer) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.Integer(20), nullable=False)
-    info_price = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
 
     def db_post(self):        
         db.session.add(self)
@@ -127,7 +128,7 @@ class Cakes(db.Model, BasicMode):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
-        self.info.price = json["info.price"]
+        self.size = json["size"]
         return self
 
     def serialize(self):
@@ -136,28 +137,28 @@ class Cakes(db.Model, BasicMode):
             "image": self.image,
             "description": self.description,
             "price": self.price,
-            "info_price": self.info_price
+            "size": self.size
             # do not serialize the password, its a security breach
         }
 
-class SpreadLove(db.Model, BasicMode):
-    __table__ = "SpreadLove"
-    id_spread = db.Column(db.Integer,unique = True, primary_key= True)
+class Gifts(db.Model, BasicMode):
+    __table__ = "gifts"
+    id_gifts = db.Column(db.Integer,unique = True, primary_key= True)
     image = db.Column(db.Integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
-    info_price = db.Column(db.String(250), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
 
     def db_post(self):        
         db.session.add(self)
         db.session.commit()
 
-    def set_with_spread(self,json):
+    def set_with_gifts(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
-        self.info.price = json["info.price"]
+        self.size= json["size"]
         return self
 
     def serialize(self):
@@ -166,7 +167,7 @@ class SpreadLove(db.Model, BasicMode):
             "image": self.image,
             "description": self.description,
             "price": self.price,
-            "info_price": self.info_price
+            "size": self.size
             # do not serialize the password, its a security breach
         }
 
