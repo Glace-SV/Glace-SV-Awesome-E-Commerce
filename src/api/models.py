@@ -54,6 +54,7 @@ class User(db.Model, BasicMode):
 class Glace(db.Model, BasicMode):
     __table__ = "Glazed"
     id_glace = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
@@ -63,7 +64,7 @@ class Glace(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_Treat(self,json):
+    def set_with_glace(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
@@ -82,6 +83,7 @@ class Glace(db.Model, BasicMode):
 class TreatYou(db.Model, BasicMode):
     __table__ = "TreatYou"
     id_treat = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
@@ -101,6 +103,7 @@ class TreatYou(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_treat": self.id_treat,
+            "image": self.image,
             "description": self.description,
             "price": self.price,
             "info_price": self.info_price
@@ -110,6 +113,7 @@ class TreatYou(db.Model, BasicMode):
 class Cakes(db.Model, BasicMode):
     __table__ = "Cakes"
     id_cakes = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
@@ -129,6 +133,7 @@ class Cakes(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_cakes": self.id_cakes,
+            "image": self.image,
             "description": self.description,
             "price": self.price,
             "info_price": self.info_price
@@ -138,6 +143,7 @@ class Cakes(db.Model, BasicMode):
 class SpreadLove(db.Model, BasicMode):
     __table__ = "SpreadLove"
     id_spread = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
@@ -147,7 +153,7 @@ class SpreadLove(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_Treat(self,json):
+    def set_with_spread(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
@@ -157,6 +163,7 @@ class SpreadLove(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_spread": self.id_spread,
+            "image": self.image,
             "description": self.description,
             "price": self.price,
             "info_price": self.info_price
@@ -165,6 +172,7 @@ class SpreadLove(db.Model, BasicMode):
 class Events(db.Model, BasicMode):
     __table__ = "Events"
     id_events = db.Column(db.Integer,unique = True, primary_key= True)
+    image = db.Column(db.integer)
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer(20), nullable=False)
@@ -174,7 +182,7 @@ class Events(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_Treat(self,json):
+    def set_with_event(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
@@ -184,6 +192,7 @@ class Events(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_events": self.id_events,
+            "image": self.image,
             "description": self.description,
             "price": self.price,
             "info_price": self.info_price
