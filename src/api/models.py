@@ -65,7 +65,7 @@ class Glazed(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_glace(self,json):
+    def set_with_glaze(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]

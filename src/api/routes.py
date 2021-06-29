@@ -69,3 +69,33 @@ def handle_invalid_usage(error):
 @app.route('/')
 def sitemap():
     return generate_sitemap(app)
+
+@app.route('/glazed',methods=['GET']) 
+def all_glazed():
+    glazed = Glazed.get_all()
+    glazed_Dic = []
+    for item in glazed :
+        glazed_Dic.append(item.serialize())
+    return jsonify(glazed_Dic) 
+
+@app.route('/glazed',methods=['POST'])
+def adding_glazed():
+    json = request.get_json()
+    print (json)
+    item = Glazed.set_with_glace(Glazed(),json)
+    Glazed.db_post(glazed)
+    return jsonify(glazed.serialize())
+
+@app.route("/glazed/<int:glazed_id>", methods=['GET'])
+def one_glazed(glazed_id):
+    glazed = Glazed.get_one(glazed_id)
+    glazed_serialized = glazed.serialized()
+    return jsonify(glazed_serialized)
+
+@app.route("/glazed/<int:glazed_id>", methods=["DELETE"])
+def glazed_delete(glazed_id):
+    glazed = Glazed.query.get(glazed_id)
+    Glazed.delete(glazed)
+    return jsonify(glazed.serialize())
+
+    
