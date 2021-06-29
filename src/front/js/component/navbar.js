@@ -1,17 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 
-export const Navbar = () => {
+export const NavBarTwo = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
-		</nav>
+		<Navbar expand="sm" bg="dark" variant="dark">
+			<Navbar.Brand href="#">GLACE SV LOGO</Navbar.Brand>
+			<Navbar.Toggle aria-controls="navbarScroll" />
+			<i className="fas fa-grin fa-fw me-3" />
+			<Navbar.Collapse id="responsive-navbar-nav">
+				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+					<Nav.Link href="#action1">ACCEDE</Nav.Link>
+					<Nav.Link href="#action2">PRODUCTOS</Nav.Link>
+				</Nav>
+				<Form className="d-flex">
+					<Button variant="flat">
+						<i className="fas fa-shopping-basket" />
+					</Button>
+				</Form>
+			</Navbar.Collapse>
+		</Navbar>
 	);
 };
