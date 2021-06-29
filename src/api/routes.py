@@ -72,30 +72,112 @@ def sitemap():
 
 @app.route('/glazed',methods=['GET']) 
 def all_glazed():
-    glazed = Glazed.get_all()
-    glazed_Dic = []
-    for item in glazed :
-        glazed_Dic.append(item.serialize())
-    return jsonify(glazed_Dic) 
+        glazed = Glazed.get_all()
+        glazed_Dic = []
+        for item in glazed :
+            glazed_Dic.append(item.serialize())
+        return jsonify(glazed_Dic) 
 
 @app.route('/glazed',methods=['POST'])
 def adding_glazed():
-    json = request.get_json()
-    print (json)
-    item = Glazed.set_with_glace(Glazed(),json)
-    Glazed.db_post(glazed)
-    return jsonify(glazed.serialize())
+        json = request.get_json()
+        print (json)
+        glazed = Glazed.set_with_glace(Glazed(),json)
+        Glazed.db_post(glazed)
+        return jsonify(glazed.serialize())
 
 @app.route("/glazed/<int:glazed_id>", methods=['GET'])
 def one_glazed(glazed_id):
-    glazed = Glazed.get_one(glazed_id)
-    glazed_serialized = glazed.serialized()
-    return jsonify(glazed_serialized)
+        glazed = Glazed.get_one(glazed_id)
+        glazed_serialized = glazed.serialized()
+        return jsonify(glazed_serialized)
 
 @app.route("/glazed/<int:glazed_id>", methods=["DELETE"])
 def glazed_delete(glazed_id):
-    glazed = Glazed.query.get(glazed_id)
-    Glazed.delete(glazed)
-    return jsonify(glazed.serialize())
+        glazed = Glazed.query.get(glazed_id)
+        Glazed.delete(glazed)
+        return jsonify(glazed.serialize())
 
-    
+@app.route('/cakes',methods=['GET']) 
+def all_cakes():
+    cakes = Cakes.get_all()
+    cakes_Dic = []
+    for item in Cakes :
+        cakes_Dic.append(item.serialize())
+    return jsonify(cakes_Dic) 
+
+@app.route('/cakes',methods=['POST'])
+def adding_cakes():
+    json = request.get_json()
+    print (json)
+    cakes = Cakes.set_with_cakes(Cakes(),json)
+    Cakes.db_post(cakes)
+    return jsonify(cakes.serialize())
+
+@app.route("/cakes/<int:cakes_id>", methods=['GET'])
+def one_cakes(cakes_id):
+    cakes = Cakes.get_one(glazed_id)
+    cakes_serialized = cakes.serialized()
+    return jsonify(cakes_serialized)
+
+@app.route("/cakes/<int:cakes_id>", methods=["DELETE"])
+def cakes_delete(cakes_id):
+    cakes = Cakes.query.get(cakes_id)
+    cakes.delete(cakes)
+    return jsonify(cakes.serialize())
+
+@app.route('/treats',methods=['GET']) 
+def all_treats():
+    treats = Treats.get_all()
+    treats_Dic = []
+    for item in treats :
+        treats_Dic.append(item.serialize())
+    return jsonify(treats_Dic) 
+
+@app.route('/treats',methods=['POST'])
+def adding_treats():
+    json = request.get_json()
+    print (json)
+    treats = Treats.set_with_treats(Treats(),json)
+    Treats.db_post(treats)
+    return jsonify(treats.serialize())
+
+@app.route("/treats/<int:treats_id>", methods=['GET'])
+def one_treats(treats_id):
+    treats = Treats.get_one(treats_id)
+    treats_serialized = treats.serialized()
+    return jsonify(treats_serialized)
+
+@app.route("/treats/<int:treats_id>", methods=["DELETE"])
+def treats_delete(treats_id):
+    treats = Treats.query.get(treats_id)
+    Treats.delete(treats)
+    return jsonify(treats.serialize())
+
+@app.route('/gifts',methods=['GET']) 
+def all_gifts():
+    gifts = Gifts.get_all()
+    gifts_Dic = []
+    for item in gifts :
+        gifts_Dic.append(item.serialize())
+    return jsonify(gifts_Dic) 
+
+@app.route('/gifts',methods=['POST'])
+def adding_gifts():
+    json = request.get_json()
+    print (json)
+    gifts = Gifts.set_with_gifts(Gifts(),json)
+    Gifts.db_post(gifts)
+    return jsonify(gifts.serialize())
+
+@app.route("/gifts/<int:gifts_id>", methods=['GET'])
+def one_gifts(gifts_id):
+    gifts = Gifts.get_one(gifts_id)
+    gifts_serialized = gifts.serialized()
+    return jsonify(gifts_serialized)
+
+@app.route("/gifts/<int:gifts_id>", methods=["DELETE"])
+def gifts_delete(gifts_id):
+    gifts = Gifts.query.get(gifts_id)
+    gifts.delete(gifts)
+    return jsonify(gifts.serialize())

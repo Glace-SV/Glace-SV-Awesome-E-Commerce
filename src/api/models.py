@@ -94,7 +94,7 @@ class Treats(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_Treat(self,json):
+    def set_with_treat(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
@@ -124,7 +124,7 @@ class Cakes(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_Treat(self,json):
+    def set_with_cakes(self,json):
         self.name = json["name"]
         self.description = json["description"]
         self.price = json["price"]
