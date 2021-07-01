@@ -4,14 +4,17 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-boots
 
 export const NavBarTwo = () => {
 	return (
-		<Navbar expand="sm" bg="dark" variant="dark">
+		<Navbar expand="sm" bg="dark" variant="dark" fixed="top">
 			<Navbar.Brand href="#">GLACE SV LOGO</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarScroll" />
-			<i className="fas fa-grin fa-fw me-3" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-					<Nav.Link href="#action1">ACCEDE</Nav.Link>
-					<Nav.Link href="#action2">PRODUCTOS</Nav.Link>
+					<Nav.Link href="#action1" className="text-warning">
+						ACCEDE
+					</Nav.Link>
+					<Nav.Link href="#action2" className="text-warning">
+						PRODUCTOS
+					</Nav.Link>
 				</Nav>
 				<Form className="d-flex">
 					<Button variant="flat">
