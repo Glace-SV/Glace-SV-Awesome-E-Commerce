@@ -5,7 +5,12 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-boots
 export const NavBarTwo = () => {
 	return (
 		<Navbar expand="sm" bg="dark" variant="dark" fixed="top">
-			<Navbar.Brand href="#">GLACE SV LOGO</Navbar.Brand>
+			<Navbar.Brand href="#">
+				<img
+					className="navimage"
+					src="https://svglace.s3.eu-west-3.amazonaws.com/GLACE+SV+E-COMMERCE/Logo+y+brief+de+Glac%C3%A9/image-bb448ea9-45fe-4700-9234-db0c00178c79.jpg"
+				/>
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarScroll" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
