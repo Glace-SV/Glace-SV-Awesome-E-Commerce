@@ -20,6 +20,9 @@ export const NavBarTwo = () => {
 					<Nav.Link href="#action2" className="text-warning">
 						PRODUCTOS
 					</Nav.Link>
+					<Nav.Link href="#action2" className="text-warning">
+						EVENTOS
+					</Nav.Link>
 				</Nav>
 
 				<Button variant="flat">
