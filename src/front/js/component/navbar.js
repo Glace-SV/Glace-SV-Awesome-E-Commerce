@@ -27,7 +27,7 @@ export const NavBarTwo = () => {
 
 				<Button variant="flat">
 					<i className="fas fa-shopping-basket" />
-					TU CESTA
+					
 				</Button>
 			</Navbar.Collapse>
 		</Navbar>
