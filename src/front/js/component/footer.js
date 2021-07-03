@@ -8,7 +8,7 @@ export const Footer = () => {
 		return currentYear;
 	};
 	return (
-		<div className="myFooter">
+		<div className="myFooter mt-5">
 			<footer className="py-4">
 				<div className="container-fluid ">
 					<p className="m-0 text-center text-white">
@@ -50,11 +50,19 @@ export const Footer = () => {
 								</div>
 								<div className="footerawesome">
 									<p>
-										<a className="text-white" href="https://wa.me/50377362484">
+										<a
+											className="text-white"
+											href="https://wa.me/50377362484"
+											target="_blank"
+											rel="noopener noreferrer">
 											<i className="fab fa-whatsapp" />
 										</a>{" "}
 										&nbsp;
-										<a className="text-white" href="https://www.instagram.com/glace_sv/">
+										<a
+											className="text-white"
+											href="https://www.instagram.com/glace_sv/"
+											target="_blank"
+											rel="noopener noreferrer">
 											<i className="fab fa-instagram" />
 										</a>
 									</p>
