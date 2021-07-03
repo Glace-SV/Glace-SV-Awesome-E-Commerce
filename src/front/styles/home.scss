@@ -1,0 +1,68 @@
+
+//Styles for carousel paragraph style
+.homepara {
+    margin: 0px;
+    font-size: 20px;
+    font-weight: 600; 
+}
+
+//Styles for carousel text 
+.slideonecolor {
+    color: white;
+    text-shadow: 5px 4px 7px rgba(81,67,21,0.8);
+   }
+
+//Style for carousel text scrim
+.scrim {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+//Styles for nav bar logo
+.navimage {
+  width: 100px; /* width of container */
+  height: 100px; /* height of container */
+  object-fit: cover;
+  margin: 10px;
+}
+
+//Styles for carousel images
+.imgsizing {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+//Styles for category card images
+.imgsizingcategory {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    object-position: 10% 40%;
+
+}
+
+//Styles for category card animation
+.card:hover {
+    box-shadow: 4px 8px 12px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
+    transform: translatey(-4px);
+
+}
+
+.card{
+    margin-top: 10px;
+    border: none;
+}
+
+//Styles for span emojis
+.emoji {
+    font-size: 20px;
+    margin: 10px;
+}

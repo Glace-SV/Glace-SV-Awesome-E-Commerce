@@ -4,8 +4,13 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-boots
 
 export const NavBarTwo = () => {
 	return (
-		<Navbar expand="sm" bg="dark" variant="dark" fixed="top">
-			<Navbar.Brand href="#">GLACE SV LOGO</Navbar.Brand>
+		<Navbar expand="sm" bg="dark" variant="dark">
+			<Navbar.Brand href="#">
+				<img
+					className="navimage"
+					src="https://svglace.s3.eu-west-3.amazonaws.com/GLACE+SV+E-COMMERCE/glace+nuevo.jpg"
+				/>
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarScroll" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
@@ -15,12 +20,15 @@ export const NavBarTwo = () => {
 					<Nav.Link href="#action2" className="text-warning">
 						PRODUCTOS
 					</Nav.Link>
+					<Nav.Link href="#action2" className="text-warning">
+						EVENTOS
+					</Nav.Link>
 				</Nav>
-				<Form className="d-flex">
-					<Button variant="flat">
-						<i className="fas fa-shopping-basket" />
-					</Button>
-				</Form>
+
+				<Button variant="flat">
+					<i className="fas fa-shopping-basket" />
+					TU CESTA
+				</Button>
 			</Navbar.Collapse>
 		</Navbar>
 	);
