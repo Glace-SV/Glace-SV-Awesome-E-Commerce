@@ -33,8 +33,8 @@ export const Home = () => {
 					<Carousel.Caption>
 						<div className="scrim">
 							<h3 className="slideonecolor hometitle">The art of Bakery</h3>
-							<p className="homepara slideonecolor">✨Made from scratch </p>
-							<p className="homepara slideonecolor">🍰Glazed desserts & MORE </p>
+							<p className="homepara slideonecolor">Made from scratch </p>
+							<p className="homepara slideonecolor">Glazed desserts & MORE </p>
 						</div>
 					</Carousel.Caption>
 				</Carousel.Item>
@@ -48,17 +48,17 @@ export const Home = () => {
 					<Carousel.Caption>
 						<div className="scrim">
 							<h2 className="slideonecolor hometitle">The art of Bakery</h2>
-							<p className="homepara slideonecolor">❤Passion for creating delicious desserts</p>
-							<p className="homepara slideonecolor">🛵Delivery service only </p>
+							<p className="homepara slideonecolor">Passion for creating delicious desserts</p>
+							<p className="homepara slideonecolor">Delivery service only </p>
 						</div>
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
 			<div className="row mx-auto">
-				<h2 className="mt-5 mx-auto">
-					<span className="emoji">✨</span>
+				<h2 className="mt-5 mx-auto categorytitle">
+					<span className="emoji">🍰</span>
 					Nuestras especialidades
-					<span className="emoji">✨</span>
+					<span className="emoji">🍰</span>
 				</h2>
 			</div>
 			<div className="row mt-4 mx-auto">
@@ -112,12 +112,12 @@ export const Home = () => {
 				</Card>
 			</div>
 			<div className="mt-5 bckgrndimg eventcontainer" id="events">
-				<h2 className="pt-5 mt-5 eventtitle scrim text-center">
-					<span className="emoji">✨</span>
+				<h2 className="pt-4 mt-3 eventtitle scrim text-center">
+					<span className="emoji">🍰</span>
 					El evento perfecto
-					<span className="emoji">✨</span>
+					<span className="emoji">🍰</span>
 				</h2>
-				<h3 className="eventtitle mt-5 scrim slideonecolor">We design delicious events.</h3>
+				<h3 className="eventtitle3 mt-4 scrim slideonecolor">We design delicious events.</h3>
 				<p className="eventpara scrim slideonecolor">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
 					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -134,7 +134,7 @@ export const Home = () => {
 						Click para conseguir nuestros packs!
 					</a>
 				</Button>
-				<h3 className="eventtitle mt-5 scrim slideonecolor">Presupuesto personalizado.</h3>
+				<h3 className="eventtitle3 mt-5 scrim slideonecolor">Presupuesto personalizado.</h3>
 				<p className="eventpara scrim slideonecolor">
 					Déjanos tus datos y nos pondremos en contacto contigo lo más pronto posible.
 				</p>

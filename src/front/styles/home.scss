@@ -1,10 +1,24 @@
 
 //Styles for carousel paragraph 
+
+.hometitle {
+    font-size: 80px;
+    margin-bottom: 70px;
+    opacity: 0.90;
+}
+
 .homepara {
     margin: 0px;
     font-size: 20px;
     font-weight: 600; 
+    opacity: 0.75;
 }
+
+.categorytitle {
+    font-size: 30px;
+}
+
+
 
 
 //Styles for carousel text 
@@ -89,6 +103,13 @@ height: auto;
     padding: 0 30px 0 30px;
 }
 
+.eventtitle3 {
+    color: white;
+    padding: 0 30px 0 30px;
+    font-size: 25px;
+
+}
+
 //Styles for event section paragraph
 .eventpara {
     color: white;
@@ -107,7 +128,7 @@ height: auto;
 }
 
 .air {
-    height: 50px;
+    height: 30px;
 
 }
 

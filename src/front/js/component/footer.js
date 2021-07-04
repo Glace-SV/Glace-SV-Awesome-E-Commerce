@@ -8,7 +8,7 @@ export const Footer = () => {
 		return currentYear;
 	};
 	return (
-		<div className="myFooter mt-5">
+		<div className="myFooter">
 			<footer className="py-4">
 				<div className="container-fluid ">
 					<p className="m-0 text-center text-white">
