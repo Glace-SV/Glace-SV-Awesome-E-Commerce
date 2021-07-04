@@ -1,10 +1,11 @@
 
-//Styles for carousel paragraph style
+//Styles for carousel paragraph 
 .homepara {
     margin: 0px;
     font-size: 20px;
     font-weight: 600; 
 }
+
 
 //Styles for carousel text 
 .slideonecolor {
@@ -61,8 +62,52 @@
     border: none;
 }
 
+.card-text {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 400;
+}
+
 //Styles for span emojis
 .emoji {
     font-size: 20px;
     margin: 10px;
 }
+
+//Styles for the background on events section
+.bckgrndimg {
+    background-image: URL("https://unsplash.com/photos/J_IaguGH6rI/download?force=true&w=2400");
+    background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+height: auto;
+
+}
+
+//Styles for event section title
+.eventtitle {
+    color: white;
+    padding: 0 30px 0 30px;
+}
+
+//Styles for event section paragraph
+.eventpara {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    padding: 0 30px 20px 30px;
+
+}
+
+//Styles for event section button 
+#app > div > div:nth-child(2) > div.mt-5.bckgrndimg.eventcontainer > button, #events > form > button{
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+}
+
+.air {
+    height: 50px;
+
+}
+
