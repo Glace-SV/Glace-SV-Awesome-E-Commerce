@@ -1,0 +1,72 @@
+.bckgrndimg {
+    background-image: URL("https://unsplash.com/photos/vL6XDSdvmec/download?force=true&w=2400");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+}
+
+.rowdesign1 {
+    
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.rowdesign2 {
+    background-color: whitesmoke;
+    margin: 0 auto;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+
+
+#app > div > div.bckgrndimg > div.row.rowdesign1 > div > div:nth-child(1) {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    
+}
+
+#app > div > div.bckgrndimg > div.row.rowdesign1 > div > div:nth-child(2) {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    
+
+}
+
+
+
+#left-tabs-example-tab-second, #left-tabs-example-tab-first  {
+    color: #EEBA0B;
+    background-color: black;
+   
+    
+}
+
+a#left-tabs-example-tab-second.nav-link.active  {
+    color: black;
+    background-color:#EEBA0B;
+    text-shadow: 5px 4px 7px rgba(81,67,21,0.8);
+       
+  
+}
+
+a#left-tabs-example-tab-first.nav-link.active {
+    color: black;
+    background-color:#EEBA0B;
+    text-shadow: 5px 4px 7px rgba(81,67,21,0.8);
+       
+  
+}
+
+#left-tabs-example-tabpane-first {
+
+}
