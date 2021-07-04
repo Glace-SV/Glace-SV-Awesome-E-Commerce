@@ -17,10 +17,10 @@ export const NavBarTwo = () => {
 					<Nav.Link href="#action1" className="text-warning">
 						ACCEDE
 					</Nav.Link>
-					<Nav.Link href="#action2" className="text-warning">
+					<Nav.Link href="#categories" className="text-warning">
 						PRODUCTOS
 					</Nav.Link>
-					<Nav.Link href="#action2" className="text-warning">
+					<Nav.Link href="#events" className="text-warning">
 						EVENTOS
 					</Nav.Link>
 				</Nav>

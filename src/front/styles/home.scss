@@ -1,24 +1,19 @@
 
-//Styles for carousel paragraph 
-
+//Styles for carousel title
 .hometitle {
-    font-size: 80px;
+    font-size: 70px;
     margin-bottom: 70px;
     opacity: 0.90;
 }
 
+
+//Styles for carousel paragraph
 .homepara {
     margin: 0px;
     font-size: 20px;
     font-weight: 600; 
-    opacity: 0.75;
+    
 }
-
-.categorytitle {
-    font-size: 30px;
-}
-
-
 
 
 //Styles for carousel text 
@@ -63,6 +58,11 @@
 
 }
 
+//Styles for category title
+.categorytitle {
+    font-size: 30px;
+}
+
 //Styles for category card animation
 .card:hover {
     box-shadow: 4px 8px 12px 0 rgba(0,0,0,0.3);
@@ -71,11 +71,14 @@
 
 }
 
+//Styles for ccategory card
 .card{
     margin-top: 10px;
     border: none;
 }
 
+
+//Styles for ccategory card text
 .card-text {
     font-family: 'Playfair Display', serif !important;
     font-weight: 400;
@@ -103,6 +106,7 @@ height: auto;
     padding: 0 30px 0 30px;
 }
 
+//Styles for event section h3 title
 .eventtitle3 {
     color: white;
     padding: 0 30px 0 30px;
@@ -127,6 +131,7 @@ height: auto;
   font-weight: bold;
 }
 
+//Air just because.. 
 .air {
     height: 30px;
 

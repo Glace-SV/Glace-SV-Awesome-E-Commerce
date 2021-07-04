@@ -54,7 +54,7 @@ export const Home = () => {
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
-			<div className="row mx-auto">
+			<div className="row mx-auto" id="categories">
 				<h2 className="mt-5 mx-auto categorytitle">
 					<span className="emoji">🍰</span>
 					Nuestras especialidades
@@ -82,7 +82,7 @@ export const Home = () => {
 					/>
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
-						<Card.Text>Brownies, cupcakes, pertzels y macarons para endulzarte la vida.</Card.Text>
+						<Card.Text>Brownies, cupcakes, pretzels y macarons para endulzarte la vida.</Card.Text>
 						<Button variant="warning">Comprar ahora</Button>
 					</Card.Body>
 				</Card>
@@ -94,7 +94,7 @@ export const Home = () => {
 					/>
 					<Card.Body>
 						<Card.Title>CAKES & MORE!</Card.Title>
-						<Card.Text>Pasteles para celebrar toda ocasión.</Card.Text>
+						<Card.Text>Pasteles para celebrar toda ocasión: cumpleaños, graduaciones, bodas...</Card.Text>
 						<Button variant="warning">Comprar ahora</Button>
 					</Card.Body>
 				</Card>
@@ -106,7 +106,7 @@ export const Home = () => {
 					/>
 					<Card.Body>
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
-						<Card.Text>Cajas de regalo especialmente diseñadas para esparcir amor y felicidad.</Card.Text>
+						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
 						<Button variant="warning">Comprar ahora</Button>
 					</Card.Body>
 				</Card>
@@ -138,7 +138,7 @@ export const Home = () => {
 				<p className="eventpara scrim slideonecolor">
 					Déjanos tus datos y nos pondremos en contacto contigo lo más pronto posible.
 				</p>
-				<Form className="col-lg-6 col-12 mx-auto">
+				<Form className="col-lg-6 col-10 mx-auto">
 					<Form.Group className="mb-3" controlId="formBasicEmail">
 						<Form.Control type="text" placeholder="Nombre" required />
 					</Form.Group>
