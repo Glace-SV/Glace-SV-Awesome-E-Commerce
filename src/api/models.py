@@ -14,6 +14,8 @@ class Person(db.Model):
     email = db.Column(db.VARCHAR, unique=True, nullable=False)
     first_name = db.Column(db.VARCHAR, unique=False, nullable=False)
     last_name = db.Column(db.VARCHAR, unique=False, nullable=False)
+    address = db.Column(db.VARCHAR, unique=False, nullable=False)
+    phone = db.Column(db.Integer, unique=False, nullable=False)
     _password = db.Column(db.VARCHAR, unique=False, nullable=False)
     is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)  
     has_ad = db.relationship('Ad', backref='person',lazy=True)
@@ -27,6 +29,8 @@ class Person(db.Model):
             "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "address": self.address,
+            "phone": self.phone
         }
 
     @hybrid_property
