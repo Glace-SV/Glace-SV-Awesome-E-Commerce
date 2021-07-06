@@ -1,9 +1,9 @@
-.bckgrndimg {
-    background-image: URL("https://unsplash.com/photos/vL6XDSdvmec/download?force=true&w=2400");
+.loginbckgrndimg {
+    background-image:  linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), URL("https://unsplash.com/photos/vdx5hPQhXFk/download?force=true&w=2400");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
+    height: auto;
 }
 
 .rowdesign1 {
@@ -15,39 +15,34 @@
 }
 
 .rowdesign2 {
-    background-color: whitesmoke;
+    
+    background-color: transparent;
     margin: 0 auto;
     font-size: 20px;
-    border: 1px solid black;
     border-radius: 10px;
 }
 
 
 
 
-#app > div > div.bckgrndimg > div.row.rowdesign1 > div > div:nth-child(1) {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    font-weight: 500;
-    
-}
-
-#app > div > div.bckgrndimg > div.row.rowdesign1 > div > div:nth-child(2) {
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    font-weight: 500;
-    
-
-}
 
 
 
-#left-tabs-example-tab-second, #left-tabs-example-tab-first  {
+
+#left-tabs-example-tab-second  {
     color: #EEBA0B;
     background-color: black;
+    padding-left:10px;
+    font-weight: 500px;
    
+    
+}
+
+#left-tabs-example-tab-first {
+    color: #EEBA0B;
+    background-color: black;
+    font-weight: 500px;
+    
     
 }
 
@@ -68,5 +63,21 @@ a#left-tabs-example-tab-first.nav-link.active {
 }
 
 #left-tabs-example-tabpane-first {
+    padding: 20px 40px;
 
+}
+
+#left-tabs-example-tabpane-second {
+    padding: 20px 40px;
+
+}
+
+.scrim {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.formcolor {
+    color: white;
 }
