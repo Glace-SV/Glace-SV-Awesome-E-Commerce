@@ -8,6 +8,7 @@ import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Fab } from "./component/fab"
 
 //create your first component
 const Layout = () => {
