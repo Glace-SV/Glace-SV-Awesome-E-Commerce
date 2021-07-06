@@ -24,18 +24,18 @@ class BasicMode():
 
 class User(db.Model, BasicMode):
     __tablename__ = 'user'
-    user_id = db.Column(db.Integer, primary_key=True)
-    user_email = db.Column(db.String(120), unique=True, nullable=False)
-    user_name = db.Column(db.String(120), unique=True, nullable=False)
-    user_password = db.Column(db.String(80), unique=False, nullable=False)
-    user_adress = db.Column(db.String(250), unique=False, nullable=False)
-    user_city = db.Column(db.String(80), unique=False, nullable=False)
-    user_phone = db.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    adress = db.Column(db.String(250), unique=False, nullable=False)
+    city = db.Column(db.String(80), unique=False, nullable=False)
+    phone = db.Column(db.Integer)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
 
     def __repr__(self):
-        return '<user %r>' % self.username
+        return '<user %r>' % self.name
 
     @staticmethod
     def login_credentials(email,password):
@@ -55,8 +55,8 @@ class User(db.Model, BasicMode):
 
     def serialize(self):
         return {
-            "user_id": self.id_user,
-            "user_email": self.email_user,
+            "user_id": self.id,
+            "user_email": self.email,
             # do not serialize the password, its a security breach
         }
 
