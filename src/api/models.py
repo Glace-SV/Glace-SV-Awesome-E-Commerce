@@ -101,5 +101,3 @@ class Ad(db.Model):
 
     def __repr__(self):
         return f'Ad {self.title}'
-
-
