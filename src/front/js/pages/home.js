@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import { Link, useParams } from "react-router-dom";
 import {
 	Carousel,
 	Item,
@@ -107,7 +108,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
 						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Link to="/category">
+							<Button variant="warning">Comprar ahora</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 			</div>
