@@ -1,3 +1,4 @@
+  
 from datetime import timedelta
 
 from flask import Flask, request, jsonify, url_for, Blueprint
@@ -5,142 +6,175 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash
 
-from api.models import db, Person, Ad, Ad_category
+from api.models import db, User, Glazed, Cakes, Treats, Gifts
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
-@api.route('/login', methods=['POST'])
-def login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-
-    if not (email and password):
-        return {'error': 'Missing info'}, 400
-
-    user = Person.get_by_email(email)
-
-    if user and check_password_hash(user.password, password) and user.is_active:
-        token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
-        return {'token': token}, 200
-
-    else:
-        return {'error': 'Some parameter is wrong'}, 400
+@api.route("/access",methods=['GET'])
+def all_users():
+    people = User.get_all()
+    people_dic = []
+    for person in people :
+        people_dic.append(person.serialize())
+    return jsonify(people_dic),200
 
 
-@api.route('/users', methods=['POST'])
-def create_user():
-    email = request.json.get('email', None)
-    first_name = request.json.get('first_name', None)
-    last_name = request.json.get('last_name', None)
-    password = request.json.get('password', None)
+@api.route("/access", methods=['POST'])
+def handle_login():
 
-    if not (email and first_name and last_name and password):
-        return {'error': 'Missing info'}, 400
+    json=request.get_json()
 
-    user = Person.get_by_email(email)
-    if user and not user.is_active:
-        user.reactive_account(first_name, last_name, password)
-        return jsonify(user.to_dict()), 200
-     
-    new_user = Person(
-                email=email, 
-                password=password, 
-                first_name=first_name, 
-                last_name=last_name
-            )
-    try:
-        new_user.create()
-        return jsonify(new_user.to_dict()), 201
+    if json is None: 
+        raise APIException("You shoulld be return a json")
 
-    except exc.IntegrityError:
-        return {'error': 'Something went wrong'}, 409
+    if "email" not in json:
+        raise APIException("That's not an email in json")
 
-
-@api.route('/users/<int:id>', methods=['GET'])
-@jwt_required()
-def read_user(id):
-    user = Person.get_by_id(id)
-    if user and user.is_active:
-        return jsonify(user.to_dict()), 200
+    if "password" not in json:
+        raise APIException("That's not a password in json")
     
-    return {'error': 'User not found'}, 404
+    print(json["email"],json["password"])
+   
+    email = json["email"]
+    password = json["password"]
 
+    user = User.query.filter_by(email=email).one_or_none()
 
-@api.route('/users/<int:id>', methods=['PUT', 'PATCH'])
-@jwt_required()
-def update_user(id):
-    current_user = get_jwt_identity() #id
+    if user is None:
+         raise APIException("User not found")
 
-    if current_user != id:
-        return {'error': 'Invalid action'}, 400
+    if not user.check_password(password):
+      return jsonify("Your credentials are wrong, please try again"), 401
 
-    update_info = {
-        'email': request.json.get('email', None),
-        'first_name': request.json.get('first_name', None),
-        'last_name': request.json.get('last_name', None),
-        'password': request.json.get('password', None),
-    }
+    access_token = create_access_token(identity=user.serialize())
+    return jsonify(accessToken=access_token)
 
-    user = Person.get_by_id(id)
+@api.route('/glazed',methods=['GET']) 
+def all_glazed():
+        glazed = Glazed.get_all()
+        glazed_Dic = []
+        for item in glazed :
+            glazed_Dic.append(item.serialize())
+        return jsonify(glazed_Dic) 
 
-    if user:
-        updated_user =  user.update(**{
-                            key:value for key, value in update_info.items() 
-                            if value is not None
-                        })
-        return jsonify(updated_user.to_dict()), 200
+@api.route('/glazed',methods=['POST'])
+def adding_glazed():
+        json = request.get_json()
+        print (json)
+        glazed = Glazed.set_with_glace(Glazed(),json)
+        Glazed.db_post(glazed)
+        return jsonify(glazed.serialize())
 
-    return {'error': 'User not found'}, 400
+@api.route('/glazed/<int:glazed_id>', methods=['GET'])
+def one_glazed(glazed_id):
+        glazed = Glazed.get_one(glazed_id)
+        glazed_serialized = glazed.serialized()
+        return jsonify(glazed_serialized)
 
+@api.route('/glazed/<int:glazed_id>', methods=["DELETE"])
+def glazed_delete(glazed_id):
+        glazed = Glazed.query.get(glazed_id)
+        Glazed.delete(glazed)
+        return jsonify(glazed.serialize())
 
-@api.route('/users/<int:id>', methods=['DELETE'])
-@jwt_required()
-def delete_user(id):
-    current_user = get_jwt_identity()
+@api.route('/cakes',methods=['GET']) 
+def all_cakes():
+    cakes = Cakes.get_all()
+    cakes_Dic = []
+    for item in cakes :
+        cakes_Dic.append(item.serialize())
+    return jsonify(cakes_Dic) 
 
-    if current_user != id:
-        return {'error': 'Invalid action'}, 400
+@api.route('/cakes',methods=['POST'])
+def adding_cakes():
+    json = request.get_json()
+    print (json)
+    cakes = Cakes.set_with_cakes(Cakes(),json)
+    Cakes.db_post(cakes)
+    return jsonify(cakes.serialize())
+
+@api.route('/cakes/<int:cakes_id>', methods=['GET'])
+def one_cakes(cakes_id):
+    cakes = Cakes.get_one(glazed_id)
+    cakes_serialized = cakes.serialized()
+    return jsonify(cakes_serialized)
+
+@api.route('/cakes/<int:cakes_id>', methods=["DELETE"])
+def cakes_delete(cakes_id):
+    cakes = Cakes.query.get(cakes_id)
+    cakes.delete(cakes)
+    return jsonify(cakes.serialize())
+
+@api.route('/treats',methods=['GET']) 
+def all_treats():
+    treats = Treats.get_all()
+    treats_Dic = []
+    for item in treats :
+        treats_Dic.append(item.serialize())
+    return jsonify(treats_Dic) 
+
+@api.route('/treats',methods=['POST'])
+def adding_treats():
+    json = request.get_json()
+    print (json)
+    treats = Treats.set_with_treat(Treats(),json)
+    Treats.db_post(treats)
+    return jsonify(treats.serialize())
+
+@api.route('/treats/<int:treats_id>', methods=['GET'])
+def one_treats(treats_id):
+    treats = Treats.get_one(treats_id)
+    treats_serialized = treats.serialized()
+    return jsonify(treats_serialized)
+
+@api.route('/treats/<int:treats_id>', methods=["DELETE"])
+def treats_delete(treats_id):
+    treats = Treats.query.get(treats_id)
+    Treats.delete(treats)
+    return jsonify(treats.serialize())
+
+@api.route('/gifts',methods=['GET']) 
+def all_gifts():
+    gifts = Gifts.get_all()
+    gifts_Dic = []
+    for item in gifts :
+        gifts_Dic.append(item.serialize())
+    return jsonify(gifts_Dic) 
+
+@api.route('/gifts',methods=['POST'])
+def adding_gifts():
+    json = request.get_json()
+    print (json)
+    gifts = Gifts.set_with_gifts(Gifts(),json)
+    Gifts.db_post(gifts)
+    return jsonify(gifts.serialize())
+
+@api.route('/gifts/<int:gifts_id>', methods=['GET'])
+def one_gifts(gifts_id):
+    gifts = Gifts.get_one(gifts_id)
+    gifts_serialized = gifts.serialized()
+    return jsonify(gifts_serialized)
+
+@api.route('/gifts/<int:gifts_id>', methods=["DELETE"])
+def gifts_delete(gifts_id):
+    gifts = Gifts.query.get(gifts_id)
+    gifts.delete(gifts)
+    return jsonify(gifts.serialize())
+
+@api.route('/Test', methods= ['GET'])
+def all_test():
+        test = Test.get_all()
+        test_Dic = []
+        for item in test :
+            test_Dic.append(item.serialize())
+        return jsonify(test_Dic) 
     
-    user = Person.get_by_id(id)
-    if user:
-        user.delete()
-        return jsonify(user.to_dict()), 200
-    
-    return {'error': 'User not found'}, 400
+@api.errorhandler(APIException)
+def handle_invalid_usage(error):
+    return jsonify(error.to_dict()), error.status_code
 
 
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['POST'])
-def create_ad():
-    pass
-
-@api.route('/users/<int:id>/ads', methods=['GET'])
-@jwt_required()
-def read_user_ads():
-    pass
-
-
-@api.route('/ads', methods=['GET'])
-def read_all_ads():
-    pass
-
-@api.route('/ads/<int:id>', methods=['GET'])
-@jwt_required()
-def read_ad(id):
-    pass
-
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['PUT', 'PATCH'])
-@jwt_required()
-def update_ad(id):
-    pass
-
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['DELETE'])
-@jwt_required()
-def delete_ad(id):
-    pass
-
-
-@api.route('/ad_categories', methods=['GET'])
-def read_ad_categories():
-    return {'categories': Ad_category.get()}, 200
+@api.route('/')
+def sitemap():
+    return generate_sitemap(app)

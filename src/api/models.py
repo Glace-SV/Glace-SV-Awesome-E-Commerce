@@ -1,3 +1,4 @@
+  
 import enum
 
 from flask_sqlalchemy import SQLAlchemy
@@ -7,97 +8,185 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
-class Person(db.Model):
-    __tablename__ = 'person'
 
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.VARCHAR, unique=True, nullable=False)
-    first_name = db.Column(db.VARCHAR, unique=False, nullable=False)
-    last_name = db.Column(db.VARCHAR, unique=False, nullable=False)
-    address = db.Column(db.VARCHAR, unique=False, nullable=False)
-    phone = db.Column(db.Integer, unique=False, nullable=False)
-    _password = db.Column(db.VARCHAR, unique=False, nullable=False)
-    is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)  
-    has_ad = db.relationship('Ad', backref='person',lazy=True)
+class BasicMode():
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+        
+    @classmethod
+    def get_one(cls,model_id):
+        return cls.query.filter_by(id = model_id).first()
+    @classmethod
+    def delete(cls,self):
+        return cls.query.delete()
+
+class User(db.Model, BasicMode):
+    __tablename__ = 'user'
+    user_id = db.Column(db.Integer, primary_key=True)
+    user_email = db.Column(db.String(120), unique=True, nullable=False)
+    user_name = db.Column(db.String(120), unique=True, nullable=False)
+    user_password = db.Column(db.String(80), unique=False, nullable=False)
+    user_adress = db.Column(db.String(250), unique=False, nullable=False)
+    user_city = db.Column(db.String(80), unique=False, nullable=False)
+    user_phone = db.Column(db.Integer)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+
 
     def __repr__(self):
-        return f'User {self.email}'
+        return '<user %r>' % self.username
 
-    def to_dict(self):
+    @staticmethod
+    def login_credentials(email,password):
+        return User.query.filter_by(email=email).filter_by(password=password).first()
+    
+    
+    def user_have_token(self,token):
+        return User.query.filter_by(token=self.token).first()
+   
+    def assign_token(self,token):
+        self.token = token
+        db.session.add(self)
+        db.session.commit()
+    
+    def check_password(self, password_param):
+        return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
+
+    def serialize(self):
         return {
-            "id": self.id,
-            "email": self.email,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "address": self.address,
-            "phone": self.phone
+            "user_id": self.id_user,
+            "user_email": self.email_user,
+            # do not serialize the password, its a security breach
         }
 
-    @hybrid_property
-    def password(self):
-        return self._password
 
-    @password.setter
-    def password(self, password):
-        self._password = generate_password_hash(
-                password, 
-                method='pbkdf2:sha256', 
-                salt_length=16
-            )
+#  class
 
-    def create(self):
+class Glazed(db.Model, BasicMode):
+    __tablename__ = 'glazed'
+    id_glazed = db.Column(db.Integer,unique = True, primary_key= True)
+    url_image = db.Column(db.String) #Preguntar si es string.
+    name = db.Column(db.String(80), unique = True)
+    description = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
+
+    def db_post(self):        
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_by_email(cls, email):
-        user = cls.query.filter_by(email=email).one_or_none()
-        return user
-
-    @classmethod
-    def get_by_id(cls, id):
-        user = cls.query.get(id)
-        return user
-
-    def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-        db.session.commit()
+    def set_with_glace(self,json):
+        self.name = json["name"]
+        self.description = json["description"]
+        self.price = json["price"]
+        self.size = json["size"]
         return self
 
-    def delete(self):
-        self.is_active = False
+    def serialize(self):
+        return {
+            "id_glazed": self.id_glazed,
+            "url_image": self.url_image,
+            "description": self.description,
+            "price": self.price,
+            "size": self.size
+            # do not serialize the password, its a security breach
+        }
+
+class Treats(db.Model, BasicMode):
+    __tablename__ = 'treats'
+    id = db.Column(db.Integer,unique = True, primary_key= True)
+    url_image = db.Column(db.String) #Preguntar si es string.
+    name = db.Column(db.String(80), unique = True)
+    description = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
+
+    def db_post(self):        
+        db.session.add(self)
         db.session.commit()
 
-    def reactive_account(self, first_name, last_name, password):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.password = password
-        self.is_active = True
+    def set_with_treat(self,json):
+        self.name = json["name"]
+        self.description = json["description"]
+        self.price = json["price"]
+        self.size = json["size"]
+        return self
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "url_image": self.url_image,
+            "description": self.description,
+            "price": self.price,
+            "size": self.size
+            # do not serialize the password, its a security breach
+        }
+class TestClass(db.Model, BasicMode):
+    __tablename__ = 'testclass'
+    id = db.Column(db.Integer,unique = True, primary_key = True)
+    name = db.Column(db.VARCHAR(250))
+    
+    
+    
+   
+
+class Cakes(db.Model, BasicMode):
+    __tablename__ = 'cakes'
+    id_cakes = db.Column(db.Integer,unique = True, primary_key= True)
+    url_image = db.Column(db.String) #Preguntar si es string.
+    name = db.Column(db.String(80), unique = True)
+    description = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
+
+    def db_post(self):        
+        db.session.add(self)
         db.session.commit()
 
+    def set_with_Cake(self,json):
+        self.name = json["name"]
+        self.description = json["description"]
+        self.price = json["price"]
+        self.size = json["size"]
+        return self
 
-class Ad_category(str, enum.Enum):
-    option_1 = "To Sell"
-    option_2 = "I want"
-    option_3 = "Exchange"
+    def serialize(self):
+        return {
+            "id_cakes": self.id_cakes,
+            "url_image": self.url_image,
+            "description": self.description,
+            "price": self.price,
+            "size": self.size
+            # do not serialize the password, its a security breach
+        }
 
-    @classmethod
-    def get(cls):
-        return [cls.option_1, cls.option_2, cls.option_3]
+class Gifts(db.Model, BasicMode):
+    __tablename__ = 'gifts'
+    id_gifts = db.Column(db.Integer,unique = True, primary_key= True)
+    url_image = db.Column(db.String)
+    name = db.Column(db.String(80), unique = True)
+    description = db.Column(db.String(250), nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(20), nullable=False)
 
+    def db_post(self):        
+        db.session.add(self)
+        db.session.commit()
 
-class Ad(db.Model):
-    __tablename__='ad'
+    def set_with_gifts(self,json):
+        self.name = json["name"]
+        self.description = json["description"]
+        self.price = json["price"]
+        self.size= json["size"]
+        return self
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.VARCHAR, unique=False, nullable=False)
-    text = db.Column(db.VARCHAR, unique=False, nullable=False)
-    #pictures = db.Column(db.ARRAY(db.VARCHAR), unique=True, nullable=True)
-    category = db.Column(db.Enum(Ad_category), nullable=False)
-    price = db.Column(db.Float, unique=False, nullable=True)
-    is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)
-    owner = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-
-    def __repr__(self):
-        return f'Ad {self.title}'
+    def serialize(self):
+        return {
+            "id_gifts": self.id_gifts,
+            "url_image": self.url_image,
+            "description": self.description,
+            "price": self.price,
+            "size": self.size
+            # do not serialize the password, its a security breach
+        }
