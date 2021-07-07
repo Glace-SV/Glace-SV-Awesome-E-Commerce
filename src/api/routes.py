@@ -4,7 +4,7 @@ from datetime import timedelta
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from sqlalchemy import exc
-from werkzeug.security import check_password_hash
+# from werkzeug.security import check_password_hash
 
 from api.models import db, User, Glazed, Cakes, Treats, Gifts
 from api.utils import generate_sitemap, APIException
@@ -61,10 +61,17 @@ def all_glazed():
 @api.route('/glazed',methods=['POST'])
 def adding_glazed():
         json = request.get_json()
-        print (json)
-        glazed = Glazed.set_with_glace(Glazed(),json)
-        Glazed.db_post(glazed)
-        return jsonify(glazed.serialize())
+        res = []
+        try:
+            for element in json:
+                glazed = Glazed.set_with_glace(json)
+                new_glazed = Glazed(glazed)
+                new_glazed.db_post()
+                res.append(new_glazed.serialize)
+        except Exception as inst:
+            print(inst)
+        
+        return jsonify(res)
 
 @api.route('/glazed/<int:glazed_id>', methods=['GET'])
 def one_glazed(glazed_id):

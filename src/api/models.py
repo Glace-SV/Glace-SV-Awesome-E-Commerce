@@ -4,7 +4,7 @@ import enum
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import VARCHAR, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
-from werkzeug.security import generate_password_hash
+# from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -76,16 +76,21 @@ class Glazed(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    def set_with_glace(self,json):
-        self.name = json["name"]
-        self.description = json["description"]
-        self.price = json["price"]
-        self.size = json["size"]
-        return self
+    @classmethod
+    def set_with_glace(json):
+        obj = {
+        name: json["name"]
+        description: json["description"]
+        price: json["price"]
+        size: json["size"]
+        }
+        return obj
+        
 
     def serialize(self):
         return {
             "id_glazed": self.id_glazed,
+            "name": self.name,
             "url_image": self.url_image,
             "description": self.description,
             "price": self.price,
@@ -116,6 +121,7 @@ class Treats(db.Model, BasicMode):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "url_image": self.url_image,
             "description": self.description,
             "price": self.price,
@@ -154,6 +160,7 @@ class Cakes(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_cakes": self.id_cakes,
+            "name": self.name,
             "url_image": self.url_image,
             "description": self.description,
             "price": self.price,
@@ -184,6 +191,7 @@ class Gifts(db.Model, BasicMode):
     def serialize(self):
         return {
             "id_gifts": self.id_gifts,
+            "name": self.name,
             "url_image": self.url_image,
             "description": self.description,
             "price": self.price,
