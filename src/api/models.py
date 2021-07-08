@@ -18,9 +18,11 @@ class BasicMode():
     @classmethod
     def get_one(cls,model_id):
         return cls.query.filter_by(id = model_id).first()
+
     @classmethod
-    def delete(cls,self):
-        return cls.query.delete()
+    def delete(cls,self): 
+        db.session.query(cls).filter(cls.id==self.id).delete(synchronize_session=False)
+        db.session.commit()
 
 class User(db.Model, BasicMode):
     __tablename__ = 'user'
@@ -65,31 +67,32 @@ class User(db.Model, BasicMode):
 
 class Glazed(db.Model, BasicMode):
     __tablename__ = 'glazed'
-    id_glazed = db.Column(db.Integer,unique = True, primary_key= True)
+    id = db.Column(db.Integer,unique = True, primary_key= True)
     url_image = db.Column(db.String) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.String(20), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
-    def db_post(self):        
+    def db_post(self): 
+        print(self)       
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def set_with_glace(json):
-        obj = {
-        name: json["name"]
-        description: json["description"]
-        price: json["price"]
-        size: json["size"]
-        }
-        return obj
+    # @classmethod
+    # def set_with_glace(cls,json):
+    #     obj = {
+    #     "name": json["name"],
+    #     "description": json["description"],
+    #     "price": json["price"],
+    #     "size": json["size"]
+    #     }
+    #     return obj
         
 
     def serialize(self):
         return {
-            "id_glazed": self.id_glazed,
+            "id": self.id,
             "name": self.name,
             "url_image": self.url_image,
             "description": self.description,

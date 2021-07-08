@@ -64,10 +64,9 @@ def adding_glazed():
         res = []
         try:
             for element in json:
-                glazed = Glazed.set_with_glace(json)
-                new_glazed = Glazed(glazed)
-                new_glazed.db_post()
-                res.append(new_glazed.serialize)
+                glazed = Glazed(name = element.get("name"), description = element.get("description"), price= element.get("price"), size= element.get("size"), url_image= element.get("url_image"))
+                glazed.db_post()
+                res.append(glazed.serialize())
         except Exception as inst:
             print(inst)
         
@@ -82,6 +81,7 @@ def one_glazed(glazed_id):
 @api.route('/glazed/<int:glazed_id>', methods=["DELETE"])
 def glazed_delete(glazed_id):
         glazed = Glazed.query.get(glazed_id)
+        print(glazed.id)
         Glazed.delete(glazed)
         return jsonify(glazed.serialize())
 
