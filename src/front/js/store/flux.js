@@ -1,4 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	let api = "xxxx"
 	return {
 		store: {
 			gifts: []
@@ -6,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			loadSomeData: () => {
-					fetch("https://swapi.dev/api/gifts/")
+					fetch({api + "/products/gifts"})
 						.then(resp => resp.json())
 						.then(data => setStore({ gifts: data.results }));
 				}
