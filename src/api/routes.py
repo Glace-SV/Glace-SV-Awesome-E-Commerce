@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from sqlalchemy import exc
 # from werkzeug.security import check_password_hash
 
-from api.models import db, User, Glazed, Cakes, Treats, Gifts
+from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -50,133 +50,47 @@ def handle_login():
     access_token = create_access_token(identity=user.serialize())
     return jsonify(accessToken=access_token)
 
-@api.route('/glazed',methods=['GET']) 
-def all_glazed():
-        glazed = Glazed.get_all()
-        glazed_Dic = []
-        for item in glazed :
-            glazed_Dic.append(item.serialize())
-        return jsonify(glazed_Dic) 
+@api.route('/products',methods=['GET']) 
+def all_products():
+        products = Products.get_all()
+        products_Dic = []
+        for item in products :
+            products_Dic.append(item.serialize())
+        return jsonify(products_Dic) 
 
-@api.route('/glazed',methods=['POST'])
-def adding_glazed():
+@api.route('/products' ,methods=['POST'])
+def adding_product():
         json = request.get_json()
         res = []
         try:
             for element in json:
-                glazed = Glazed(name = element.get("name"), description = element.get("description"), price= element.get("price"), size= element.get("size"), url_image= element.get("url_image"))
-                glazed.db_post()
-                res.append(glazed.serialize())
+                products = Products(name = element.get("name"), description = element.get("description"), price= element.get("price"), size= element.get("size"), url_image= element.get("url_image"), category=element.get("category"))
+                products.db_post()
+                res.append(products.serialize())
         except Exception as inst:
             print(inst)
         
         return jsonify(res)
 
-@api.route('/glazed/<int:glazed_id>', methods=['GET'])
-def one_glazed(glazed_id):
-        glazed = Glazed.get_one(glazed_id)
-        glazed_serialized = glazed.serialized()
-        return jsonify(glazed_serialized)
+@api.route('/products/<int:product_id>', methods=['GET'])
+def one_product(product_id):
+        product = Products.get_by_id(product_id)
+        product_serialized = product.serialize()
+        return jsonify(product_serialized)
 
-@api.route('/glazed/<int:glazed_id>', methods=["DELETE"])
-def glazed_delete(glazed_id):
-        glazed = Glazed.query.get(glazed_id)
-        print(glazed.id)
-        Glazed.delete(glazed)
-        return jsonify(glazed.serialize())
+@api.route('/products/<products_category>', methods=['GET'])
+def cat_product(products_category):
+        product = Products.get_by_category(products_category)
+        product_serialized = product.serialize()
+        return jsonify(product_serialized)
 
-@api.route('/cakes',methods=['GET']) 
-def all_cakes():
-    cakes = Cakes.get_all()
-    cakes_Dic = []
-    for item in cakes :
-        cakes_Dic.append(item.serialize())
-    return jsonify(cakes_Dic) 
-
-@api.route('/cakes',methods=['POST'])
-def adding_cakes():
-    json = request.get_json()
-    print (json)
-    cakes = Cakes.set_with_cakes(Cakes(),json)
-    Cakes.db_post(cakes)
-    return jsonify(cakes.serialize())
-
-@api.route('/cakes/<int:cakes_id>', methods=['GET'])
-def one_cakes(cakes_id):
-    cakes = Cakes.get_one(glazed_id)
-    cakes_serialized = cakes.serialized()
-    return jsonify(cakes_serialized)
-
-@api.route('/cakes/<int:cakes_id>', methods=["DELETE"])
-def cakes_delete(cakes_id):
-    cakes = Cakes.query.get(cakes_id)
-    cakes.delete(cakes)
-    return jsonify(cakes.serialize())
-
-@api.route('/treats',methods=['GET']) 
-def all_treats():
-    treats = Treats.get_all()
-    treats_Dic = []
-    for item in treats :
-        treats_Dic.append(item.serialize())
-    return jsonify(treats_Dic) 
-
-@api.route('/treats',methods=['POST'])
-def adding_treats():
-    json = request.get_json()
-    print (json)
-    treats = Treats.set_with_treat(Treats(),json)
-    Treats.db_post(treats)
-    return jsonify(treats.serialize())
-
-@api.route('/treats/<int:treats_id>', methods=['GET'])
-def one_treats(treats_id):
-    treats = Treats.get_one(treats_id)
-    treats_serialized = treats.serialized()
-    return jsonify(treats_serialized)
-
-@api.route('/treats/<int:treats_id>', methods=["DELETE"])
-def treats_delete(treats_id):
-    treats = Treats.query.get(treats_id)
-    Treats.delete(treats)
-    return jsonify(treats.serialize())
-
-@api.route('/gifts',methods=['GET']) 
-def all_gifts():
-    gifts = Gifts.get_all()
-    gifts_Dic = []
-    for item in gifts :
-        gifts_Dic.append(item.serialize())
-    return jsonify(gifts_Dic) 
-
-@api.route('/gifts',methods=['POST'])
-def adding_gifts():
-    json = request.get_json()
-    print (json)
-    gifts = Gifts.set_with_gifts(Gifts(),json)
-    Gifts.db_post(gifts)
-    return jsonify(gifts.serialize())
-
-@api.route('/gifts/<int:gifts_id>', methods=['GET'])
-def one_gifts(gifts_id):
-    gifts = Gifts.get_one(gifts_id)
-    gifts_serialized = gifts.serialized()
-    return jsonify(gifts_serialized)
-
-@api.route('/gifts/<int:gifts_id>', methods=["DELETE"])
-def gifts_delete(gifts_id):
-    gifts = Gifts.query.get(gifts_id)
-    gifts.delete(gifts)
-    return jsonify(gifts.serialize())
-
-@api.route('/Test', methods= ['GET'])
-def all_test():
-        test = Test.get_all()
-        test_Dic = []
-        for item in test :
-            test_Dic.append(item.serialize())
-        return jsonify(test_Dic) 
-    
+@api.route('/products/<int:product_id>', methods=["DELETE"])
+def product_delete(product_id):
+        product = Products.query.get(product_id)
+        print(product.id)
+        Products.delete(product)
+        return jsonify(product.serialize())
+   
 @api.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code

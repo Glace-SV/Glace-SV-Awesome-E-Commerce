@@ -17,7 +17,11 @@ class BasicMode():
         
     @classmethod
     def get_one(cls,model_id):
-        return cls.query.filter_by(id = model_id).first()
+        return cls.query.filter_by(id = model_id).one_or_none()
+    
+    @classmethod
+    def get_by_category(cls,model_category):
+        return cls.query.filter_by(category = model_category).first()
 
     @classmethod
     def delete(cls,self): 
@@ -57,20 +61,21 @@ class User(db.Model, BasicMode):
 
     def serialize(self):
         return {
-            "user_id": self.id,
-            "user_email": self.email,
+            "id": self.id,
+            "email": self.email,
             # do not serialize the password, its a security breach
         }
 
 
 #  class
 
-class Glazed(db.Model, BasicMode):
-    __tablename__ = 'glazed'
+class Products(db.Model, BasicMode):
+    __tablename__ = 'products'
     id = db.Column(db.Integer,unique = True, primary_key= True)
     url_image = db.Column(db.String) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
+    category = db.Column(db.String(250), unique=True, nullable=False)
     price = db.Column(db.String(20), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
@@ -79,125 +84,17 @@ class Glazed(db.Model, BasicMode):
         db.session.add(self)
         db.session.commit()
 
-    # @classmethod
-    # def set_with_glace(cls,json):
-    #     obj = {
-    #     "name": json["name"],
-    #     "description": json["description"],
-    #     "price": json["price"],
-    #     "size": json["size"]
-    #     }
-    #     return obj
-        
-
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name,
             "url_image": self.url_image,
             "description": self.description,
+            "category": self.category,
             "price": self.price,
             "size": self.size
             # do not serialize the password, its a security breach
         }
-
-class Treats(db.Model, BasicMode):
-    __tablename__ = 'treats'
-    id = db.Column(db.Integer,unique = True, primary_key= True)
-    url_image = db.Column(db.String) #Preguntar si es string.
-    name = db.Column(db.String(80), unique = True)
-    description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.String(20), nullable=False)
-    size = db.Column(db.String(250), nullable=False)
-
-    def db_post(self):        
-        db.session.add(self)
-        db.session.commit()
-
-    def set_with_treat(self,json):
-        self.name = json["name"]
-        self.description = json["description"]
-        self.price = json["price"]
-        self.size = json["size"]
-        return self
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "url_image": self.url_image,
-            "description": self.description,
-            "price": self.price,
-            "size": self.size
-            # do not serialize the password, its a security breach
-        }
-class TestClass(db.Model, BasicMode):
-    __tablename__ = 'testclass'
-    id = db.Column(db.Integer,unique = True, primary_key = True)
-    name = db.Column(db.VARCHAR(250))
-    
-    
-    
-   
-
-class Cakes(db.Model, BasicMode):
-    __tablename__ = 'cakes'
-    id_cakes = db.Column(db.Integer,unique = True, primary_key= True)
-    url_image = db.Column(db.String) #Preguntar si es string.
-    name = db.Column(db.String(80), unique = True)
-    description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.String(20), nullable=False)
-    size = db.Column(db.String(250), nullable=False)
-
-    def db_post(self):        
-        db.session.add(self)
-        db.session.commit()
-
-    def set_with_Cake(self,json):
-        self.name = json["name"]
-        self.description = json["description"]
-        self.price = json["price"]
-        self.size = json["size"]
-        return self
-
-    def serialize(self):
-        return {
-            "id_cakes": self.id_cakes,
-            "name": self.name,
-            "url_image": self.url_image,
-            "description": self.description,
-            "price": self.price,
-            "size": self.size
-            # do not serialize the password, its a security breach
-        }
-
-class Gifts(db.Model, BasicMode):
-    __tablename__ = 'gifts'
-    id_gifts = db.Column(db.Integer,unique = True, primary_key= True)
-    url_image = db.Column(db.String)
-    name = db.Column(db.String(80), unique = True)
-    description = db.Column(db.String(250), nullable=False)
-    price = db.Column(db.String(20), nullable=False)
-    size = db.Column(db.String(20), nullable=False)
-
-    def db_post(self):        
-        db.session.add(self)
-        db.session.commit()
-
-    def set_with_gifts(self,json):
-        self.name = json["name"]
-        self.description = json["description"]
-        self.price = json["price"]
-        self.size= json["size"]
-        return self
-
-    def serialize(self):
-        return {
-            "id_gifts": self.id_gifts,
-            "name": self.name,
-            "url_image": self.url_image,
-            "description": self.description,
-            "price": self.price,
-            "size": self.size
-            # do not serialize the password, its a security breach
-        }
+    @classmethod
+    def get_by_id(cls,model_id):
+        return cls.query.filter_by(id = model_id).first()
