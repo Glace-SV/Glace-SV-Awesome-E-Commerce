@@ -33,9 +33,9 @@ class User(db.Model, BasicMode):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     name = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80)
+    password = db.Column(db.String(80))
     adress = db.Column(db.String(250),unique=False, nullable=False)
-    city = db.Column(db.String(80)
+    city = db.Column(db.String(80))
     phone = db.Column(db.Integer)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
