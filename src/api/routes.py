@@ -25,6 +25,12 @@ def handle_login():
 
     json=request.get_json()
 
+    for element in json:
+            user = User(name = element.get("name"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
+            res.append(user.serialize())
+               
+    return jsonify(res)
+
     if json is None: 
         raise APIException("You shoulld be return a json")
 

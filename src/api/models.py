@@ -33,9 +33,9 @@ class User(db.Model, BasicMode):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     name = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    adress = db.Column(db.String(250), unique=False, nullable=False)
-    city = db.Column(db.String(80), unique=False, nullable=False)
+    password = db.Column(db.String(80)
+    adress = db.Column(db.String(250),unique=False, nullable=False)
+    city = db.Column(db.String(80)
     phone = db.Column(db.Integer)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -62,7 +62,9 @@ class User(db.Model, BasicMode):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "email": self.email,
+            
             # do not serialize the password, its a security breach
         }
 
@@ -75,7 +77,7 @@ class Products(db.Model, BasicMode):
     url_image = db.Column(db.String) #Preguntar si es string.
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
-    category = db.Column(db.String(250), unique=True, nullable=False)
+    category = db.Column(db.String(250), unique=False, nullable=False)
     price = db.Column(db.String(20), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
