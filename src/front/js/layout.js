@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { PBC } from "./pages/productsbycategory";
+import { Gifts } from "./pages/Gifts";
 import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
@@ -24,11 +24,11 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/category">
-							<PBC />
-						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/gifts">
+							<Gifts />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

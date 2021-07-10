@@ -1,7 +1,10 @@
+//import rendergifts???
+
 import React, { useContext } from "react";
+import GiftsInfoCard from "../pages/Gifts";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import {
 	Carousel,
 	Item,
@@ -18,9 +21,23 @@ import {
 	Control,
 	Check
 } from "react-bootstrap";
+import renderGifts from "./Gifts";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
+	console.log(store.gifts);
+	const renderGifts = () => {
+		history.push("/gifts");
+
+		// <div className="row">
+		// 	<div className="col-4">
+		// 		{store.gifts.map((gift, key) => (
+		// 			<GiftsInfoCard key={key} gift={gift} />
+		// 		))}
+		// 	</div>
+		// </div>
+	};
 
 	return (
 		<div>
@@ -72,7 +89,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>GLAZE ME UP!</Card.Title>
 						<Card.Text>Nuestra selección de pasteles glazeados te encantará!</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={renderGifts}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -84,7 +103,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
 						<Card.Text>Brownies, cupcakes, pretzels y macarons para endulzarte la vida.</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={actions.prueba}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
