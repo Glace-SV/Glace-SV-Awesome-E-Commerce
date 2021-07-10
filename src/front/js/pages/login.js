@@ -24,9 +24,17 @@ import {
 	Nav
 } from "react-bootstrap";
 
-export const Login = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
+export const Login = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	function login(){
+		fetch ("https://3001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"), { method: "POST",
+				body: JSON.stringify ({
+					email = email,
+					password = password}
+				) }
+	}
 
 	return (
 		<div className="loginbckgrndimg">
