@@ -4,10 +4,10 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import VARCHAR, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
-# from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
-jwt = JWTManager()
+# jwt = JWTManager()
 
 
 
@@ -35,10 +35,12 @@ class User(db.Model, BasicMode):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80))
-    adress = db.Column(db.String(250),unique=False, nullable=False)
-    city = db.Column(db.String(80))
-    phone = db.Column(db.Integer)
+    password = db.Column(db.String(80), unique=True, nullable=False)
+    name = db.Column(db.String(80), unique=False, nullable=False)
+    last_name = db.Column(db.String(80), unique=False, nullable=False)
+    adress = db.Column(db.String(250), unique=False, nullable=False)
+    city = db.Column(db.String(80), unique=False, nullable=False)
+    phone = db.Column(db.Integer, unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
 
@@ -60,6 +62,11 @@ class User(db.Model, BasicMode):
     
     def check_password(self, password_param):
         return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
+
+    def db_post(self): 
+        print(self)       
+        db.session.add(self)
+        db.session.commit()
 
     def serialize(self):
         return {
@@ -83,10 +90,6 @@ class Products(db.Model, BasicMode):
     price = db.Column(db.String(20), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
-    def db_post(self): 
-        print(self)       
-        db.session.add(self)
-        db.session.commit()
 
     def serialize(self):
         return {
@@ -103,13 +106,13 @@ class Products(db.Model, BasicMode):
     def get_by_id(cls,model_id):
         return cls.query.filter_by(id = model_id).first()
 
-class TokenBlocklist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    jti = db.Column(db.String(36), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
+# class TokenBlocklist(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     jti = db.Column(db.String(36), nullable=False)
+#     created_at = db.Column(db.DateTime, nullable=False)
 
-    @jwt.token_in_blocklist_loader
-    def check_if_token_revoked(jwt_header, jwt_payload):
-        jti = jwt_payload["jti"]
-        token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
-        return token is not None
+#     @jwt.token_in_blocklist_loader
+#     def check_if_token_revoked(jwt_header, jwt_payload):
+#         jti = jwt_payload["jti"]
+#         token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
+#         return token is not None

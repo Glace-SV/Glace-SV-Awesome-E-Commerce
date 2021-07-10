@@ -6,13 +6,13 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from sqlalchemy import exc
 # from werkzeug.security import check_password_hash
 
-from api.models import db, User, Products, TokenBlocklist
+from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
 # ACCESS_EXPIRES = timedelta(hours=1)
 # api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 # api.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
-jwt = JWTManager()
+# jwt = JWTManager()
 
 api = Blueprint('api', __name__)
 
@@ -21,17 +21,17 @@ def all_users():
     user = User.get_all()
     user_dic = []
     for user in user :
-        user_dic.append(person.serialize())
+        user_dic.append(user.serialize())
     return jsonify(user_dic),200
 
-
 @api.route("/login", methods=['POST'])
-def handle_login():
+def handling_login():
 
     json=request.get_json()
+    res = []
 
     for element in json:
-            user = User(name = element.get("name"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
+            user = User(name = element.get("name"), last_name = element.get("last_name"), username = element.get("username"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
             res.append(user.serialize())
                
     return jsonify(res)
@@ -59,9 +59,7 @@ def handle_login():
       return jsonify("Your credentials are wrong, please try again"), 401
 
     access_token = create_access_token(identity=user.serialize())
-    return jsonify(accessToken=access_token)
-
-@api.route("/login", methods=["POST"])
+    return jsonify(accessToken=access_token)   
 def login():
     username = request.json.get("username", None)
     password = request.json.get("password", None)
@@ -70,15 +68,12 @@ def login():
     access_token = create_access_token(identity="user")
     return jsonify(access_token=access_token)
 
-@api.route("/logout", methods=["DELETE"])
-@jwt_required()
-def modify_token():
-    jti = get_jwt()["jti"]
-    now = datetime.now(timezone.utc)
-    db.session.add(TokenBlocklist(jti=jti, created_at=now))
-    db.session.commit()
-    return jsonify(msg="JWT revoked")
-
+@api.route('/login/<int:product_id>', methods=["DELETE"])
+def user_delete(user_id):
+        user = User.query.get(user_id)
+        print(user.id)
+        User.delete(user)
+        return jsonify(user.serialize())
 
 @api.route('/products',methods=['GET']) 
 def all_products():
