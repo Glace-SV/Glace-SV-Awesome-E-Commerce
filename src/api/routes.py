@@ -2,25 +2,30 @@
 from datetime import timedelta
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 # from werkzeug.security import check_password_hash
 
-from api.models import db, User, Products
+from api.models import db, User, Products, TokenBlocklist
 from api.utils import generate_sitemap, APIException
+
+# ACCESS_EXPIRES = timedelta(hours=1)
+# api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# api.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
+jwt = JWTManager()
 
 api = Blueprint('api', __name__)
 
-@api.route("/access",methods=['GET'])
+@api.route("/login",methods=['GET'])
 def all_users():
-    people = User.get_all()
-    people_dic = []
-    for person in people :
-        people_dic.append(person.serialize())
-    return jsonify(people_dic),200
+    user = User.get_all()
+    user_dic = []
+    for user in user :
+        user_dic.append(person.serialize())
+    return jsonify(user_dic),200
 
 
-@api.route("/access", methods=['POST'])
+@api.route("/login", methods=['POST'])
 def handle_login():
 
     json=request.get_json()
@@ -55,6 +60,25 @@ def handle_login():
 
     access_token = create_access_token(identity=user.serialize())
     return jsonify(accessToken=access_token)
+
+@api.route("/login", methods=["POST"])
+def login():
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    if username != "username" or password != "password":
+        return jsonify({"msg": "Bad username or password"}), 401
+    access_token = create_access_token(identity="user")
+    return jsonify(access_token=access_token)
+
+@api.route("/logout", methods=["DELETE"])
+@jwt_required()
+def modify_token():
+    jti = get_jwt()["jti"]
+    now = datetime.now(timezone.utc)
+    db.session.add(TokenBlocklist(jti=jti, created_at=now))
+    db.session.commit()
+    return jsonify(msg="JWT revoked")
+
 
 @api.route('/products',methods=['GET']) 
 def all_products():
