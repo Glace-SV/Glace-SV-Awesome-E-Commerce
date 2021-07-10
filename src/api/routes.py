@@ -1,146 +1,107 @@
+  
 from datetime import timedelta
 
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from sqlalchemy import exc
-from werkzeug.security import check_password_hash
+# from werkzeug.security import check_password_hash
 
-from api.models import db, Person, Ad, Ad_category
+from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
-@api.route('/login', methods=['POST'])
-def login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-
-    if not (email and password):
-        return {'error': 'Missing info'}, 400
-
-    user = Person.get_by_email(email)
-
-    if user and check_password_hash(user.password, password) and user.is_active:
-        token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
-        return {'token': token}, 200
-
-    else:
-        return {'error': 'Some parameter is wrong'}, 400
+@api.route("/access",methods=['GET'])
+def all_users():
+    people = User.get_all()
+    people_dic = []
+    for person in people :
+        people_dic.append(person.serialize())
+    return jsonify(people_dic),200
 
 
-@api.route('/users', methods=['POST'])
-def create_user():
-    email = request.json.get('email', None)
-    first_name = request.json.get('first_name', None)
-    last_name = request.json.get('last_name', None)
-    password = request.json.get('password', None)
+@api.route("/access", methods=['POST'])
+def handle_login():
 
-    if not (email and first_name and last_name and password):
-        return {'error': 'Missing info'}, 400
+    json=request.get_json()
 
-    user = Person.get_by_email(email)
-    if user and not user.is_active:
-        user.reactive_account(first_name, last_name, password)
-        return jsonify(user.to_dict()), 200
-     
-    new_user = Person(
-                email=email, 
-                password=password, 
-                first_name=first_name, 
-                last_name=last_name
-            )
-    try:
-        new_user.create()
-        return jsonify(new_user.to_dict()), 201
+    for element in json:
+            user = User(name = element.get("name"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
+            res.append(user.serialize())
+               
+    return jsonify(res)
 
-    except exc.IntegrityError:
-        return {'error': 'Something went wrong'}, 409
+    if json is None: 
+        raise APIException("You shoulld be return a json")
 
+    if "email" not in json:
+        raise APIException("That's not an email in json")
 
-@api.route('/users/<int:id>', methods=['GET'])
-@jwt_required()
-def read_user(id):
-    user = Person.get_by_id(id)
-    if user and user.is_active:
-        return jsonify(user.to_dict()), 200
+    if "password" not in json:
+        raise APIException("That's not a password in json")
     
-    return {'error': 'User not found'}, 404
+    print(json["email"],json["password"])
+   
+    email = json["email"]
+    password = json["password"]
+
+    user = User.query.filter_by(email=email).one_or_none()
+
+    if user is None:
+         raise APIException("User not found")
+
+    if not user.check_password(password):
+      return jsonify("Your credentials are wrong, please try again"), 401
+
+    access_token = create_access_token(identity=user.serialize())
+    return jsonify(accessToken=access_token)
+
+@api.route('/products',methods=['GET']) 
+def all_products():
+        products = Products.get_all()
+        products_Dic = []
+        for item in products :
+            products_Dic.append(item.serialize())
+        return jsonify(products_Dic) 
+
+@api.route('/products' ,methods=['POST'])
+def adding_product():
+        json = request.get_json()
+        res = []
+        try:
+            for element in json:
+                products = Products(name = element.get("name"), description = element.get("description"), price= element.get("price"), size= element.get("size"), url_image= element.get("url_image"), category=element.get("category"))
+                products.db_post()
+                res.append(products.serialize())
+        except Exception as inst:
+            print(inst)
+        
+        return jsonify(res)
+
+@api.route('/products/<int:product_id>', methods=['GET'])
+def one_product(product_id):
+        product = Products.get_by_id(product_id)
+        product_serialized = product.serialize()
+        return jsonify(product_serialized)
+
+@api.route('/products/<products_category>', methods=['GET'])
+def cat_product(products_category):
+        product = Products.get_by_category(products_category)
+        product_serialized = product.serialize()
+        return jsonify(product_serialized)
+
+@api.route('/products/<int:product_id>', methods=["DELETE"])
+def product_delete(product_id):
+        product = Products.query.get(product_id)
+        print(product.id)
+        Products.delete(product)
+        return jsonify(product.serialize())
+   
+@api.errorhandler(APIException)
+def handle_invalid_usage(error):
+    return jsonify(error.to_dict()), error.status_code
 
 
-@api.route('/users/<int:id>', methods=['PUT', 'PATCH'])
-@jwt_required()
-def update_user(id):
-    current_user = get_jwt_identity() #id
-
-    if current_user != id:
-        return {'error': 'Invalid action'}, 400
-
-    update_info = {
-        'email': request.json.get('email', None),
-        'first_name': request.json.get('first_name', None),
-        'last_name': request.json.get('last_name', None),
-        'password': request.json.get('password', None),
-    }
-
-    user = Person.get_by_id(id)
-
-    if user:
-        updated_user =  user.update(**{
-                            key:value for key, value in update_info.items() 
-                            if value is not None
-                        })
-        return jsonify(updated_user.to_dict()), 200
-
-    return {'error': 'User not found'}, 400
-
-
-@api.route('/users/<int:id>', methods=['DELETE'])
-@jwt_required()
-def delete_user(id):
-    current_user = get_jwt_identity()
-
-    if current_user != id:
-        return {'error': 'Invalid action'}, 400
-    
-    user = Person.get_by_id(id)
-    if user:
-        user.delete()
-        return jsonify(user.to_dict()), 200
-    
-    return {'error': 'User not found'}, 400
-
-
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['POST'])
-def create_ad():
-    pass
-
-@api.route('/users/<int:id>/ads', methods=['GET'])
-@jwt_required()
-def read_user_ads():
-    pass
-
-
-@api.route('/ads', methods=['GET'])
-def read_all_ads():
-    pass
-
-@api.route('/ads/<int:id>', methods=['GET'])
-@jwt_required()
-def read_ad(id):
-    pass
-
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['PUT', 'PATCH'])
-@jwt_required()
-def update_ad(id):
-    pass
-
-@api.route('users/<int:user_id>/ads/<int:ad_id>', methods=['DELETE'])
-@jwt_required()
-def delete_ad(id):
-    pass
-
-
-@api.route('/ad_categories', methods=['GET'])
-def read_ad_categories():
-    return {'categories': Ad_category.get()}, 200
+@api.route('/')
+def sitemap():
+    return generate_sitemap(app)
