@@ -31,8 +31,8 @@ export const Login = () => {
 	function login(){
 		fetch ("https://3001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"), { method: "POST",
 				body: JSON.stringify ({
-					email = email,
-					password = password}
+					email=email,
+					password=password}
 				) }
 	}
 
@@ -72,19 +72,17 @@ export const Login = () => {
 						<Tab.Pane eventKey="second">
 							<Form className="formcolor">
 								<Form.Group className="mb-3" controlId="formBasicEmail">
-									<Form.Label>Nombre</Form.Label>
-									<Form.Control type="text" placeholder="Nombre" required />
+									<Form.Label>Username</Form.Label>
+									<Form.Control type="text" placeholder="username" required />
 								</Form.Group>
 
 								<Form.Group className="mb-3" controlId="formBasicPassword">
 									<Form.Label>Email</Form.Label>
 									<Form.Control type="email" placeholder="Email" required />
+									<Form.Text>Se enviará una contraseña a tu dirección de correo electrónico.</Form.Text>
 									<Form.Text>
-										Se enviará una contraseña a tu dirección de correo electrónico.
-									</Form.Text>
-									<Form.Text>
-										Tus datos personales se utilizarán para procesar tu pedido, mejorar tu
-										experiencia en esta web, gestionar el acceso a tu cuenta y otros propósitos.
+										Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia
+										en esta web, gestionar el acceso a tu cuenta y otros propósitos.
 									</Form.Text>
 								</Form.Group>
 								<Button variant="warning" type="submit">
@@ -99,6 +97,3 @@ export const Login = () => {
 	);
 };
 
-Login.propTypes = {
-	match: PropTypes.object
-};

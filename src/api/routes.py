@@ -9,10 +9,10 @@ from werkzeug.security import check_password_hash
 from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
-ACCESS_EXPIRES = timedelta(hours=1)
-api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-api.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
-jwt = JWTManager()
+# ACCESS_EXPIRES = timedelta(hours=1)
+# api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# api.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
+# jwt = JWTManager()
 
 api = Blueprint('api', __name__)
 
@@ -50,10 +50,10 @@ def handling_login():
     email = json["email"]
     password = json["password"]
 
-    # user = User.query.filter_by(email=email).one_or_none()
+    user = User.query.filter_by(email=email).one_or_none()
 
-    # if user is None:
-    #      raise APIException("User not found")
+    if user is None:
+         raise APIException("User not found")
 
     if not user.check_password(password):
       return jsonify("Your credentials are wrong, please try again"), 401
@@ -71,10 +71,10 @@ def login():
 
 @api.route('/login/<user_email>', methods=["GET"])
 def get_user_by_email(user_email):
-        user = User.query.get(user_mail)
-        print(user.mail)
-        User.delete(user)
-        return jsonify(user.serialize())
+        user = User.query.get(user_email)
+        print(user_email)
+        user_serialized = user.serialize()
+        return jsonify(user_serialized)
 
 @api.route('/login/<int:user_id>', methods=["DELETE"])
 def user_delete(user_id):
@@ -90,6 +90,9 @@ def logout():
     db.session.add(TokenBlocklist(jti=jti, created_at=now))
     db.session.commit()
     return jsonify(msg="JWT revoked")
+
+
+    
 
 @api.route('/products',methods=['GET']) 
 def all_products():
