@@ -29,15 +29,15 @@ export const Home = () => {
 	console.log(store.gifts);
 	const renderGifts = () => {
 		history.push("/gifts");
-
-		// <div className="row">
-		// 	<div className="col-4">
-		// 		{store.gifts.map((gift, key) => (
-		// 			<GiftsInfoCard key={key} gift={gift} />
-		// 		))}
-		// 	</div>
-		// </div>
 	};
+
+	// <div className="row">
+	// 	<div className="col-4">
+	// 		{store.gifts.map((gift, key) => (
+	// 			<GiftsInfoCard key={key} gift={gift} />
+	// 		))}
+	// 	</div>
+	// </div>
 
 	return (
 		<div>

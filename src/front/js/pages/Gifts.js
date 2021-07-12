@@ -4,28 +4,25 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
-function GiftsInfoCard({ gift }) {
-	console.log(gift);
+export const GiftsInfoCard = props => {
+	console.log(props.name);
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div>
-			<Card style={{ width: "18rem" }}>
-				<Card.Img variant="top" src="holder.js/100px180" />
-				<Card.Body>
-					<Card.Title>{gift.name}</Card.Title>
-					<Card.Text>{gift.description}</Card.Text>
-					<Button variant="primary">Go somewhere</Button>
-				</Card.Body>
-			</Card>
+			<h1>Hello World</h1>
 		</div>
 	);
-}
+};
+
+// GiftsInfoCard.propTypes = {
+// 	// You can declare that a prop is a specific JS type. By default, these
+// 	// are all optional.
+// 	gift: PropTypes.object
+// };
 
 GiftsInfoCard.propTypes = {
-	// You can declare that a prop is a specific JS type. By default, these
-	// are all optional.
-	gift: PropTypes.object
+	name: PropTypes.object
 };
 
 export default GiftsInfoCard;
