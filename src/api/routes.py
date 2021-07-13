@@ -9,10 +9,7 @@ from werkzeug.security import check_password_hash
 from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
-# ACCESS_EXPIRES = timedelta(hours=1)
-# api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-# api.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
-# jwt = JWTManager()
+
 
 api = Blueprint('api', __name__)
 
@@ -24,50 +21,53 @@ def all_users():
         user_dic.append(user.serialize())
     return jsonify(user_dic),200
 
-@api.route("/login", methods=['POST'])
-def handling_login():
+# @api.route("/login", methods=['POST'])
+# def handling_login():
 
-    json=request.get_json()
-    res = []
+#     json=request.get_json()
+#     res = []
 
-    for element in json:
-            user = User(name = element.get("name"), last_name = element.get("last_name"), username = element.get("username"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
-            res.append(user.serialize())
+#     for element in json:
+#             user = User(name = element.get("name"), last_name = element.get("last_name"), username = element.get("username"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
+#             res.append(user.serialize())
                
-    return jsonify(res)
+#     return jsonify(res)
 
-    if json is None: 
-        raise APIException("You shoulld be return a json")
+#     if json is None: 
+#         raise APIException("You shoulld be return a json")
 
-    if "email" not in json:
-        raise APIException("That's not an email in json")
+#     if "email" not in json:
+#         raise APIException("That's not an email in json")
 
-    if "password" not in json:
-        raise APIException("That's not a password in json")
+#     if "password" not in json:
+#         raise APIException("That's not a password in json")
     
-    print(json["email"],json["password"])
+#     print(json["email"],json["password"])
    
-    email = json["email"]
-    password = json["password"]
+#     email = json["email"]
+#     password = json["password"]
 
-    user = User.query.filter_by(email=email).one_or_none()
+#     user = User.query.filter_by(email=email).one_or_none()
 
-    if user is None:
-         raise APIException("User not found")
+#     if user is None:
+#          raise APIException("User not found")
 
-    if not user.check_password(password):
-      return jsonify("Your credentials are wrong, please try again"), 401
+#     if not user.check_password(password):
+#       return jsonify("Your credentials are wrong, please try again"), 401
 
-    access_token = create_access_token(identity=user.serialize())
-    return jsonify(accessToken=access_token)   
-    
-# def login():
-#     username = request.json.get("username", None)
-#     password = request.json.get("password", None)
-#     if username != "username" or password != "password":
-#         return jsonify({"msg": "Bad username or password"}), 401
-#     access_token = create_access_token(identity="user")
-#     return jsonify(access_token=access_token)
+#     access_token = create_access_token(identity=user.serialize())
+#     return jsonify(accessToken=access_token) 
+  
+@api.route("/login", methods=['POST'])    
+def login(User):
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    if email != "email" or password != "password":
+        raise APIException("Invalid login")
+    access_token = create_access_token(identity="user")
+    return jsonify(access_token=access_token)
+    if token != "token":
+        raise APIException("Invalid login")
 
 @api.route("/profile", methods=["GET"])
 def handle_profile():
