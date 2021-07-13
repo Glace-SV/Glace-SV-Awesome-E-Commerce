@@ -61,27 +61,29 @@ def handling_login():
     access_token = create_access_token(identity=user.serialize())
     return jsonify(accessToken=access_token)   
     
-def login():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if username != "username" or password != "password":
-        return jsonify({"msg": "Bad username or password"}), 401
-    access_token = create_access_token(identity="user")
-    return jsonify(access_token=access_token)
+# def login():
+#     username = request.json.get("username", None)
+#     password = request.json.get("password", None)
+#     if username != "username" or password != "password":
+#         return jsonify({"msg": "Bad username or password"}), 401
+#     access_token = create_access_token(identity="user")
+#     return jsonify(access_token=access_token)
 
-@api.route('/login/<user_email>', methods=["GET"])
-def get_user_by_email(user_email):
-        user = User.query.get(user_email)
-        print(user_email)
-        user_serialized = user.serialize()
-        return jsonify(user_serialized)
+@api.route("/profile", methods=["GET"])
+def handle_profile():
+    json = request.get_json()
+    token = json["token"]
+    user = user.get_with_token(token)
+    return jsonify(user.serlialize())
 
-@api.route('/login/<int:user_id>', methods=["DELETE"])
-def user_delete(user_id):
-        user = User.query.get(user_id)
-        print(user.id)
-        User.delete(user)
-        return jsonify(user.serialize())
+# @api.route('/login/<user_email>', methods=["GET"])
+# def get_user_by_email(user_email):
+#         user = User.query.get(user_email)
+#         print(user_email)
+#         user_serialized = user.serialize()
+#         return jsonify(user_serialized)
+
+
 
 @api.route('/logout', methods=["DELETE"])
 def logout():

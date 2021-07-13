@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -25,15 +25,29 @@ import {
 } from "react-bootstrap";
 
 export const Login = () => {
+	const history = useHistory();
+	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	function login(){
-		fetch ("https://3001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"), { method: "POST",
-				body: JSON.stringify ({
-					email=email,
-					password=password}
-				) }
+	function login() {
+		fetch("https://3001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"),
+			{
+				method: "POST",
+				Headers: {
+					"content-type": "aplication/json"
+				},
+				body: JSON.stringify({
+					email: email,
+					password: password
+				})
+			}
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+					actions.setToken(responseJson.token);
+					history.push("/profile");
+				});
 	}
 
 	return (
@@ -79,10 +93,12 @@ export const Login = () => {
 								<Form.Group className="mb-3" controlId="formBasicPassword">
 									<Form.Label>Email</Form.Label>
 									<Form.Control type="email" placeholder="Email" required />
-									<Form.Text>Se enviará una contraseña a tu dirección de correo electrónico.</Form.Text>
 									<Form.Text>
-										Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia
-										en esta web, gestionar el acceso a tu cuenta y otros propósitos.
+										Se enviará una contraseña a tu dirección de correo electrónico.
+									</Form.Text>
+									<Form.Text>
+										Tus datos personales se utilizarán para procesar tu pedido, mejorar tu
+										experiencia en esta web, gestionar el acceso a tu cuenta y otros propósitos.
 									</Form.Text>
 								</Form.Group>
 								<Button variant="warning" type="submit">
@@ -96,4 +112,3 @@ export const Login = () => {
 		</div>
 	);
 };
-
