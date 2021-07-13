@@ -21,7 +21,6 @@ import {
 	Control,
 	Check
 } from "react-bootstrap";
-import renderGifts from "./Gifts";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -29,6 +28,9 @@ export const Home = () => {
 	console.log(store.gifts);
 	const renderGifts = () => {
 		history.push("/gifts");
+	};
+	const renderCakes = () => {
+		history.push("/cakes");
 	};
 
 	// <div className="row">
@@ -89,9 +91,7 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>GLAZE ME UP!</Card.Title>
 						<Card.Text>Nuestra selección de pasteles glazeados te encantará!</Card.Text>
-						<Button variant="warning" onClick={renderGifts}>
-							Comprar ahora
-						</Button>
+						<Button variant="warning">Comprar ahora</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -117,7 +117,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>CAKES & MORE!</Card.Title>
 						<Card.Text>Pasteles para celebrar toda ocasión: cumpleaños, graduaciones, bodas...</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={renderCakes}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -130,7 +132,9 @@ export const Home = () => {
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
 						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
 						<Link to="/category">
-							<Button variant="warning">Comprar ahora</Button>
+							<Button variant="warning" onClick={renderGifts}>
+								Comprar ahora
+							</Button>
 						</Link>
 					</Card.Body>
 				</Card>

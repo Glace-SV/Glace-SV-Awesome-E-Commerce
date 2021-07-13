@@ -1,36 +1,36 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	let api = "https://swapi.dev/api/people";
 	return {
 		store: {
 			gifts: [],
 			cakes: [],
 			treats: [],
 			glazed: []
+			//shopping cart
 		},
 
 		actions: {
 			loadGifts: () => {
-				fetch("https://swapi.dev/api/people")
+				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Gifts")
 					.then(resp => resp.json())
-					.then(data => setStore({ gifts: data.results }));
+					.then(data => setStore({ gifts: data }));
 			},
 
 			loadCakes: () => {
-				fetch({ api } + "/Cakes")
+				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Cakes")
 					.then(resp => resp.json())
-					.then(data => setStore({ cakes: data.results }));
+					.then(data => setStore({ cakes: data }));
 			},
 
 			loadTreats: () => {
-				fetch({ api } + "/Treats")
+				fetch("")
 					.then(resp => resp.json())
-					.then(data => setStore({ treats: data.results }));
+					.then(data => setStore({ treats: data }));
 			},
 
 			loadGlazed: () => {
-				fetch({ api } + "/Glazed")
+				fetch("")
 					.then(resp => resp.json())
-					.then(data => setStore({ glzed: data.results }));
+					.then(data => setStore({ glzed: data }));
 			}
 
 			// Use getActions to call a function within a fuction

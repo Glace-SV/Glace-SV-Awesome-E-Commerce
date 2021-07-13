@@ -3,6 +3,7 @@ import ScrollToTop from "./component/scrollToTop";
 import React, { useContext } from "react";
 import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
+import { CakesInfoCard } from "./pages/Cakes";
 import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
@@ -28,7 +29,10 @@ const Layout = () => {
 							<Login />
 						</Route>
 						<Route exact path="/gifts">
-							<GiftsInfoCard props={store.gifts} />
+							<GiftsInfoCard />
+						</Route>
+						<Route exact path="/cakes">
+							<CakesInfoCard />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

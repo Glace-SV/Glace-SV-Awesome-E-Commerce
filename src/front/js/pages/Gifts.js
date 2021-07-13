@@ -1,18 +1,34 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
-export const GiftsInfoCard = props => {
-	console.log(props.name);
+export const GiftsInfoCard = () => {
 	const { store, actions } = useContext(Context);
+	useEffect(() => {
+		actions.loadGifts();
+	}, []);
+	const gifts = store.gifts;
+	console.log(gifts);
 
 	return (
-		<div>
-			<h1>Hello World</h1>
-		</div>
+		<>
+			<div>
+				{gifts.map(gift => (
+					<div key={gift}> {gift.name} </div>
+				))}
+			</div>
+		</>
 	);
+
+	// return (
+	// 	<>
+	// 		<div>
+	// 			<h1>hello </h1>
+	// 		</div>
+	// 	</>
+	// );
 };
 
 // GiftsInfoCard.propTypes = {
@@ -21,8 +37,8 @@ export const GiftsInfoCard = props => {
 // 	gift: PropTypes.object
 // };
 
-GiftsInfoCard.propTypes = {
-	name: PropTypes.object
-};
+// GiftsInfoCard.propTypes = {
+// 	gifts: PropTypes.object
+// };
 
 export default GiftsInfoCard;
