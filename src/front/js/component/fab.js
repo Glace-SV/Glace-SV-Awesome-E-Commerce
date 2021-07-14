@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import WebFont from "webfontloader";
+import { animateScroll as scroll } from "react-scroll";
 
 export const Fab = () => {
 	const [btnScrollToTop, setBtnScrollToTop] = useState("");
@@ -12,7 +13,7 @@ export const Fab = () => {
 	};
 
 	const scrollFunction = () => {
-		if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+		if (document.body.scrollToTop > 80 || document.documentElement.scrollToTop > 80) {
 			setBtnScrollToTop("");
 		} else {
 			setBtnScrollToTop("d-none");
@@ -20,19 +21,22 @@ export const Fab = () => {
 	};
 
 	// When the user clicks on the button, scroll to the top of the document
-	function topFunction() {
-		document.body.scrollTop = 0; // For Safari
-		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	function scrollToTop() {
+		scroll.scrollToTop();
 	}
+
+	const toggleHome = () => {
+		scroll.scrollToTop();
+	};
 
 	return (
 		<>
 			<div className="fab">
-				<div className="active">
+				<div className="active" smooth={true} offset={50} duration={500} delay={1000}>
 					<button
 						id="fabToTop"
-						onClick={() => topFunction()}
-						className={"scrollfab fab fab-energized " + btnScrollToTop}>
+						onClick={toggleHome}
+						className={"scrollfab fab fab-energized " + btnScrollToTop + scrollToTop}>
 						<i className="fa fa-home" />
 					</button>
 				</div>
