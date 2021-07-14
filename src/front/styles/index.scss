@@ -24,6 +24,10 @@ footer {
       background-color: #171712;
 }
 
+.fab {
+  font-size: 32px;
+}
+
 .glogo {
       width: -10%;
       height: -20%;
@@ -66,9 +70,11 @@ footer {
 
 // FAB Styles
 
-.fab {
+.scrollfab {
       display: inline-block;
-      position: relative;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
       outline: none;
       -webkit-user-select: none;
       user-select: none;

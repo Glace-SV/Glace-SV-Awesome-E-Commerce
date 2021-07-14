@@ -49,23 +49,20 @@ export const Footer = () => {
 									<span>Contacto</span>
 								</div>
 								<div className="footerawesome">
-									<p>
-										<a
-											className="text-white"
-											href="https://wa.me/50377362484"
-											target="_blank"
-											rel="noopener noreferrer">
-											<i className="fab fa-whatsapp" />
-										</a>{" "}
-										&nbsp;
-										<a
-											className="text-white"
-											href="https://www.instagram.com/glace_sv/"
-											target="_blank"
-											rel="noopener noreferrer">
-											<i className="fab fa-instagram" />
-										</a>
-									</p>
+									<a
+										className="text-white mr-3"
+										href="https://wa.me/50377362484"
+										target="_blank"
+										rel="noopener noreferrer">
+										<i className="fab fa-whatsapp" />
+									</a>{" "}
+									<a
+										className="text-white"
+										href="https://www.instagram.com/glace_sv/"
+										target="_blank"
+										rel="noopener noreferrer">
+										<i className="fab fa-instagram" />
+									</a>
 								</div>
 							</div>
 						</div>
