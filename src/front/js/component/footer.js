@@ -67,7 +67,7 @@ export const Footer = () => {
 							</div>
 						</div>
 						<div className="copyr mt-5">
-							🍰 Glace SV &copy;
+							🍰 Glacé SV &copy;
 							<span> {getYear()} </span>
 						</div>
 						<div className="madeby">
