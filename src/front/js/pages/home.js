@@ -33,14 +33,6 @@ export const Home = () => {
 		history.push("/cakes");
 	};
 
-	// <div className="row">
-	// 	<div className="col-4">
-	// 		{store.gifts.map((gift, key) => (
-	// 			<GiftsInfoCard key={key} gift={gift} />
-	// 		))}
-	// 	</div>
-	// </div>
-
 	return (
 		<div>
 			<Carousel>
@@ -103,9 +95,7 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
 						<Card.Text>Brownies, cupcakes, pretzels y macarons para endulzarte la vida.</Card.Text>
-						<Button variant="warning" onClick={actions.prueba}>
-							Comprar ahora
-						</Button>
+						<Button variant="warning">Comprar ahora</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
