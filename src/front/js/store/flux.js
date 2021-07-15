@@ -2,12 +2,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			user: null
+			baseURL: "https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login",
+			currentUser: {}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			login: (email, password) => {
+				fetch(getStore().baseURL.concat("/login"), {
+					method: "POST",
+					mode: "no-cors",
+					headers: {
+						"Content-Type": "application/json",
+						authoritation: "bearer " + token
+					},
+					body: JSON.stringify({ email: email, password: password })
+				}).then(response => {
+					if (response.ok) {
+						response = response.json();
+						console.log(response);
+					}
+				});
 			},
 
 			getMessage: () => {
@@ -16,19 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
-			},
-			getToken: () => {
-				const store = getStore();
-				if (store.token) {
-					return store.token;
-				} else {
-					return localStorage.getItem("token");
-				}
-			},
-
-			setToken: token => {
-				localStorage.setItem("token", token);
-				setStore({ token: token });
 			},
 
 			setUser: user => {

@@ -70,14 +70,23 @@ class User(db.Model, BasicMode):
         print(self)       
         db.session.add(self)
         db.session.commit()
+        
+    def serialize(self):
+        return {
+            "id": self.id,
+            "username": self.name,
+            "email": self.email,
+           
+            # do not serialize the password, its a security breach
+        }
     
-    @password.setter
-    def password(self, password):
-        self._password = generate_password_hash(
-                password, 
-                method='pbkdf2:sha256', 
-                salt_length=16
-            )
+    # @password.setter
+    # def password(self, password):
+    #     self._password = generate_password_hash(
+    #             password, 
+    #             method='pbkdf2:sha256', 
+    #             salt_length=16
+    #         )
         
 #  class
 class Products(db.Model, BasicMode):
