@@ -70,6 +70,15 @@ class User(db.Model, BasicMode):
         print(self)       
         db.session.add(self)
         db.session.commit()
+        
+    def serialize(self):
+        return {
+            "id": self.id,
+            "username": self.name,
+            "email": self.email,
+           
+            # do not serialize the password, its a security breach
+        }
     
     def serialize(self):
         return {

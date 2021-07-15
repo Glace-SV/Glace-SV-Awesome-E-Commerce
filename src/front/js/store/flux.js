@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
-			user: null
+			baseURL: "https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login",
+			currentUser: {}
 		},
 
 		actions: {
