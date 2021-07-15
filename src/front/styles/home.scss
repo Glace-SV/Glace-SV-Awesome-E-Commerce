@@ -58,6 +58,10 @@
 
 }
 
+.categoryline {
+    border: 5px solid #EEBA0B;
+}
+
 //Styles for category title
 .categorytitle {
     font-size: 30px;
@@ -135,5 +139,22 @@ height: auto;
 .air {
     height: 30px;
 
+}
+
+
+//Products view
+.buynow {
+    font-weight: bold;
+
+}
+
+.viewstitle {
+    font-size: 35px;
+    border-bottom: 5px solid #EEBA0B;
+}
+
+.viewspara {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
 }
 

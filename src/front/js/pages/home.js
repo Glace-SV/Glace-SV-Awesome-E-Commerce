@@ -1,6 +1,10 @@
+//import rendergifts???
+
 import React, { useContext } from "react";
+import GiftsInfoCard from "../pages/Gifts";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import { Link, useParams, useHistory } from "react-router-dom";
 import {
 	Carousel,
 	Item,
@@ -20,6 +24,14 @@ import {
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	let history = useHistory();
+	console.log(store.gifts);
+	const renderGifts = () => {
+		history.push("/gifts");
+	};
+	const renderCakes = () => {
+		history.push("/cakes");
+	};
 
 	return (
 		<div>
@@ -95,7 +107,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>CAKES & MORE!</Card.Title>
 						<Card.Text>Pasteles para celebrar toda ocasión: cumpleaños, graduaciones, bodas...</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={renderCakes}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -107,7 +121,11 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
 						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Link to="/category">
+							<Button variant="warning" onClick={renderGifts}>
+								Comprar ahora
+							</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 			</div>
