@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			gifts: [],
 			cakes: [],
 			treats: [],
-			glazed: []
+			glazed: [],
 			//shopping cart
 			token: "",
 			user: null
@@ -18,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			loadCakes: () => {
-				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Cakes")
+				fetch("https://3001-coral-tarsier-vq418o42.ws-eu10.gitpod.io/api/products/Cakes")
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
-      },
+			},
 
 			getToken: () => {
 				const store = getStore();
@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setUser: user => {
 				setStore({ user: user });
-			},
+			}
 
 			// Use getActions to call a function within a fuction
 			// exampleFunction: () => {

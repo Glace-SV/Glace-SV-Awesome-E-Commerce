@@ -18,11 +18,6 @@ export const CakesInfoCard = () => {
 				<h1 className="mt-3 mx-auto viewstitle">Cakes & more</h1>
 			</div>
 			<div className="row mx-auto ">
-				{/* <h2 className="mt-3 mx-auto categorytitle">
-					<span className="emoji">🍰</span>
-					Cakes & More
-					<span className="emoji">🍰</span>
-				</h2> */}
 				<p className="mx-5 mt-3 viewspara">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
 					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
