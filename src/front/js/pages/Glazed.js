@@ -4,18 +4,18 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
-export const CakesInfoCard = () => {
+export const GlazedInfoCard = () => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {
-		actions.loadCakes();
+		actions.loadGlazed();
 	}, []);
-	const cakes = store.cakes;
-	console.log(cakes);
+	const glazed = store.glazed;
+	console.log(glazed);
 
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
-				<h1 className="mt-3 mx-auto viewstitle">Cakes & More</h1>
+				<h1 className="mt-3 mx-auto viewstitle">Spread the Love</h1>
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
@@ -27,8 +27,9 @@ export const CakesInfoCard = () => {
 				</p>
 				<h3 className="lead mx-auto buynow my-3">COMPRA AHORA!</h3>
 			</div>
-			{cakes.map(cake => (
-				<div key={cake} className="row d-inline-block mx-auto">
+
+			{glazed.map(glaze => (
+				<div key={glaze} className="row d-inline-block mx-auto">
 					<Card style={{ width: "17rem" }} className="col-12 m-3">
 						<Card.Img
 							variant="top"
@@ -36,10 +37,10 @@ export const CakesInfoCard = () => {
 							src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
 						/>
 						<Card.Body>
-							<Card.Title>{cake.name}</Card.Title>
-							<Card.Text>{cake.description}</Card.Text>
-							<Card.Text>{cake.size}</Card.Text>
-							<Card.Text>{cake.price}</Card.Text>
+							<Card.Title>{glaze.name}</Card.Title>
+							<Card.Text>{glaze.description}</Card.Text>
+							<Card.Text>{glaze.size}</Card.Text>
+							<Card.Text>{glaze.price}</Card.Text>
 							<Button variant="warning">Comprar</Button>
 						</Card.Body>
 					</Card>
@@ -48,4 +49,5 @@ export const CakesInfoCard = () => {
 		</>
 	);
 };
-export default CakesInfoCard;
+
+export default GlazedInfoCard;

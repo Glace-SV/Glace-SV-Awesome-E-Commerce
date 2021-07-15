@@ -1,7 +1,6 @@
 //import rendergifts???
 
 import React, { useContext } from "react";
-import GiftsInfoCard from "../pages/Gifts";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -25,7 +24,7 @@ import {
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
-	console.log(store.gifts);
+
 	const renderGifts = () => {
 		history.push("/gifts");
 	};
@@ -33,6 +32,13 @@ export const Home = () => {
 		history.push("/cakes");
 	};
 
+	const renderTreats = () => {
+		history.push("/treats");
+	};
+
+	const renderGlazed = () => {
+		history.push("/glazed");
+	};
 	return (
 		<div>
 			<Carousel>
@@ -83,7 +89,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>GLAZE ME UP!</Card.Title>
 						<Card.Text>Nuestra selección de pasteles glazeados te encantará!</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={renderGlazed}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -95,7 +103,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
 						<Card.Text>Brownies, cupcakes, pretzels y macarons para endulzarte la vida.</Card.Text>
-						<Button variant="warning">Comprar ahora</Button>
+						<Button variant="warning" onClick={renderTreats}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -121,11 +131,10 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
 						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
-						<Link to="/category">
-							<Button variant="warning" onClick={renderGifts}>
-								Comprar ahora
-							</Button>
-						</Link>
+
+						<Button variant="warning" onClick={renderGifts}>
+							Comprar ahora
+						</Button>
 					</Card.Body>
 				</Card>
 			</div>

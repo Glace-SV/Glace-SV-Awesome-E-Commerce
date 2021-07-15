@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			loadGifts: () => {
-				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Gifts")
+				fetch("https://3001-coral-tarsier-vq418o42.ws-eu10.gitpod.io/api/products/Gifts")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			},
@@ -24,13 +24,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			loadTreats: () => {
-				fetch("")
+				fetch("https://3001-coral-tarsier-vq418o42.ws-eu10.gitpod.io/api/products/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
 
 			loadGlazed: () => {
-				fetch("")
+				fetch("https://3001-coral-tarsier-vq418o42.ws-eu10.gitpod.io/api/products/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
 			},
