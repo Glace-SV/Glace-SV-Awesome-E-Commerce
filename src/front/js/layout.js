@@ -5,10 +5,12 @@ import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";
 import { Login } from "./pages/login";
+import { Profile } from "./pages/profile";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Context } from "./store/appContext";
+import { Fab } from "./component/fab";
 
 //create your first component
 const Layout = () => {
@@ -33,12 +35,15 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/cakes">
 							<CakesInfoCard />
+						<Route exact path="/profile">
+							<Profile />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
 					<Footer />
+					<Fab />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

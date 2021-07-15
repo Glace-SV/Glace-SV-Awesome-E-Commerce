@@ -1,5 +1,6 @@
+  
 import enum
-
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import VARCHAR, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -7,97 +8,109 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
-class Person(db.Model):
-    __tablename__ = 'person'
+class BasicMode():
 
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.VARCHAR, unique=True, nullable=False)
-    first_name = db.Column(db.VARCHAR, unique=False, nullable=False)
-    last_name = db.Column(db.VARCHAR, unique=False, nullable=False)
-    address = db.Column(db.VARCHAR, unique=False, nullable=False)
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+        
+    @classmethod
+    def get_one(cls,model_id):
+        return cls.query.filter_by(id = model_id).one_or_none()
+    
+
+    @classmethod
+    def delete(cls,self): 
+        db.session.query(cls).filter(cls.id==self.id).delete(synchronize_session=False)
+        db.session.commit()
+
+class User(db.Model, BasicMode):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer,unique=True, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    username = db.Column(db.String(120), unique=False, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    name = db.Column(db.String(80), unique=False, nullable=False)
+    last_name = db.Column(db.String(80), unique=False, nullable=False)
+    adress = db.Column(db.String(250), unique=False, nullable=False)
+    city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
-    _password = db.Column(db.VARCHAR, unique=False, nullable=False)
-    is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)  
-    has_ad = db.relationship('Ad', backref='person',lazy=True)
+    token = db.Column(db.String(250), unique=True, nullable=True)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=True)
+
 
     def __repr__(self):
-        return f'User {self.email}'
+        return '<user %r>' % self.username
 
     def to_dict(self):
         return {
             "id": self.id,
             "email": self.email,
-            "first_name": self.first_name,
+            "name": self.name,
             "last_name": self.last_name,
-            "address": self.address,
-            "phone": self.phone
         }
-
-    @hybrid_property
-    def password(self):
-        return self._password
-
-    @password.setter
-    def password(self, password):
-        self._password = generate_password_hash(
-                password, 
-                method='pbkdf2:sha256', 
-                salt_length=16
-            )
-
-    def create(self):
+      
+    @staticmethod
+    def login_credentials(email,password):
+        return User.query.filter_by(email=email).filter_by(password=password).first()
+    
+    
+    def user_have_token(self,token):
+        return User.query.filter_by(token=self.token).first()
+   
+    def assign_token(self,token):
+        self.token = token
         db.session.add(self)
         db.session.commit()
+    
+    def check_password(self, password_param):
+        return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
 
-    @classmethod
-    def get_by_email(cls, email):
-        user = cls.query.filter_by(email=email).one_or_none()
-        return user
-
-    @classmethod
-    def get_by_id(cls, id):
-        user = cls.query.get(id)
-        return user
-
-    def update(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+    def db_post(self): 
+        print(self)       
+        db.session.add(self)
         db.session.commit()
-        return self
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "username": self.name,
+            "email": self.email,
+           
+            # do not serialize the password, its a security breach
+        }
+        
+#  class
+class Products(db.Model, BasicMode):
+    __tablename__ = 'products'
+    id = db.Column(db.Integer,unique = True, primary_key= True)
+    url_image = db.Column(db.String) #Preguntar si es string.
+    name = db.Column(db.String(80), unique = True)
+    description = db.Column(db.String(250), nullable=False)
+    category = db.Column(db.String(250), unique=False, nullable=False)
+    price = db.Column(db.String(20), nullable=False)
+    size = db.Column(db.String(250), nullable=False)
 
-    def delete(self):
-        self.is_active = False
-        db.session.commit()
 
-    def reactive_account(self, first_name, last_name, password):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.password = password
-        self.is_active = True
-        db.session.commit()
-
-
-class Ad_category(str, enum.Enum):
-    option_1 = "To Sell"
-    option_2 = "I want"
-    option_3 = "Exchange"
-
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "url_image": self.url_image,
+            "description": self.description,
+            "category": self.category,
+            "price": self.price,
+            "size": self.size
+            # do not serialize the password, its a security breach
+        }
+      
     @classmethod
-    def get(cls):
-        return [cls.option_1, cls.option_2, cls.option_3]
+    def get_by_id(cls,model_id):
+        return cls.query.filter_by(id = model_id).first()
 
+    
+    @classmethod
+    def get_all_by_category(cls, model_category):
+        return cls.query.filter_by(category = model_category).all()
 
-class Ad(db.Model):
-    __tablename__='ad'
-
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.VARCHAR, unique=False, nullable=False)
-    text = db.Column(db.VARCHAR, unique=False, nullable=False)
-    #pictures = db.Column(db.ARRAY(db.VARCHAR), unique=True, nullable=True)
-    category = db.Column(db.Enum(Ad_category), nullable=False)
-    price = db.Column(db.Float, unique=False, nullable=True)
-    is_active = db.Column(db.Boolean, default=True, unique=False, nullable=False)
-    owner = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-
-    def __repr__(self):
-        return f'Ad {self.title}'
+   

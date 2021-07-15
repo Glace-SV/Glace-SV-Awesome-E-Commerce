@@ -6,6 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			treats: [],
 			glazed: []
 			//shopping cart
+			token: "",
+			user: null
 		},
 
 		actions: {
@@ -30,8 +32,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadGlazed: () => {
 				fetch("")
 					.then(resp => resp.json())
-					.then(data => setStore({ glzed: data }));
-			}
+					.then(data => setStore({ glazed: data }));
+      },
+
+			getToken: () => {
+				const store = getStore();
+				if (store.token) {
+					return store.token;
+				} else {
+					return localStorage.getItem("token");
+				}
+			},
+
+			setToken: token => {
+				localStorage.setItem("token", token);
+				setStore({ token: token });
+			},
+
+			setUser: user => {
+				setStore({ user: user });
+			},
 
 			// Use getActions to call a function within a fuction
 			// exampleFunction: () => {
