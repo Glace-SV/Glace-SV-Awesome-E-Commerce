@@ -85,10 +85,12 @@ def one_product(product_id):
         return jsonify(product_serialized)
 
 @api.route('/products/<products_category>', methods=['GET'])
-def cat_product(products_category):
-        product = Products.get_by_category(products_category)
-        product_serialized = product.serialize()
-        return jsonify(product_serialized)
+def get_all_by_category(products_category):
+        products = Products.get_all_by_category(products_category)
+        products_Dic = []
+        for item in products :
+            products_Dic.append(item.serialize())
+        return jsonify(products_Dic) 
 
 @api.route('/products/<int:product_id>', methods=["DELETE"])
 def product_delete(product_id):

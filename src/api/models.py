@@ -19,9 +19,6 @@ class BasicMode():
     def get_one(cls,model_id):
         return cls.query.filter_by(id = model_id).one_or_none()
     
-    @classmethod
-    def get_by_category(cls,model_category):
-        return cls.query.filter_by(category = model_category).first()
 
     @classmethod
     def delete(cls,self): 
@@ -100,3 +97,10 @@ class Products(db.Model, BasicMode):
     @classmethod
     def get_by_id(cls,model_id):
         return cls.query.filter_by(id = model_id).first()
+    
+    @classmethod
+    def get_all_by_category(cls, model_category):
+        return cls.query.filter_by(category = model_category).all()
+
+   
+   
