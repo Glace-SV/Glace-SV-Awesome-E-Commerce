@@ -74,6 +74,7 @@ class User(db.Model, BasicMode):
     def serialize(self):
         return {
             "id": self.id,
+            "token": self.token,
             "username": self.name,
             "email": self.email,
            
