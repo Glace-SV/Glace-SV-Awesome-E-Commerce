@@ -1,19 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			token: "",
+			user: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -28,6 +17,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+			getToken: () => {
+				const store = getStore();
+				if (store.token) {
+					return store.token;
+				} else {
+					return localStorage.getItem("token");
+				}
+			},
+
+			setToken: token => {
+				localStorage.setItem("token", token);
+				setStore({ token: token });
+			},
+
+			setUser: user => {
+				setStore({ user: user });
+			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

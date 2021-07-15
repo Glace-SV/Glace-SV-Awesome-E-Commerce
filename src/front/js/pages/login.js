@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -24,9 +24,31 @@ import {
 	Nav
 } from "react-bootstrap";
 
-export const Login = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
+export const Login = () => {
+	const history = useHistory();
+	const { actions } = useContext(Context);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	function login() {
+		fetch("https://3001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"),
+			{
+				method: "POST",
+				Headers: {
+					"content-type": "aplication/json"
+				},
+				body: JSON.stringify({
+					email: email,
+					password: password
+				})
+			}
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+					actions.setToken(responseJson.token);
+					history.push("/profile");
+				});
+	}
 
 	return (
 		<div className="loginbckgrndimg">
@@ -64,8 +86,8 @@ export const Login = props => {
 						<Tab.Pane eventKey="second">
 							<Form className="formcolor">
 								<Form.Group className="mb-3" controlId="formBasicEmail">
-									<Form.Label>Nombre</Form.Label>
-									<Form.Control type="text" placeholder="Nombre" required />
+									<Form.Label>Username</Form.Label>
+									<Form.Control type="text" placeholder="username" required />
 								</Form.Group>
 
 								<Form.Group className="mb-3" controlId="formBasicPassword">
@@ -89,8 +111,4 @@ export const Login = props => {
 			</Tab.Container>
 		</div>
 	);
-};
-
-Login.propTypes = {
-	match: PropTypes.object
 };
