@@ -9,6 +9,7 @@ import { Profile } from "./pages/profile";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Fab } from "./component/fab";
 
 //create your first component
 const Layout = () => {
@@ -39,6 +40,7 @@ const Layout = () => {
 						</Route>
 					</Switch>
 					<Footer />
+					<Fab />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

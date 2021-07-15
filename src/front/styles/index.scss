@@ -24,6 +24,10 @@ footer {
       background-color: #171712;
 }
 
+.fab {
+  font-size: 32px;
+}
+
 .glogo {
       width: -10%;
       height: -20%;
@@ -61,3 +65,75 @@ footer {
       font-size: 70%;
 
 }
+
+// FAB Styles
+
+// FAB Styles
+
+.scrollfab {
+      display: inline-block;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      outline: none;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      font-size: 32px;
+      z-index: 999;
+      background: #eee;
+      color: #336699;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      transition: 0.2s opacity ease-in-out;
+      -webkit-transition: 0.2s opacity ease-in-out;
+      border: 0;
+      overflow: hidden; }
+    
+    .fab:after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      margin-left: -60px;
+      margin-top: -60px;
+      background: #aaa;
+      border-radius: 100%;
+      opacity: .6;
+      transform: scale(0); }
+    
+    @keyframes ripple {
+      0% {
+        transform: scale(0); }
+      20% {
+        transform: scale(1); }
+      100% {
+        opacity: 0;
+        transform: scale(1); } }
+    
+    .fab:not(:active):after {
+      animation: ripple 3s ease-out; }
+    
+    /* fixes initial animation run, without user input, on page load.*/
+
+    .fab:after {
+      visibility: hidden; }
+    
+    .fab:focus:after {
+      visibility: visible; }
+    
+    .fab.fab-energized {
+      color: #fff;
+      background: rgba(234, 182, 11, 0.5); }
+    
+    /*----------------*/
+
+    .fab.fab-energized:after {
+      background: #cca100; }
