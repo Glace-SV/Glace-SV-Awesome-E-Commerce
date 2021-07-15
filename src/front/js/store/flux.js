@@ -23,6 +23,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
+			getToken: () => {
+				const store = getStore();
+				if (store.token) {
+					return store.token;
+				} else {
+					return localStorage.getItem("token");
+				}
+			},
+
+			setToken: () => {
+				localStorage.setItem("token", token);
+				setStore({ token: token });
+			},
 
 			getMessage: () => {
 				// fetching data from the backend
