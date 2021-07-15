@@ -7,9 +7,6 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
-# jwt = JWTManager()
-
-
 
 class BasicMode():
 
@@ -32,22 +29,30 @@ class BasicMode():
 
 class User(db.Model, BasicMode):
     __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer,unique=True, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    username = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(120), unique=False, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     adress = db.Column(db.String(250), unique=False, nullable=False)
     city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
     token = db.Column(db.String(250), unique=True, nullable=True)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=True)
 
 
     def __repr__(self):
         return '<user %r>' % self.username
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "name": self.name,
+            "last_name": self.last_name,
+           
+        }
     @staticmethod
     def login_credentials(email,password):
         return User.query.filter_by(email=email).filter_by(password=password).first()
@@ -68,16 +73,23 @@ class User(db.Model, BasicMode):
         print(self)       
         db.session.add(self)
         db.session.commit()
+    
+    @password.setter
+    def password(self, password):
+        self._password = generate_password_hash(
+                password, 
+                method='pbkdf2:sha256', 
+                salt_length=16
+            )
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "is_active": self.is_active
+    # def serialize(self):
+    #     return {
+    #         "id": self.id,
+    #         "email": self.email,
+    #         "is_active": self.is_active
             
-            # do not serialize the password, its a security breach
-        }
+    #         # do not serialize the password, its a security breach
+    #     }
 
 
 #  class

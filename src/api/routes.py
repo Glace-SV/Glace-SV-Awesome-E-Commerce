@@ -21,45 +21,32 @@ def all_users():
         user_dic.append(user.serialize())
     return jsonify(user_dic),200
 
-# @api.route("/login", methods=['POST'])
-# def handling_login():
+@api.route("/login", methods=['POST'])
+def handling_login():
 
-#     json=request.get_json()
-#     res = []
-
-#     for element in json:
-#             user = User(name = element.get("name"), last_name = element.get("last_name"), username = element.get("username"), email = element.get("email"), password= element.get("pasword"), adress= element.get("adress"), city= element.get("city"), phone=element.get("phone"))
-#             res.append(user.serialize())
-               
-#     return jsonify(res)
-
-#     if json is None: 
-#         raise APIException("You shoulld be return a json")
-
-#     if "email" not in json:
-#         raise APIException("That's not an email in json")
-
-#     if "password" not in json:
-#         raise APIException("That's not a password in json")
+    json=request.get_json()
     
-#     print(json["email"],json["password"])
-   
-#     email = json["email"]
-#     password = json["password"]
+    if json is None: 
+        raise APIException("Fail to loging")
 
-#     user = User.query.filter_by(email=email).one_or_none()
+    if "email" not in json:
+        raise APIException("Fail to loging")
 
-#     if user is None:
-#          raise APIException("User not found")
+    if "password" not in json:
+        raise APIException("Fail to loging")
+     
+    new_user = User (email = json.get("email"), password= json.get("password"),username= json.get("username"), name= json.get("name"), last_name= json.get("last_name"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
+    try:
+        new_user.db_post()
+        return jsonify(new_user.to_dict()), 201
 
-#     if not user.check_password(password):
-#       return jsonify("Your credentials are wrong, please try again"), 401
-
-#     access_token = create_access_token(identity=user.serialize())
-#     return jsonify(accessToken=access_token) 
+    except exc.IntegrityError:
+        
+        return {'error': 'Something went wrong'}, 409
+           
   
 @api.route("/login", methods=['POST'])    
-def login(User):
+def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email != "email" or password != "password":
@@ -69,21 +56,13 @@ def login(User):
     if token != "token":
         raise APIException("Invalid login")
 
+
 @api.route("/profile", methods=["GET"])
 def handle_profile():
     json = request.get_json()
     token = json["token"]
-    user = user.get_with_token(token)
+    user = User.get_with_token(token)
     return jsonify(user.serlialize())
-
-# @api.route('/login/<user_email>', methods=["GET"])
-# def get_user_by_email(user_email):
-#         user = User.query.get(user_email)
-#         print(user_email)
-#         user_serialized = user.serialize()
-#         return jsonify(user_serialized)
-
-
 
 @api.route('/logout', methods=["DELETE"])
 def logout():
@@ -93,8 +72,6 @@ def logout():
     db.session.commit()
     return jsonify(msg="JWT revoked")
 
-
-    
 
 @api.route('/products',methods=['GET']) 
 def all_products():
