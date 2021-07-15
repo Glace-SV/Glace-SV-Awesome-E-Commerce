@@ -18,9 +18,6 @@ class BasicMode():
     def get_one(cls,model_id):
         return cls.query.filter_by(id = model_id).one_or_none()
     
-    @classmethod
-    def get_by_category(cls,model_category):
-        return cls.query.filter_by(category = model_category).first()
 
     @classmethod
     def delete(cls,self): 
@@ -51,8 +48,8 @@ class User(db.Model, BasicMode):
             "email": self.email,
             "name": self.name,
             "last_name": self.last_name,
-           
         }
+      
     @staticmethod
     def login_credentials(email,password):
         return User.query.filter_by(email=email).filter_by(password=password).first()
@@ -81,19 +78,8 @@ class User(db.Model, BasicMode):
                 method='pbkdf2:sha256', 
                 salt_length=16
             )
-
-    # def serialize(self):
-    #     return {
-    #         "id": self.id,
-    #         "email": self.email,
-    #         "is_active": self.is_active
-            
-    #         # do not serialize the password, its a security breach
-    #     }
-
-
+        
 #  class
-
 class Products(db.Model, BasicMode):
     __tablename__ = 'products'
     id = db.Column(db.Integer,unique = True, primary_key= True)
@@ -116,17 +102,14 @@ class Products(db.Model, BasicMode):
             "size": self.size
             # do not serialize the password, its a security breach
         }
+      
     @classmethod
     def get_by_id(cls,model_id):
         return cls.query.filter_by(id = model_id).first()
 
-# class TokenBlocklist(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     jti = db.Column(db.String(36), nullable=False)
-#     created_at = db.Column(db.DateTime, nullable=False)
+    
+    @classmethod
+    def get_all_by_category(cls, model_category):
+        return cls.query.filter_by(category = model_category).all()
 
-#     @jwt.token_in_blocklist_loader
-#     def check_if_token_revoked(jwt_header, jwt_payload):
-#         jti = jwt_payload["jti"]
-#         token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
-#         return token is not None
+   
