@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash
-
 from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
@@ -43,6 +42,32 @@ def handling_login():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
+
+    if user and check_password_hash(user.password, password) and user.is_active:
+        token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
+        return {'token': token}, 200
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    password = form.password.data
+    email = form.email.data
+    try
+        generate_password_hash( password, 
+                method='pbkdf2:sha256', 
+                salt_length=16
+            )
+    except:
+        return jsonify({'error': 'An error occurred saving the user to the database'}), 500
+    
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User(password, email)
+            db.session.add(user)
+            db.session.commit()
+
+        return redirect(url_for('login'))
+
            
   
 @api.route("/login", methods=['POST'])    
@@ -56,13 +81,19 @@ def login():
     if token != "token":
         raise APIException("Invalid login")
 
+# añadir a la funcion de registro
+# generate_password_hash(
+#                 password, 
+#                 method='pbkdf2:sha256', 
+#                 salt_length=16
+#             )
 
-@api.route("/profile", methods=["GET"])
-def handle_profile():
-    json = request.get_json()
-    token = json["token"]
-    user = User.get_with_token(token)
-    return jsonify(user.serlialize())
+# @api.route("/profile", methods=["GET"])
+# def handle_profile():
+#     json = request.get_json()
+#     token = json["token"]
+#     user = User.get_with_token(token)
+#     return jsonify(user.serlialize())
 
 @api.route('/logout', methods=["DELETE"])
 def logout():

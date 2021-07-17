@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					mode: "no-cors",
 					headers: {
 						"Content-Type": "application/json",
-						authoritation: "bearer " + token
+						Authoritation: "bearer " + token
 					},
 					body: JSON.stringify({ email: email, password: password })
 				}).then(response => {

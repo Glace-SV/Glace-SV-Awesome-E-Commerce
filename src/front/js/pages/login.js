@@ -31,9 +31,7 @@ export const Login = () => {
 	const [password, setPassword] = useState("");
 
 	function login() {
-		fetch(
-			"https://3https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login001-teal-ox-gom7j0sl.ws-eu11.gitpod.io/api/login"
-		),
+		fetch("https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login"),
 			{
 				method: "POST",
 				Headers: {

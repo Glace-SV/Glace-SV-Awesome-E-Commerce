@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import VARCHAR, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
 from werkzeug.security import generate_password_hash
 
+
 db = SQLAlchemy()
 
 class BasicMode():
@@ -49,7 +50,20 @@ class User(db.Model, BasicMode):
             "name": self.name,
             "last_name": self.last_name,
         }
-      
+
+    @hybrid_property
+    def password(self):
+        return self.password
+
+    @password.setter
+    def password(self, password):
+        self._password = generate_password_hash(
+                password, 
+                method='pbkdf2:sha256', 
+                salt_length=16
+            )
+
+     
     @staticmethod
     def login_credentials(email,password):
         return User.query.filter_by(email=email).filter_by(password=password).first()
@@ -81,13 +95,6 @@ class User(db.Model, BasicMode):
             # do not serialize the password, its a security breach
         }
     
-    # @password.setter
-    # def password(self, password):
-    #     self._password = generate_password_hash(
-    #             password, 
-    #             method='pbkdf2:sha256', 
-    #             salt_length=16
-    #         )
         
 #  class
 class Products(db.Model, BasicMode):
