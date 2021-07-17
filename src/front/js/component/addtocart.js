@@ -7,19 +7,19 @@ const AddToCart = () => {
 		<div classNameName="btn-group">
 			<button
 				type="button"
-				className="btn btn-primary dropdown-toggle"
+				className="mt-2 btn btn-warning dropdown-toggle"
 				data-toggle="dropdown"
 				aria-haspopup="true"
 				aria-expanded="false">
-				Mi cesta: {store.cart.length}
+				<i className="fas fa-shopping-basket" /> {store.cart.length}
 			</button>
 			<div className="dropdown-menu">
 				<ul>
 					{store.cart.length > 0 ? (
-						store.cart.map((cart, index) => {
+						store.cart.map((item, index) => {
 							return (
 								<li key={index}>
-									<a href="#">{cart}</a>
+									<a href="#">{item}</a>
 									<i
 										id="delete"
 										className="far fa-trash-alt pointer trash px-3"
@@ -31,7 +31,7 @@ const AddToCart = () => {
 							);
 						})
 					) : (
-						<span>Empty</span>
+						<span>Vacío.</span>
 					)}
 				</ul>
 			</div>
