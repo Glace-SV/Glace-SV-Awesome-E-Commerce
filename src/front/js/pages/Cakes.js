@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { faUserAltSlash } from "@fortawesome/free-solid-svg-icons";
+
+import { Link } from "react-router-dom";
 
 export const CakesInfoCard = () => {
 	const { store, actions } = useContext(Context);
@@ -15,7 +16,15 @@ export const CakesInfoCard = () => {
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
-				<h1 className="mt-3 mx-auto viewstitle">Cakes & More</h1>
+				<h1 className="mt-3 mx-auto viewstitle">
+					<Link to="/treats">
+						<i className="changesection mr-4 fas fa-arrow-left" />
+					</Link>
+					Cakes & More
+					<Link to="/gifts">
+						<i className=" changesection ml-4 fas fa-arrow-right" />
+					</Link>
+				</h1>
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
