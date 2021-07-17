@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import AddToCart from "../component/addtocart";
 
 export const NavBarTwo = () => {
 	return (
@@ -24,10 +25,12 @@ export const NavBarTwo = () => {
 						EVENTOS
 					</Nav.Link>
 				</Nav>
-
-				<Button variant="flat">
-					<i className="fas fa-shopping-basket" />
-				</Button>
+				<div>
+					{/* <Button variant="flat"> */}
+					{/* <i className="fas fa-shopping-basket" /> */}
+					<AddToCart />
+				</div>
+				{/* </Button> */}
 			</Navbar.Collapse>
 		</Navbar>
 	);

@@ -40,7 +40,13 @@ export const CakesInfoCard = () => {
 							<Card.Text>{cake.description}</Card.Text>
 							<Card.Text>{cake.size}</Card.Text>
 							<Card.Text>{cake.price}</Card.Text>
-							<Button variant="warning">Comprar</Button>
+							<Button
+								variant="warning"
+								onClick={() => {
+									actions.addToCart(cake.name);
+								}}>
+								Comprar
+							</Button>
 						</Card.Body>
 					</Card>
 				</div>

@@ -1,11 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	const api = "https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products"
 	return {
 		store: {
 			gifts: [],
 			cakes: [],
 			treats: [],
 			glazed: [],
+			cart: [],
 			//shopping cart
 			token: "",
 			user: null
@@ -13,27 +13,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			loadGifts: () => {
-				fetch({api} + "/Gifts")
+				fetch(process.env.BACKEND_URL + "/products/Gifts")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			},
 
 			loadCakes: () => {
-				fetch({api} + "/Cakes")
+				fetch(process.env.BACKEND_URL + "/products/Cakes")
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
 
 			loadTreats: () => {
-				fetch({api} + "/Treats")
+				fetch(process.env.BACKEND_URL + "/products/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
 
 			loadGlazed: () => {
-				fetch({api} + "/Glazed")
+				fetch(process.env.BACKEND_URL + "/products/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
+			},
+
+			addToCart: item => {
+				const store = getStore();
+				const validate = store.cart.includes(item);
+				if (store.cart == [] || !validate) {
+					setStore({ cart: [...store.cart, item] });
+				}
+			},
+
+			deleteFromCart: id => {
+				const store = getStore();
+				const updatedList = [...store.cart];
+				updatedList.splice(id, 1);
+				setStore({ cart: [...updatedList] });
 			},
 
 			getToken: () => {
