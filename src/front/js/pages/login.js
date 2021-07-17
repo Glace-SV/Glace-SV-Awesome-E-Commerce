@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory, useParams } from "react-router-dom";
+import Register from "./register";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -46,7 +47,7 @@ export const Login = () => {
 				.then(responseJson => {
 					console.log(responseJson);
 					actions.setToken(responseJson.token);
-					history.push("/profile");
+					history.push("/register");
 				});
 	}
 
@@ -85,25 +86,7 @@ export const Login = () => {
 						</Tab.Pane>
 						<Tab.Pane eventKey="second">
 							<Form className="formcolor">
-								<Form.Group className="mb-3" controlId="formBasicEmail">
-									<Form.Label>Username</Form.Label>
-									<Form.Control type="text" placeholder="username" required />
-								</Form.Group>
-
-								<Form.Group className="mb-3" controlId="formBasicPassword">
-									<Form.Label>Email</Form.Label>
-									<Form.Control type="email" placeholder="Email" required />
-									<Form.Text>
-										Se enviará una contraseña a tu dirección de correo electrónico.
-									</Form.Text>
-									<Form.Text>
-										Tus datos personales se utilizarán para procesar tu pedido, mejorar tu
-										experiencia en esta web, gestionar el acceso a tu cuenta y otros propósitos.
-									</Form.Text>
-								</Form.Group>
-								<Button variant="warning" type="submit">
-									Registrarme
-								</Button>
+								<Register />
 							</Form>
 						</Tab.Pane>
 					</Tab.Content>

@@ -9,6 +9,7 @@ import { GlazedInfoCard } from "./pages/Glazed";
 import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
+import Register from "./pages/register";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -50,6 +51,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/carrito">
 							<ShoppingCart />
+						</Route>
+						<Route exact path="/register">
+							<Register />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

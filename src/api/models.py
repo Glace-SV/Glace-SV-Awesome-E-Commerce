@@ -51,18 +51,6 @@ class User(db.Model, BasicMode):
             "last_name": self.last_name,
         }
 
-    @hybrid_property
-    def password(self):
-        return self.password
-
-    @password.setter
-    def password(self, password):
-        self._password = generate_password_hash(
-                password, 
-                method='pbkdf2:sha256', 
-                salt_length=16
-            )
-
      
     @staticmethod
     def login_credentials(email,password):
