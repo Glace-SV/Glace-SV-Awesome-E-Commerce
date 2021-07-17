@@ -15,7 +15,7 @@ export const GlazedInfoCard = () => {
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
-				<h1 className="mt-3 mx-auto viewstitle">Spread the Love</h1>
+				<h1 className="mt-3 mx-auto viewstitle">Glaze me up!</h1>
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
