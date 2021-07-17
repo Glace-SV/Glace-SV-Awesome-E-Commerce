@@ -84,6 +84,7 @@
 		"react": "^16.8.4",
 		"react-bootstrap": "^1.6.1",
 		"react-dom": "^16.8.4",
+		"react-native-floating-action": "^1.21.0",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0",
 		"react-scroll": "^1.8.2",
