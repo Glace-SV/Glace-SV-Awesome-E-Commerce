@@ -8,8 +8,6 @@ from werkzeug.security import check_password_hash
 from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
 
-
-
 api = Blueprint('api', __name__)
 
 @api.route("/login",methods=['GET'])
@@ -43,26 +41,26 @@ def handling_login():
         
         return {'error': 'Something went wrong'}, 409
 
-    if user and check_password_hash(user.password, password) and user.is_active:
+    if user and check_password_hash(user.password, p_hash) and user.is_active:
         token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
         return {'token': token}, 200
 
-@app.route('/register', methods=['GET', 'POST'])
+@api.route('/register', methods=['POST'])
 def register():
     password = form.password.data
     email = form.email.data
-    try
-        generate_password_hash( password, 
+    try:
+        p_hash=generate_password_hash( password, 
                 method='pbkdf2:sha256', 
                 salt_length=16
             )
     except:
-        return jsonify({'error': 'An error occurred saving the user to the database'}), 500
+        return jsonify({'error': 'An error occurred saving the user to the database'}),
     
     if form.validate_on_submit():
         user = User.query.filter_by(email=email).first()
         if not user:
-            user = User(password, email)
+            user = User(p_hash, email)
             db.session.add(user)
             db.session.commit()
 
@@ -70,16 +68,16 @@ def register():
 
            
   
-@api.route("/login", methods=['POST'])    
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "email" or password != "password":
-        raise APIException("Invalid login")
-    access_token = create_access_token(identity="user")
-    return jsonify(access_token=access_token)
-    if token != "token":
-        raise APIException("Invalid login")
+# @api.route("/login", methods=['POST'])    
+# def login():
+#     email = request.json.get("email", None)
+#     password = request.json.get("password", None)
+#     if email != "email" or password != "password":
+#         raise APIException("Invalid login")
+#     access_token = create_access_token(identity="user")
+#     return jsonify(access_token=access_token)
+#     if token != "token":
+#         raise APIException("Invalid login")
 
 # añadir a la funcion de registro
 # generate_password_hash(
