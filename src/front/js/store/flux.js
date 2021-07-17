@@ -1,4 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const api = "https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products"
 	return {
 		store: {
 			gifts: [],
@@ -12,25 +13,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			loadGifts: () => {
-				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Gifts")
+				fetch({api} + "/Gifts")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			},
 
 			loadCakes: () => {
-				fetch("https://3001-aqua-gayal-6cuxtmeq.ws-eu10.gitpod.io/api/products/Cakes")
+				fetch({api} + "/Cakes")
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
 
 			loadTreats: () => {
-				fetch("")
+				fetch({api} + "/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
 
 			loadGlazed: () => {
-				fetch("")
+				fetch({api} + "/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
 			},

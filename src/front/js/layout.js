@@ -4,6 +4,8 @@ import React, { useContext } from "react";
 import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";
+import { TreatsInfoCard } from "./pages/Treats";
+import { GlazedInfoCard } from "./pages/Glazed";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import injectContext from "./store/appContext";
@@ -30,11 +32,17 @@ const Layout = () => {
 						<Route exact path="/login">
 							<Login />
 						</Route>
-						<Route exact path="/gifts">
-							<GiftsInfoCard />
+						<Route exact path="/glazed">
+							<GlazedInfoCard />
+						</Route>
+						<Route exact path="/treats">
+							<TreatsInfoCard />
 						</Route>
 						<Route exact path="/cakes">
 							<CakesInfoCard />
+						</Route>
+						<Route exact path="/gifts">
+							<GiftsInfoCard />
 						</Route>
 						<Route exact path="/profile">
 							<Profile />
