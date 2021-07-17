@@ -6,7 +6,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			treats: [],
 			glazed: [],
 			cart: [],
-			//shopping cart
 			token: "",
 			user: null
 		},
@@ -39,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addToCart: item => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
-				if (store.cart == [] || !validate) {
+				if (!validate) {
 					setStore({ cart: [...store.cart, item] });
 				}
 			},

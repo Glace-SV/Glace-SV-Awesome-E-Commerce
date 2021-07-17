@@ -1,8 +1,9 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import { faUserAltSlash } from "@fortawesome/free-solid-svg-icons";
 
 export const CakesInfoCard = () => {
 	const { store, actions } = useContext(Context);
@@ -10,7 +11,6 @@ export const CakesInfoCard = () => {
 		actions.loadCakes();
 	}, []);
 	const cakes = store.cakes;
-	console.log(cakes);
 
 	return (
 		<>

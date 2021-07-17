@@ -26,11 +26,8 @@ export const NavBarTwo = () => {
 					</Nav.Link>
 				</Nav>
 				<div>
-					{/* <Button variant="flat"> */}
-					{/* <i className="fas fa-shopping-basket" /> */}
 					<AddToCart />
 				</div>
-				{/* </Button> */}
 			</Navbar.Collapse>
 		</Navbar>
 	);

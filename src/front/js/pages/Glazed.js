@@ -41,7 +41,13 @@ export const GlazedInfoCard = () => {
 							<Card.Text>{glaze.description}</Card.Text>
 							<Card.Text>{glaze.size}</Card.Text>
 							<Card.Text>{glaze.price}</Card.Text>
-							<Button variant="warning">Comprar</Button>
+							<Button
+								variant="warning"
+								onClick={() => {
+									actions.addToCart(glaze.name);
+								}}>
+								Comprar
+							</Button>
 						</Card.Body>
 					</Card>
 				</div>
