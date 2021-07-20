@@ -52,7 +52,7 @@ export const GiftsInfoCard = () => {
 							<Button
 								variant="warning"
 								onClick={() => {
-									actions.addToCart(gift.name);
+									actions.addToCart(gift);
 								}}>
 								Comprar
 							</Button>

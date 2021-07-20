@@ -25,20 +25,6 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	let history = useHistory();
 
-	const renderGifts = () => {
-		history.push("/gifts");
-	};
-	const renderCakes = () => {
-		history.push("/cakes");
-	};
-
-	const renderTreats = () => {
-		history.push("/treats");
-	};
-
-	const renderGlazed = () => {
-		history.push("/glazed");
-	};
 	return (
 		<div>
 			<Carousel>
@@ -89,9 +75,10 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>GLAZE ME UP!</Card.Title>
 						<Card.Text>Nuestra selección de pasteles glazeados te encantará!</Card.Text>
-						<Button variant="warning" onClick={renderGlazed}>
-							Comprar ahora
-						</Button>
+
+						<Link to="/glazed">
+							<Button variant="warning">Compra ahora</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -103,9 +90,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
 						<Card.Text>Brownies, cupcakes, pretzels y macarons para endulzarte la vida.</Card.Text>
-						<Button variant="warning" onClick={renderTreats}>
-							Comprar ahora
-						</Button>
+						<Link to="/treats">
+							<Button variant="warning">Comprar ahora</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -117,9 +104,9 @@ export const Home = () => {
 					<Card.Body>
 						<Card.Title>CAKES & MORE!</Card.Title>
 						<Card.Text>Pasteles para celebrar toda ocasión: cumpleaños, graduaciones, bodas...</Card.Text>
-						<Button variant="warning" onClick={renderCakes}>
-							Comprar ahora
-						</Button>
+						<Link to="/cakes">
+							<Button variant="warning">Compra ahora</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -132,9 +119,9 @@ export const Home = () => {
 						<Card.Title>SPREAD THE LOVE!</Card.Title>
 						<Card.Text>Regalos diseñados para esparcir amor y felicidad.</Card.Text>
 
-						<Button variant="warning" onClick={renderGifts}>
-							Comprar ahora
-						</Button>
+						<Link to="/gifts">
+							<Button variant="warning">Compra ahora</Button>
+						</Link>
 					</Card.Body>
 				</Card>
 			</div>

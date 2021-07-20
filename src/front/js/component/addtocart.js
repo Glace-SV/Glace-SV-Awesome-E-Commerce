@@ -22,7 +22,7 @@ const AddToCart = () => {
 											id="delete"
 											className="far fa-trash-alt pointer trash px-3"
 											onClick={() => {
-												actions.deleteFavorite({ index });
+												actions.deleteFromCart({ index });
 											}}
 										/>
 									</li>
