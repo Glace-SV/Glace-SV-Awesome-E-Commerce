@@ -43,7 +43,7 @@ def new_register():
         
         return {'error': 'Something went wrong'}, 409
 
-localStorage.setItem('token')
+    token_user = localStorage.setItem('token')
     
   
 @api.route("/login", methods=['POST'])
@@ -61,12 +61,12 @@ def handlin_login():
     else:
         return {'error': 'Some parameter is wrong'}, 400
 
-localStorage.getItem('token')
+    get_token_user=localStorage.getItem('token')
 
 
 @api.route('/logout', methods=["DELETE"])
 def logout():
-    localStorage.removeItem('token')
+    delete_token_user=localStorage.removeItem('token')
     return jsonify(msg="Logout successful")
 
 
