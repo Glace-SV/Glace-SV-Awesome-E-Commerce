@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
-			baseURL: "https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login",
+			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
 
@@ -20,10 +20,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "POST",
 					mode: "no-cors",
 					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ email: email, password: password })
+				}).then(response => {
+					if (response.ok) {
+						response = response.json();
+						console.log(response);
+					}
+				});
+			},
+
+			register: (email, password, username, name, lastName, adress, city, phone) => {
+				fetch(getStore().baseURL.concat("/register"), {
+					method: "POST",
+					mode: "no-cors",
+					headers: {
 						"Content-Type": "application/json",
 						Authoritation: "bearer " + token
 					},
-					body: JSON.stringify({ email: email, password: password })
+					body: JSON.stringify({
+						email: email,
+						password: password,
+						username: username,
+						name: name,
+						lastName: lastName,
+						adress: adress,
+						city: city,
+						phone: phone
+					})
 				}).then(response => {
 					if (response.ok) {
 						response = response.json();
