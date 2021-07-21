@@ -42,6 +42,8 @@ def new_register():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
+
+localStorage.setItem('token')
     
   
 @api.route("/login", methods=['POST'])
@@ -59,23 +61,13 @@ def handlin_login():
     else:
         return {'error': 'Some parameter is wrong'}, 400
 
+localStorage.getItem('token')
 
-
-
-# @api.route("/profile", methods=["GET"])
-# def handle_profile():
-#     json = request.get_json()
-#     token = json["token"]
-#     user = User.get_with_token(token)
-#     return jsonify(user.serlialize())
 
 @api.route('/logout', methods=["DELETE"])
 def logout():
-    jti = get_jwt()["jti"]
-    now = datetime.now(timezone.utc)
-    db.session.add(TokenBlocklist(jti=jti, created_at=now))
-    db.session.commit()
-    return jsonify(msg="JWT revoked")
+    localStorage.removeItem('token')
+    return jsonify(msg="Logout successful")
 
 
 @api.route('/products',methods=['GET']) 

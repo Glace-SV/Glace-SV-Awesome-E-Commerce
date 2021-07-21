@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getMessage: () => {
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+				fetch(process.env.BACKEND_URL + "/api/login")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			};
