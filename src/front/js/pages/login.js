@@ -26,30 +26,9 @@ import {
 } from "react-bootstrap";
 
 export const Login = () => {
-	const history = useHistory();
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	function login() {
-		fetch("https://3001-peach-puffin-0ko6bavx.ws-eu10.gitpod.io/api/login"),
-			{
-				method: "POST",
-				Headers: {
-					"content-type": "aplication/json"
-				},
-				body: JSON.stringify({
-					email: email,
-					password: password
-				})
-			}
-				.then(response => response.json())
-				.then(responseJson => {
-					console.log(responseJson);
-					actions.setToken(responseJson.token);
-					history.push("/register");
-				});
-	}
 
 	return (
 		<div className="loginbckgrndimg">
@@ -72,14 +51,31 @@ export const Login = () => {
 							<Form className="formcolor">
 								<Form.Group className="mb-3" controlId="formBasicEmail">
 									<Form.Label>Email</Form.Label>
-									<Form.Control type="email" placeholder="Email" required />
+									<Form.Control
+										type="email"
+										placeholder="Email"
+										required
+										value={email}
+										onChange={e => setEmail(e.target.value)}
+									/>
 								</Form.Group>
 
 								<Form.Group className="mb-3" controlId="formBasicPassword">
 									<Form.Label>Contraseña</Form.Label>
-									<Form.Control type="password" placeholder="Contraseña" required />
+									<Form.Control
+										type="password"
+										placeholder="Contraseña"
+										required
+										value={password}
+										onChange={e => setPassword(e.target.value)}
+									/>
 								</Form.Group>
-								<Button variant="warning" type="submit">
+								<Button
+									variant="warning"
+									type="submit"
+									onClick={() => {
+										actions.login;
+									}}>
 									Acceder
 								</Button>
 							</Form>
