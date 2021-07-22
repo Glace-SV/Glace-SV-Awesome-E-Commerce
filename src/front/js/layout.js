@@ -6,6 +6,7 @@ import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";
 import { TreatsInfoCard } from "./pages/Treats";
 import { GlazedInfoCard } from "./pages/Glazed";
+import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import injectContext from "./store/appContext";
@@ -46,6 +47,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/profile">
 							<Profile />
+						</Route>
+						<Route exact path="/carrito">
+							<ShoppingCart />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

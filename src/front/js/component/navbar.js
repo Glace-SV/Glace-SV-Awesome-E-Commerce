@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import AddToCart from "../component/addtocart";
 
 export const NavBarTwo = () => {
 	return (
@@ -14,20 +15,20 @@ export const NavBarTwo = () => {
 			<Navbar.Toggle />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
-					<Nav.Link href="/login" className="text-warning">
+					<Nav.Link as={Link} to="/login" className="text-warning">
 						ACCEDE
 					</Nav.Link>
-					<Nav.Link href="/#categories" className="text-warning">
+
+					<Nav.Link as={Link} to="/#categories" className="text-warning">
 						PRODUCTOS
 					</Nav.Link>
-					<Nav.Link href="/#events" className="text-warning">
+					<Nav.Link as={Link} to="/#events" className="text-warning">
 						EVENTOS
 					</Nav.Link>
 				</Nav>
-
-				<Button variant="flat">
-					<i className="fas fa-shopping-basket" />
-				</Button>
+				<div>
+					<AddToCart />
+				</div>
 			</Navbar.Collapse>
 		</Navbar>
 	);
