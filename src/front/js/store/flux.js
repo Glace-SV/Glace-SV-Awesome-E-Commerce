@@ -35,20 +35,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ glazed: data }));
 			},
 
-
-
 			addToCart: item => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
 				if (!validate) {
+					item["quantity"] = 1;
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
 
-			deleteFromCart: id => {
+			updateCartItem: (index, quantity) => {
 				const store = getStore();
-				const updatedList = [...store.cart];
-				updatedList.splice(id, 1);
+				let item = store.cart[index];
+				item.quantity = quantity;
+				const updatedList = store.cart;
+				updatedList.splice(index, 1, item);
+				setStore({ cart: [...updatedList] });
+			},
+
+			deleteFromCart: index => {
+				const store = getStore();
+				const updatedList = store.cart;
+				updatedList.splice(index, 1);
 				setStore({ cart: [...updatedList] });
 			},
 
