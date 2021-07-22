@@ -35,9 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ glazed: data }));
 			},
 
-			loadCart: () => {
-				setStore({ cart: [] });
-			},
+
 
 			addToCart: item => {
 				const store = getStore();
