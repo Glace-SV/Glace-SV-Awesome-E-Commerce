@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(response);
 					}
 				});
-			},
+			};
 
 			register: (email, password, username, name, lastName, adress, city, phone) => {
 				fetch(getStore().baseURL.concat("/register"), {
