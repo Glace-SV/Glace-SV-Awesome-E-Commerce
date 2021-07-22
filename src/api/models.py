@@ -87,6 +87,7 @@ class User(db.Model, BasicMode):
             # do not serialize the password, its a security breach
         }
     
+<<<<<<< HEAD
     def serialize(self):
         return {
             "id": self.id,
@@ -95,6 +96,8 @@ class User(db.Model, BasicMode):
            
             # do not serialize the password, its a security breach
         }
+=======
+>>>>>>> ac1f7da29a4c4e5f694d322036eb3954bd51409b
         
 #  class
 class Products(db.Model, BasicMode):
