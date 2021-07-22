@@ -11,7 +11,7 @@ export const Footer = () => {
 		<div className="myFooter">
 			<footer className="py-4">
 				<div className="container-fluid ">
-					<p className="m-0 text-center text-white">
+					<div className="m-0 text-center text-white">
 						<div className="row mx-auto">
 							<div className="glogo col-sm-3 col-12 w-50 mx-auto">
 								<img src={gLogo} alt="GLogo" width="100px" />
@@ -73,7 +73,7 @@ export const Footer = () => {
 						<div className="madeby">
 							<br /> Made with ❤️ by ADG 🔥
 						</div>
-					</p>
+					</div>
 				</div>
 			</footer>
 		</div>
