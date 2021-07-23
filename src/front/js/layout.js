@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 import React, { useContext } from "react";
+import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";

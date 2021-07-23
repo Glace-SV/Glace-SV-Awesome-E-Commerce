@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import AddToCart from "../component/addtocart";
+import Logout from "./logout";
 
 export const NavBarTwo = () => {
 	return (
@@ -16,7 +17,7 @@ export const NavBarTwo = () => {
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
 					<Nav.Link as={Link} to="/login" className="text-warning">
-						ACCEDE
+						ACCEDE {Logout}
 					</Nav.Link>
 
 					<Nav.Link as={Link} to="/#categories" className="text-warning">
