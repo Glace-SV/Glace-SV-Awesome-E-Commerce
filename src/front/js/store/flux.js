@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			loadGifts: () => {
-				fetch(process.env.BACKEND_URL + "/products/Gifts")
+				fetch(process.env.BACKEND_URL + "/products/Gifts");
 				// Use getActions to call a function within a fuction
 				login: (email, password) => {
 					fetch(getStore().baseURL.concat("/login"), {
@@ -94,9 +94,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(resp => resp.json())
 						.then(data => setStore({ glazed: data }));
 				};
-
-
-
 				addToCart: item => {
 					const store = getStore();
 					const validate = store.cart.includes(item);
@@ -111,7 +108,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					updatedList.splice(id, 1);
 					setStore({ cart: [...updatedList] });
 				};
-
 			},
 
 			register: (email, password, username, name, lastName, adress, city, phone) => {
@@ -164,10 +160,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUser: user => {
 				setStore({ user: user });
 			}
-
-
 		}
 	};
-},
+};
 
-export default getState
+export default getState;

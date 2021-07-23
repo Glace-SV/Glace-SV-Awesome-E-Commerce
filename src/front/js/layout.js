@@ -8,7 +8,6 @@ import { TreatsInfoCard } from "./pages/Treats";
 import { GlazedInfoCard } from "./pages/Glazed";
 import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
-import { Register } from "./pages/register";
 import Register from "./pages/register";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
