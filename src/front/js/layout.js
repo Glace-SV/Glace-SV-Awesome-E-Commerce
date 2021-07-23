@@ -2,13 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import React, { useContext } from "react";
 import { Home } from "./pages/home";
-import { GiftsInfoCard } from "./pages/Gifts";
-import { CakesInfoCard } from "./pages/Cakes";
-import { TreatsInfoCard } from "./pages/Treats";
-import { GlazedInfoCard } from "./pages/Glazed";
-import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
-import { Register } from "./pages/register";
 import Register from "./pages/register";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
@@ -33,24 +27,6 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
-						</Route>
-						<Route exact path="/glazed">
-							<GlazedInfoCard />
-						</Route>
-						<Route exact path="/treats">
-							<TreatsInfoCard />
-						</Route>
-						<Route exact path="/cakes">
-							<CakesInfoCard />
-						</Route>
-						<Route exact path="/gifts">
-							<GiftsInfoCard />
-						</Route>
-						<Route exact path="/register">
-							<Register />
-						</Route>
-						<Route exact path="/carrito">
-							<ShoppingCart />
 						</Route>
 						<Route exact path="/register">
 							<Register />
