@@ -35,8 +35,9 @@ export const ShoppingCart = () => {
 					</Card>
 				</div>
 			));
+
+			<Button variant="warning">Check Out</Button>;
 		}
-		// <Button variant="warning">Check Out</Button>
 	};
 
 	return (
