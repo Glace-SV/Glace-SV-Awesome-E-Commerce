@@ -44,10 +44,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			updateCartItem: (index, quantity) => {
+			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
 				let item = store.cart[index];
-				item.quantity = quantity;
+				item.quantity = quantity + 1;
+				// item.price = price * quantity;
+				const updatedList = store.cart;
+				updatedList.splice(index, 1, item);
+				setStore({ cart: [...updatedList] });
+			},
+
+			subsCartItem: (index, quantity) => {
+				const store = getStore();
+				let item = store.cart[index];
+				item.quantity = quantity - 1;
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
@@ -76,6 +86,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setUser: user => {
 				setStore({ user: user });
+			},
+
+			addForm: (name, email, phone, event, pax, date) => {
+				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
+				}).then(response => response.json());
 			}
 
 			// Use getActions to call a function within a fuction

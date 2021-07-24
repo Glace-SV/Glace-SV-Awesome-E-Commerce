@@ -115,6 +115,24 @@ def product_delete(product_id):
         print(product.id)
         Products.delete(product)
         return jsonify(product.serialize())
+
+@api.route('/eventforms' ,methods=['POST'])
+def adding_form():
+        body = request.get_json(force=True)
+        name = body['name']
+        email = body['email']
+        phone = body['phone']
+        event = body['event']
+        pax = body['pax']
+        date = body['date']
+        
+        for data in body:
+            body_Dic.append(data.serialize())
+            
+        return jsonify(res)
+
+       
+    
    
 @api.errorhandler(APIException)
 def handle_invalid_usage(error):
