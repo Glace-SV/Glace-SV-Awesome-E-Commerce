@@ -1,3 +1,5 @@
+import { useHistory } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -7,7 +9,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
-			baseURL: "https://3001-yellow-cockroach-5gzjibkx.ws-eu11.gitpod.io",
 			currentUser: {}
 		},
 
@@ -17,57 +18,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// Use getActions to call a function within a fuction
 			login: (email, password) => {
-				fetch(
-					"https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=e55c77cd266c49819ce521ec629ea4e2&include=minutely",
-					{
-						method: "POST",
-						mode: "no-cors",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({ email: email, password: password })
-					}
-				)
-					.then(response => {
-						console.log(response.json());
-						if (response.ok) {
-							console.log("if");
-							console.log(response.json());
-							return response.json();
-						}
-					})
+				fetch(process.env.BACKEND_URL.concat("/api/login"), {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ email: email, password: password })
+				})
+					.then(response => response.json())
 					.then(data => {
-						// guarda tu token en el localStorage
-						console.log(data);
+						// guarda tu token en el localStorag
 						localStorage.setItem("jwt-token", data.token);
 					});
 			},
 
 			register: (email, password, username, name, lastname, adress, city, phone) => {
-				fetch(
-					getStore().baseURL.concat("/api/register"),
-					{
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password,
-							username: username,
-							name: name,
-							lastname: lastname,
-							adress: adress,
-							city: city,
-							phone: phone
-						})
-					}.then(response => {
-						if (response.ok) {
-							return response.json();
-						}
+				fetch(process.env.BACKEND_URL.concat("/api/register"), {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password,
+						username: username,
+						name: name,
+						lastname: lastname,
+						adress: adress,
+						city: city,
+						phone: phone
 					})
-				);
+				}).then(response => response.json());
 			},
+
 			getToken: () => {
 				const store = getStore();
 				if (store.token) {
