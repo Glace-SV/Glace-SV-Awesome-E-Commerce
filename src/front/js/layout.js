@@ -51,9 +51,6 @@ const Layout = () => {
 						<Route exact path="/carrito">
 							<ShoppingCart />
 						</Route>
-						<Route exact path="/register">
-							<Register />
-						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

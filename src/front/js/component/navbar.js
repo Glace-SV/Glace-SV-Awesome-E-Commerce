@@ -17,7 +17,7 @@ export const NavBarTwo = () => {
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
 					<Nav.Link as={Link} to="/login" className="text-warning">
-						ACCEDE {Logout}
+						ACCEDE
 					</Nav.Link>
 
 					<Nav.Link as={Link} to="/#categories" className="text-warning">
@@ -25,6 +25,10 @@ export const NavBarTwo = () => {
 					</Nav.Link>
 					<Nav.Link as={Link} to="/#events" className="text-warning">
 						EVENTOS
+					</Nav.Link>
+
+					<Nav.Link className="text-warning">
+						<Logout />
 					</Nav.Link>
 				</Nav>
 				<div>

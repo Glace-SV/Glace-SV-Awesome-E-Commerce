@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			register: (email, password, username, name, lastname, adress, city, phone) => {
-				fetch(process.env.BACKEND_URL.concat("/api/register"), {
+				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					mode: "cors",
 					headers: {

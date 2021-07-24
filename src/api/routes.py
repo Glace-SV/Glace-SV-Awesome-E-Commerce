@@ -34,7 +34,7 @@ def new_register():
 
     pas_encrypted = generate_password_hash(json.get("password"), method='plain', salt_length=1)
 
-    new_user = User (email = json.get("email"), password= pas_encrypted,username= json.get("username"), name= json.get("name"), last_name= json.get("last_name"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
+    new_user = User (email = json.get("email"), password= pas_encrypted,username= json.get("username"), name= json.get("name"), last_name= json.get("lastname"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
     try:
         new_user.db_post()
         return jsonify(new_user.to_dict()), 201

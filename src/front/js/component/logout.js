@@ -2,11 +2,16 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 function Logout() {
-	const { actions } = useContext(Context);
-	const isLoggedIn = actions.login;
+	const isLoggedIn = localStorage.getItem("jwt-token");
 
-	if (isLoggedIn === True) return <button as="/logout"> Cerrar Sesion </button>;
-	else return "/";
+	if (isLoggedIn)
+		return (
+			<button as={Link} to="/logout">
+				{" "}
+				Cerrar Sesion{" "}
+			</button>
+		);
+	else return <> </>;
 }
 
 export default Logout;
