@@ -17,7 +17,7 @@ const AddToCart = () => {
 							store.cart.map((item, index) => {
 								return (
 									<li key={index}>
-										<p href="#">{item}</p>
+										<p href="#">{item.name}</p>
 										<i
 											id="delete"
 											className="far fa-trash-alt pointer trash px-3"
