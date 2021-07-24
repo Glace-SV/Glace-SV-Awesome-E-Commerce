@@ -72,9 +72,8 @@ export const Login = () => {
 								</Form.Group>
 								<Button
 									variant="warning"
-									type="submit"
 									onClick={() => {
-										actions.login;
+										actions.login(email, password);
 									}}>
 									Acceder
 								</Button>

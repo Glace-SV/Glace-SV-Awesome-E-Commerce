@@ -6,7 +6,7 @@ function Logout() {
 	const isLoggedIn = actions.login;
 
 	if (isLoggedIn === True) return <button as="/logout"> Cerrar Sesion </button>;
-	else return (as = "/");
+	else return "/";
 }
 
 export default Logout;

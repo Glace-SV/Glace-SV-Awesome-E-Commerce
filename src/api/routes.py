@@ -42,26 +42,24 @@ def new_register():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
-
-    token_user = localStorage.setItem('token')
-    
+ 
   
 @api.route("/login", methods=['POST'])
 def handlin_login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-    if not (email and password):
+    body = request.get_json(force=True)
+    email = body['email']
+    password = body['password']
+    if not email and  not password:
         return {'error': 'Missing info'}, 400   
 
     user = User.get_by_email(email)
-
-    if user and check_password_hash(user.password, password) is True:
+   
+    if user and check_password_hash(user.password, password) == True:
         token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
         return {'token': token}, 200
     else:
         return {'error': 'Some parameter is wrong'}, 400
-
-    get_token_user=localStorage.getItem('token')
+    
 
 
 @api.route('/logout', methods=["DELETE"])

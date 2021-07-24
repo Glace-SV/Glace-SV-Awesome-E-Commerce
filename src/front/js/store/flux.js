@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
-			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
+			baseURL: "https://3001-yellow-cockroach-5gzjibkx.ws-eu11.gitpod.io",
 			currentUser: {}
 		},
 
@@ -17,45 +17,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// Use getActions to call a function within a fuction
 			login: (email, password) => {
-				fetch(getStore().baseURL.concat("/login"), {
-					method: "POST",
-					mode: "no-cors",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({ email: email, password: password })
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
+				fetch(
+					"https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=e55c77cd266c49819ce521ec629ea4e2&include=minutely",
+					{
+						method: "POST",
+						mode: "no-cors",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ email: email, password: password })
 					}
-				});
+				)
+					.then(response => {
+						console.log(response.json());
+						if (response.ok) {
+							console.log("if");
+							console.log(response.json());
+							return response.json();
+						}
+					})
+					.then(data => {
+						// guarda tu token en el localStorage
+						console.log(data);
+						localStorage.setItem("jwt-token", data.token);
+					});
 			},
 
-			register: (email, password, username, name, lastName, adress, city, phone) => {
-				fetch(getStore().baseURL.concat("/register"), {
-					method: "POST",
-					mode: "no-cors",
-					headers: {
-						"Content-Type": "application/json",
-						Authoritation: "bearer " + token
-					},
-					body: JSON.stringify({
-						email: email,
-						password: password,
-						username: username,
-						name: name,
-						lastName: lastName,
-						adress: adress,
-						city: city,
-						phone: phone
+			register: (email, password, username, name, lastname, adress, city, phone) => {
+				fetch(
+					getStore().baseURL.concat("/api/register"),
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password,
+							username: username,
+							name: name,
+							lastname: lastname,
+							adress: adress,
+							city: city,
+							phone: phone
+						})
+					}.then(response => {
+						if (response.ok) {
+							return response.json();
+						}
 					})
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
-					}
-				});
+				);
 			},
 			getToken: () => {
 				const store = getStore();

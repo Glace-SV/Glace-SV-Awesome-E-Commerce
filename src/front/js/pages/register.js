@@ -126,9 +126,8 @@ const Register = () => {
 						</Form.Group>
 						<Button
 							variant="warning"
-							type="submit"
 							onClick={() => {
-								actions.register;
+								actions.register(email, password, username, name, lastName, adress, city, phone);
 							}}>
 							Acceder
 						</Button>
