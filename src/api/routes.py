@@ -1,6 +1,5 @@
-  
+import base64 
 from datetime import timedelta
-
 from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
@@ -126,8 +125,7 @@ def adding_form():
             body_Dic.append(data.serialize())
             
         return jsonify(res)
-
-       
+  
     
    
 @api.errorhandler(APIException)

@@ -80,7 +80,11 @@ class User(db.Model, BasicMode):
     def serialize(self):
         return {
             "id": self.id,
-            "token": self.token,
+            "name": self.name,
+            "last_name": self.Last_name,
+            "adress": self.adress,
+            "city": self.city,
+            "phone": self.phone,
             "username": self.name,
             "email": self.email,
            
