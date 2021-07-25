@@ -11,7 +11,6 @@ export const TreatsInfoCard = () => {
 		actions.loadTreats();
 	}, []);
 	const treats = store.treats;
-	console.log(treats);
 
 	return (
 		<>
@@ -52,7 +51,7 @@ export const TreatsInfoCard = () => {
 							<Button
 								variant="warning"
 								onClick={() => {
-									actions.addToCart(treat.name);
+									actions.addToCart(treat);
 								}}>
 								Comprar
 							</Button>
