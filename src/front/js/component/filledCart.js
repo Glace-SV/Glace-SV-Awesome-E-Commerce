@@ -5,6 +5,9 @@ import { Context } from "../store/appContext";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
+	useEffect(() => {
+		actions.getUser();
+	}, []);
 	const cart = store.cart;
 	const user = store.currentUser;
 	console.log(user);

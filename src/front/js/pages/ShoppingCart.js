@@ -18,7 +18,6 @@ export const ShoppingCart = () => {
 				<h1 className="mt-3 mx-auto viewstitle">Tu carrito de compra</h1>
 			</div>
 			<div>{isEmpty ? emptyCart : <FilledCart />}</div>
-
 		</div>
 	);
 };

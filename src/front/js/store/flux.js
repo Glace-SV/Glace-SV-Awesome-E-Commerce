@@ -8,11 +8,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
-			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
-			currentUser: {}
+			currentUser: []
 		},
 		actions: {
-
 			login: (email, password) => {
 				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
@@ -49,7 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
-
 			},
 
 			logout: () => {
@@ -64,7 +61,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(() => {
 						localStorage.removeItem("jwt-token");
 					});
-
 			},
 
 			getToken: () => {
@@ -151,13 +147,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUser: () => {
 				fetch(process.env.BACKEND_URL + "/api/login")
 					.then(resp => resp.json())
-					.then(data => setStore({ user: data }));
+					.then(data => setStore({ currentUser: data }));
 			},
 
 			setUser: user => {
 				setStore({ user: user });
 			},
-      
+
 			addForm: (name, email, phone, event, pax, date) => {
 				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
 					method: "POST",

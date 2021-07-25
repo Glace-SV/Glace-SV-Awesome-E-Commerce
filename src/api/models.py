@@ -81,7 +81,7 @@ class User(db.Model, BasicMode):
         return {
             "id": self.id,
             "name": self.name,
-            "last_name": self.Last_name,
+            "last_name": self.last_name,
             "adress": self.adress,
             "city": self.city,
             "phone": self.phone,

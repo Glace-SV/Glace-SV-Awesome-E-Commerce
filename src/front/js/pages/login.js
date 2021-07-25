@@ -33,7 +33,7 @@ export const Login = () => {
 		actions.login(email, password);
 		history.push("/");
 	};
-  
+
 	return (
 		<div className="loginbckgrndimg">
 			<Tab.Container id="left-tabs-example" defaultActiveKey="first">
