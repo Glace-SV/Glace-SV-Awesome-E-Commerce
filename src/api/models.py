@@ -98,6 +98,10 @@ class Products(db.Model, BasicMode):
     price = db.Column(db.String(250), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
+    def db_post(self): 
+        print(self)       
+        db.session.add(self)
+        db.session.commit()
 
     def serialize(self):
         return {
