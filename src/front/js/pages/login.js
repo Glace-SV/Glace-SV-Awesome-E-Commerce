@@ -33,7 +33,7 @@ export const Login = () => {
 		actions.login(email, password);
 		history.push("/");
 	};
-
+  
 	return (
 		<div className="loginbckgrndimg">
 			<Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -63,7 +63,6 @@ export const Login = () => {
 										onChange={e => setEmail(e.target.value)}
 									/>
 								</Form.Group>
-
 								<Form.Group className="mb-3" controlId="formBasicPassword">
 									<Form.Label>Contraseña</Form.Label>
 									<Form.Control

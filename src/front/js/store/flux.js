@@ -6,12 +6,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			treats: [],
 			glazed: [],
 			cart: [],
+			cartPrice: [],
 			token: "",
 			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
+
 			login: (email, password) => {
 				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
@@ -48,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
+
 			},
 
 			logout: () => {
@@ -62,6 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(() => {
 						localStorage.removeItem("jwt-token");
 					});
+
 			},
 
 			getToken: () => {
@@ -79,6 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getMessage: () => {
 				fetch(process.env.BACKEND_URL + "/api/login");
 			},
+
 			loadGifts: () => {
 				fetch(process.env.BACKEND_URL + "/api/products/Gifts")
 					.then(resp => resp.json())
@@ -112,9 +116,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let item = store.cart[index];
 				item.quantity = quantity++;
 				item["quantity"] = quantity;
-				console.log(quantity);
-				item.price = price * quantity;
-				console.log(price);
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
@@ -122,7 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			subsCartItem: (index, quantity) => {
 				const store = getStore();
 				let item = store.cart[index];
-				item.quantity = quantity - 1;
+				item.quantity = quantity--;
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
@@ -133,9 +134,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				updatedList.splice(index, 1);
 				setStore({ cart: [...updatedList] });
 			},
+
+			updateItemPrice: (index, quantity, price) => {
+				const store = getStore();
+				let item = store.cart[index];
+				quantity = item.quantity;
+				price = item.price;
+				let newPrice = quantity * price;
+				console.log(newPrice);
+			},
+
 			setUser: user => {
 				setStore({ user: user });
 			},
+
+			getUser: () => {
+				fetch(process.env.BACKEND_URL + "/api/login")
+					.then(resp => resp.json())
+					.then(data => setStore({ user: data }));
+			},
+
+			setUser: user => {
+				setStore({ user: user });
+			},
+      
 			addForm: (name, email, phone, event, pax, date) => {
 				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
 					method: "POST",
