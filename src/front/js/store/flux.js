@@ -11,8 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
-
 		actions: {
+
 			login: (email, password) => {
 				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("jwt-token", data.token);
 					});
 			},
+
 			register: (email, password, username, name, lastname, adress, city, phone) => {
 				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
@@ -48,7 +49,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
+
 			},
+
+			logout: () => {
+				fetch(process.env.BACKEND_URL + "/api/logout", {
+					method: "DELETE",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => response.json())
+					.then(() => {
+						localStorage.removeItem("jwt-token");
+					});
+
+			},
+
 			getToken: () => {
 				const store = getStore();
 				if (store.token) {
@@ -57,12 +75,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return localStorage.getItem("token");
 				}
 			},
-
 			setToken: () => {
 				localStorage.setItem("token", token);
 				setStore({ token: token });
 			},
-
 			getMessage: () => {
 				fetch(process.env.BACKEND_URL + "/api/login");
 			},
@@ -77,19 +93,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
-
 			loadTreats: () => {
 				fetch(process.env.BACKEND_URL + "/api/products/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
-
 			loadGlazed: () => {
 				fetch(process.env.BACKEND_URL + "/api/products/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
 			},
-
 			addToCart: item => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
@@ -98,7 +111,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
-
 			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
 				let item = store.cart[index];
@@ -108,7 +120,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
 			},
-
 			subsCartItem: (index, quantity) => {
 				const store = getStore();
 				let item = store.cart[index];
@@ -117,7 +128,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
 			},
-
 			deleteFromCart: index => {
 				const store = getStore();
 				const updatedList = store.cart;
@@ -144,6 +154,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ user: data }));
 			},
 
+			setUser: user => {
+				setStore({ user: user });
+			},
+      
 			addForm: (name, email, phone, event, pax, date) => {
 				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
 					method: "POST",
@@ -158,5 +172,4 @@ const getState = ({ getStore, getActions, setStore }) => {
 		}
 	};
 };
-
 export default getState;

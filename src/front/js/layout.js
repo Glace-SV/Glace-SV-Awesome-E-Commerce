@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 import React, { useContext } from "react";
+import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";
@@ -9,6 +9,8 @@ import { GlazedInfoCard } from "./pages/Glazed";
 import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
 import Register from "./pages/register";
+import Logout from "./component/logout";
+import FilledCart from "./component/filledCart";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -48,13 +50,19 @@ const Layout = () => {
 						<Route exact path="/register">
 							<Register />
 						</Route>
+						<Route exact path="/logout">
+							<Logout />
+						</Route>
 						<Route exact path="/carrito">
 							<ShoppingCart />
 						</Route>
-						<Route exact path="/eventforms" />
-						<Route exact path="/register">
-							<Register />
+
+						<Route exact path="/carrito lleno">
+							<FilledCart />
 						</Route>
+
+						<Route exact path="/eventforms" />
+						<eventform />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

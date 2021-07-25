@@ -19,6 +19,7 @@ const Register = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
 		history.push("/");
 	};
+
 	return (
 		<div className="container-fluid">
 			<div className="row rowdesign2">
@@ -104,6 +105,7 @@ const Register = () => {
 								onChange={e => setPhone(e.target.value)}
 							/>
 						</Form.Group>
+
 						<Button variant="warning" onClick={handle_acceder}>
 							Acceder
 						</Button>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useHistory, useParams } from "react-router-dom";
 import Register from "./register";
+import { useHistory } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -34,6 +33,7 @@ export const Login = () => {
 		actions.login(email, password);
 		history.push("/");
 	};
+  
 	return (
 		<div className="loginbckgrndimg">
 			<Tab.Container id="left-tabs-example" defaultActiveKey="first">

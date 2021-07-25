@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import AddToCart from "../component/addtocart";
-
 export const NavBarTwo = () => {
 	return (
 		<Navbar expand="sm" bg="dark" variant="dark">
@@ -18,7 +17,6 @@ export const NavBarTwo = () => {
 					<Nav.Link as={Link} to="/login" className="text-warning">
 						ACCEDE
 					</Nav.Link>
-
 					<Nav.Link as={Link} to="/#categories" className="text-warning">
 						PRODUCTOS
 					</Nav.Link>
