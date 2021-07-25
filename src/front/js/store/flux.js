@@ -7,16 +7,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
+			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
-
 		actions: {
-			loadGifts: () => {
-				fetch(process.env.BACKEND_URL + "/products/Gifts");
-			},
 			// Use getActions to call a function within a fuction
 			login: (email, password) => {
-
 				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
 					mode: "cors",
@@ -31,20 +27,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// guarda tu token en el localStorag
 						localStorage.setItem("jwt-token", data.token);
 					});
-
-				fetch(getStore().baseURL.concat("/login"), {
-					method: "POST",
-					mode: "no-cors",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({ email: email, password: password })
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
-					}
-				});
 			},
 
 			register: (email, password, username, name, lastname, adress, city, phone) => {
@@ -90,64 +72,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return localStorage.getItem("token");
 				}
 			},
-
 			setToken: () => {
 				localStorage.setItem("token", token);
 				setStore({ token: token });
 			},
-
 			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/login")
+				fetch(process.env.BACKEND_URL + "/api/login");
+			},
+			loadGifts: () => {
+				fetch(process.env.BACKEND_URL + "/api/products/Gifts")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			},
-
 			loadCakes: () => {
-				fetch(process.env.BACKEND_URL + "/products/Cakes")
+				fetch(process.env.BACKEND_URL + "/api/products/Cakes")
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
-
 			loadTreats: () => {
-				fetch(process.env.BACKEND_URL + "/products/Treats")
+				fetch(process.env.BACKEND_URL + "/api/products/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
-
 			loadGlazed: () => {
-				fetch(process.env.BACKEND_URL + "/products/Glazed")
+				fetch(process.env.BACKEND_URL + "/api/products/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
 			},
-
 			addToCart: item => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
 				if (!validate) {
-
 					item["quantity"] = 1;
-
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
-
-
-			deleteFromCart: id => {
-				const store = getStore();
-				const updatedList = [...store.cart];
-				updatedList.splice(id, 1);
-
 			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
 				let item = store.cart[index];
-				item.quantity = quantity + 1;
-				// item.price = price * quantity;
+				item.quantity = quantity++;
+				item["quantity"] = quantity;
+				console.log(quantity);
+				item.price = price * quantity;
+				console.log(price);
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
 			},
-
 			subsCartItem: (index, quantity) => {
 				const store = getStore();
 				let item = store.cart[index];
@@ -156,20 +127,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
 			},
-
 			deleteFromCart: index => {
 				const store = getStore();
 				const updatedList = store.cart;
 				updatedList.splice(index, 1);
-
 				setStore({ cart: [...updatedList] });
 			},
-
 			setUser: user => {
 				setStore({ user: user });
-
 			},
-
 			addForm: (name, email, phone, event, pax, date) => {
 				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
 					method: "POST",
@@ -180,10 +146,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
 				}).then(response => response.json());
-
 			}
 		}
 	};
 };
-
 export default getState;
