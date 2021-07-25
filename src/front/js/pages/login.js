@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useHistory, useParams } from "react-router-dom";
 import Register from "./register";
+import { useHistory } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -29,6 +28,11 @@ export const Login = () => {
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const history = useHistory();
+	const Loged = () => {
+		actions.login(email, password);
+		history.push("/");
+	};
 
 	return (
 		<div className="loginbckgrndimg">
@@ -70,11 +74,7 @@ export const Login = () => {
 										onChange={e => setPassword(e.target.value)}
 									/>
 								</Form.Group>
-								<Button
-									variant="warning"
-									onClick={() => {
-										actions.login(email, password);
-									}}>
+								<Button variant="warning" onClick={Loged}>
 									Acceder
 								</Button>
 							</Form>

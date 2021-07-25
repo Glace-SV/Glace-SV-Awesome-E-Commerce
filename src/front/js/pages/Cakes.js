@@ -1,5 +1,4 @@
 import { Card, Button } from "react-bootstrap";
-import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";

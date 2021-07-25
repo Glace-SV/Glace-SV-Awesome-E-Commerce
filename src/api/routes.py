@@ -1,7 +1,7 @@
   
 from datetime import timedelta
 
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -62,10 +62,11 @@ def handlin_login():
     
 
 
-@api.route('/logout', methods=["DELETE"])
+@api.route("/logout", methods=["DELETE"])
 def logout():
-    delete_token_user=localStorage.removeItem('token')
-    return jsonify(msg="Logout successful")
+    token = request.get_json("token")
+    delete_token = token.remove("jwt-token")
+    return jsonify(delete_token)
 
 
 @api.route('/products',methods=['GET']) 

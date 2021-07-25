@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
 import "../../styles/register.scss";
 import { Context } from "../store/appContext";
 import { Button, Form, Tab } from "react-bootstrap";
