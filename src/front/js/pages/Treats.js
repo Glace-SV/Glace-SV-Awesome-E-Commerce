@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import { Link } from "react-router-dom";
 
 export const TreatsInfoCard = () => {
 	const { store, actions } = useContext(Context);
@@ -10,12 +11,19 @@ export const TreatsInfoCard = () => {
 		actions.loadTreats();
 	}, []);
 	const treats = store.treats;
-	console.log(treats);
 
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
-				<h1 className="mt-3 mx-auto viewstitle">Treat Yo Self!</h1>
+				<h1 className="mt-3 mx-auto viewstitle">
+					<Link to="/glazed">
+						<i className="changesection mr-4 fas fa-arrow-left" />
+					</Link>
+					Treat yo self!
+					<Link to="/cakes">
+						<i className=" changesection ml-4 fas fa-arrow-right" />
+					</Link>
+				</h1>
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
@@ -40,7 +48,13 @@ export const TreatsInfoCard = () => {
 							<Card.Text>{treat.description}</Card.Text>
 							<Card.Text>{treat.size}</Card.Text>
 							<Card.Text>{treat.price}</Card.Text>
-							<Button variant="warning">Comprar</Button>
+							<Button
+								variant="warning"
+								onClick={() => {
+									actions.addToCart(treat);
+								}}>
+								Comprar
+							</Button>
 						</Card.Body>
 					</Card>
 				</div>

@@ -6,12 +6,9 @@ from datetime import timedelta
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
-from werkzeug.security import check_password_hash
-
+from werkzeug.security import check_password_hash, generate_password_hash
 from api.models import db, User, Products
 from api.utils import generate_sitemap, APIException
-
-
 
 api = Blueprint('api', __name__)
 
@@ -23,8 +20,8 @@ def all_users():
         user_dic.append(user.serialize())
     return jsonify(user_dic),200
 
-@api.route("/login", methods=['POST'])
-def handling_login():
+@api.route("/register", methods=['POST'])
+def new_register():
 
     json=request.get_json()
     
@@ -36,8 +33,10 @@ def handling_login():
 
     if "password" not in json:
         raise APIException("Fail to loging")
-     
-    new_user = User (email = json.get("email"), password= json.get("password"),username= json.get("username"), name= json.get("name"), last_name= json.get("last_name"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
+
+    pas_encrypted = generate_password_hash(json.get("password"), method='plain', salt_length=1)
+
+    new_user = User (email = json.get("email"), password= pas_encrypted,username= json.get("username"), name= json.get("name"), last_name= json.get("last_name"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
     try:
         new_user.db_post()
         return jsonify(new_user.to_dict()), 201
@@ -45,34 +44,32 @@ def handling_login():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
-           
+
+    token_user = localStorage.setItem('token')
+    
   
-@api.route("/login", methods=['POST'])    
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "email" or password != "password":
-        raise APIException("Invalid login")
-    access_token = create_access_token(identity="user")
-    return jsonify(access_token=access_token)
-    if token != "token":
-        raise APIException("Invalid login")
+@api.route("/login", methods=['POST'])
+def handlin_login():
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
+    if not (email and password):
+        return {'error': 'Missing info'}, 400   
 
+    user = User.get_by_email(email)
 
-@api.route("/profile", methods=["GET"])
-def handle_profile():
-    json = request.get_json()
-    token = json["token"]
-    user = User.get_with_token(token)
-    return jsonify(user.serlialize())
+    if user and check_password_hash(user.password, password) is True:
+        token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
+        return {'token': token}, 200
+    else:
+        return {'error': 'Some parameter is wrong'}, 400
+
+    get_token_user=localStorage.getItem('token')
+
 
 @api.route('/logout', methods=["DELETE"])
 def logout():
-    jti = get_jwt()["jti"]
-    now = datetime.now(timezone.utc)
-    db.session.add(TokenBlocklist(jti=jti, created_at=now))
-    db.session.commit()
-    return jsonify(msg="JWT revoked")
+    delete_token_user=localStorage.removeItem('token')
+    return jsonify(msg="Logout successful")
 
 
 @api.route('/products',methods=['GET']) 
@@ -117,6 +114,24 @@ def product_delete(product_id):
         print(product.id)
         Products.delete(product)
         return jsonify(product.serialize())
+
+@api.route('/eventforms' ,methods=['POST'])
+def adding_form():
+        body = request.get_json(force=True)
+        name = body['name']
+        email = body['email']
+        phone = body['phone']
+        event = body['event']
+        pax = body['pax']
+        date = body['date']
+        
+        for data in body:
+            body_Dic.append(data.serialize())
+            
+        return jsonify(res)
+
+       
+    
    
 @api.route('/payment', methods=['POST'])
 def auth_paypal():

@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import VARCHAR, ARRAY
 from sqlalchemy.ext.hybrid import hybrid_property
 from werkzeug.security import generate_password_hash
 
+
 db = SQLAlchemy()
 
 class BasicMode():
@@ -29,7 +30,7 @@ class User(db.Model, BasicMode):
     id = db.Column(db.Integer,unique=True, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(120), unique=False, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
+    password = db.Column(db.String(500), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     adress = db.Column(db.String(250), unique=False, nullable=False)
@@ -49,12 +50,17 @@ class User(db.Model, BasicMode):
             "name": self.name,
             "last_name": self.last_name,
         }
-      
+
+     
     @staticmethod
     def login_credentials(email,password):
         return User.query.filter_by(email=email).filter_by(password=password).first()
     
-    
+    @classmethod
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email=email).one_or_none()
+        return user
+        
     def user_have_token(self,token):
         return User.query.filter_by(token=self.token).first()
    
@@ -70,16 +76,17 @@ class User(db.Model, BasicMode):
         print(self)       
         db.session.add(self)
         db.session.commit()
-    
+        
     def serialize(self):
         return {
             "id": self.id,
+            "token": self.token,
             "username": self.name,
             "email": self.email,
            
             # do not serialize the password, its a security breach
         }
-        
+    
 #  class
 class Products(db.Model, BasicMode):
     __tablename__ = 'products'
@@ -88,7 +95,7 @@ class Products(db.Model, BasicMode):
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     category = db.Column(db.String(250), unique=False, nullable=False)
-    price = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
 
@@ -113,4 +120,31 @@ class Products(db.Model, BasicMode):
     def get_all_by_category(cls, model_category):
         return cls.query.filter_by(category = model_category).all()
 
-   
+
+class EventForm(db.Model, BasicMode):
+    __tablename__ = 'eventform'
+    id = db.Column(db.Integer,unique = True, primary_key= True)
+    name = db.Column(db.String(80), unique = True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(120), unique=True, nullable=False)
+    event = db.Column(db.String(120), unique=True, nullable=False)
+    pax = db.Column(db.String(120), unique=True, nullable=False)
+    date = db.Column(db.String(120), unique=True, nullable=False)
+    
+    def db_post(self): 
+        print(self)       
+        db.session.add(self)
+        db.session.commit()
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "phone": self.phone,
+            "event": self.event,
+            "pax": self.pax,
+            "date": self.date
+            # do not serialize the password, its a security breach
+        }
+      
