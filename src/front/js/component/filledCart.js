@@ -7,7 +7,6 @@ export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const cart = store.cart;
 	console.log(cart);
-	const isEmpty = cart.length === 0;
 
 	return (
 		<div>
