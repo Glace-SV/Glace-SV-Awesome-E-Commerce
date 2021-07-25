@@ -29,7 +29,11 @@ export const Login = () => {
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
+	const history = useHistory();
+	const Loged = () => {
+		actions.login(email, password);
+		history.push("/");
+	};
 	return (
 		<div className="loginbckgrndimg">
 			<Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -59,7 +63,6 @@ export const Login = () => {
 										onChange={e => setEmail(e.target.value)}
 									/>
 								</Form.Group>
-
 								<Form.Group className="mb-3" controlId="formBasicPassword">
 									<Form.Label>Contraseña</Form.Label>
 									<Form.Control
@@ -70,12 +73,7 @@ export const Login = () => {
 										onChange={e => setPassword(e.target.value)}
 									/>
 								</Form.Group>
-								<Button
-									variant="warning"
-									type="submit"
-									onClick={() => {
-										actions.login;
-									}}>
+								<Button variant="warning" onClick={Loged}>
 									Acceder
 								</Button>
 							</Form>

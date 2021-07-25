@@ -6,56 +6,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 			treats: [],
 			glazed: [],
 			cart: [],
+			cartPrice: [],
 			token: "",
 			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
 
 		actions: {
-			loadGifts: () => {
-				fetch(process.env.BACKEND_URL + "/products/Gifts");
-			},
-			// Use getActions to call a function within a fuction
 			login: (email, password) => {
-				fetch(getStore().baseURL.concat("/login"), {
+				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
-					mode: "no-cors",
+					mode: "cors",
 					headers: {
+						"Access-Control-Allow-Origin": "*",
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({ email: email, password: password })
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
-					}
-				});
+				})
+					.then(response => response.json())
+					.then(data => {
+						// guarda tu token en el localStorag
+						localStorage.setItem("jwt-token", data.token);
+					});
 			},
-
-			register: (email, password, username, name, lastName, adress, city, phone) => {
-				fetch(getStore().baseURL.concat("/register"), {
+			register: (email, password, username, name, lastname, adress, city, phone) => {
+				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
-					mode: "no-cors",
+					mode: "cors",
 					headers: {
-						"Content-Type": "application/json",
-						Authoritation: "bearer " + token
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
 						email: email,
 						password: password,
 						username: username,
 						name: name,
-						lastName: lastName,
+						lastname: lastname,
 						adress: adress,
 						city: city,
 						phone: phone
 					})
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
-					}
-				});
+				}).then(response => response.json());
 			},
 			getToken: () => {
 				const store = getStore();
@@ -72,26 +64,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/login")
+				fetch(process.env.BACKEND_URL + "/api/login");
+			},
+
+			loadGifts: () => {
+				fetch(process.env.BACKEND_URL + "/api/products/Gifts")
 					.then(resp => resp.json())
 					.then(data => setStore({ gifts: data }));
 			},
-
 			loadCakes: () => {
-				fetch(process.env.BACKEND_URL + "/products/Cakes")
+				fetch(process.env.BACKEND_URL + "/api/products/Cakes")
 					.then(resp => resp.json())
 					.then(data => setStore({ cakes: data }));
 			},
 
 			loadTreats: () => {
-				fetch(process.env.BACKEND_URL + "/products/Treats")
+				fetch(process.env.BACKEND_URL + "/api/products/Treats")
 					.then(resp => resp.json())
 					.then(data => setStore({ treats: data }));
 			},
 
 			loadGlazed: () => {
-				fetch(process.env.BACKEND_URL + "/products/Glazed")
+				fetch(process.env.BACKEND_URL + "/api/products/Glazed")
 					.then(resp => resp.json())
 					.then(data => setStore({ glazed: data }));
 			},
@@ -108,8 +102,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
 				let item = store.cart[index];
-				item.quantity = quantity + 1;
-				// item.price = price * quantity;
+				item.quantity = quantity++;
+				item["quantity"] = quantity;
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
@@ -118,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			subsCartItem: (index, quantity) => {
 				const store = getStore();
 				let item = store.cart[index];
-				item.quantity = quantity - 1;
+				item.quantity = quantity--;
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
@@ -131,8 +125,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ cart: [...updatedList] });
 			},
 
+			updateItemPrice: (index, quantity, price) => {
+				const store = getStore();
+				let item = store.cart[index];
+				quantity = item.quantity;
+				price = item.price;
+				let newPrice = quantity * price;
+				console.log(newPrice);
+			},
+
 			setUser: user => {
 				setStore({ user: user });
+			},
+
+			getUser: () => {
+				fetch(process.env.BACKEND_URL + "/api/login")
+					.then(resp => resp.json())
+					.then(data => setStore({ user: data }));
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {

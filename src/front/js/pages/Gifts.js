@@ -48,7 +48,7 @@ export const GiftsInfoCard = () => {
 							<Card.Title>{gift.name}</Card.Title>
 							<Card.Text>{gift.description}</Card.Text>
 							<Card.Text>{gift.size}</Card.Text>
-							<Card.Text>{gift.price}</Card.Text>
+							<Card.Text>${gift.price}</Card.Text>
 							<Button
 								variant="warning"
 								onClick={() => {

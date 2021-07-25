@@ -113,7 +113,7 @@ def product_delete(product_id):
         Products.delete(product)
         return jsonify(product.serialize())
 
-@api.route('/eventforms' ,methods=['POST'])
+@api.route('/eventform' ,methods=['POST'])
 def adding_form():
         body = request.get_json(force=True)
         name = body['name']

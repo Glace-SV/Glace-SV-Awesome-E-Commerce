@@ -6,8 +6,9 @@ import { Context } from "../store/appContext";
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const cart = store.cart;
+	const user = store.currentUser;
+	console.log(user);
 	console.log(cart);
-	const isEmpty = cart.length === 0;
 
 	return (
 		<div>
@@ -23,7 +24,7 @@ export const FilledCart = () => {
 							<Card.Title>{item.name}</Card.Title>
 							<Card.Text>{item.description}</Card.Text>
 							<Card.Text>{item.size}</Card.Text>
-							<Card.Text>{item.price}</Card.Text>
+							<Card.Text>${parseInt(item.price)}</Card.Text>
 							<div className="row mx-auto">
 								<Button
 									className="add col-2"
@@ -51,11 +52,33 @@ export const FilledCart = () => {
 								}}>
 								Eliminar
 							</Button>
+							<div>
+								<Button
+									className="mt-4"
+									variant="warning"
+									onClick={() => {
+										actions.updateItemPrice(index, item.quantity, item.price);
+									}}>
+									Actualizar total
+								</Button>
+							</div>
 						</Card.Body>
 					</Card>
 				</div>
 			))}
-			;<div>Hello</div>
+			;
+			<div className="mx-auto" id="categories">
+				<div className="row mb-4">
+					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
+				</div>
+				<h3 className="text-center">Gran total: $</h3>
+			</div>
+			<div className="mx-auto" id="categories">
+				<div className="row mb-4">
+					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
+				</div>
+				<h3 className="text-center">Gran total: $</h3>
+			</div>
 		</div>
 	);
 };

@@ -49,7 +49,7 @@ export const GlazedInfoCard = () => {
 							<Card.Title>{glaze.name}</Card.Title>
 							<Card.Text>{glaze.description}</Card.Text>
 							<Card.Text>{glaze.size}</Card.Text>
-							<Card.Text>{glaze.price}</Card.Text>
+							<Card.Text>${glaze.price}</Card.Text>
 							<Button
 								variant="warning"
 								onClick={() => {

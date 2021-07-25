@@ -1,28 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import "../../styles/register.scss";
 import { Context } from "../store/appContext";
-import {
-	Carousel,
-	Item,
-	Caption,
-	Card,
-	Img,
-	Title,
-	Text,
-	ImgOverlay,
-	Button,
-	Form,
-	Group,
-	Label,
-	Control,
-	Check,
-	Tab,
-	Row,
-	Col,
-	Nav
-} from "react-bootstrap";
+import { Button, Form, Tab } from "react-bootstrap";
 
 const Register = () => {
 	const { actions } = useContext(Context);
@@ -34,7 +14,11 @@ const Register = () => {
 	const [adress, setAdress] = useState("");
 	const [city, setCity] = useState("");
 	const [phone, setPhone] = useState("");
-
+	const history = useHistory();
+	const handle_acceder = () => {
+		actions.register(email, password, username, name, lastName, adress, city, phone);
+		history.push("/");
+	};
 	return (
 		<div className="container-fluid">
 			<div className="row rowdesign2">
@@ -50,7 +34,6 @@ const Register = () => {
 								onChange={e => setEmail(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicPasswordRegister">
 							<Form.Label>Contraseña</Form.Label>
 							<Form.Control
@@ -71,7 +54,6 @@ const Register = () => {
 								onChange={e => setUsername(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicName">
 							<Form.Label>Nombre</Form.Label>
 							<Form.Control
@@ -92,7 +74,6 @@ const Register = () => {
 								onChange={e => setLastName(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicadress">
 							<Form.Label>Dirección</Form.Label>
 							<Form.Control
@@ -113,7 +94,6 @@ const Register = () => {
 								onChange={e => setCity(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicPhone">
 							<Form.Label>Teléfono</Form.Label>
 							<Form.Control
@@ -124,12 +104,7 @@ const Register = () => {
 								onChange={e => setPhone(e.target.value)}
 							/>
 						</Form.Group>
-						<Button
-							variant="warning"
-							type="submit"
-							onClick={() => {
-								actions.register;
-							}}>
+						<Button variant="warning" onClick={handle_acceder}>
 							Acceder
 						</Button>
 					</div>

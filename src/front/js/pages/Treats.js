@@ -47,7 +47,7 @@ export const TreatsInfoCard = () => {
 							<Card.Title>{treat.name}</Card.Title>
 							<Card.Text>{treat.description}</Card.Text>
 							<Card.Text>{treat.size}</Card.Text>
-							<Card.Text>{treat.price}</Card.Text>
+							<Card.Text>${treat.price}</Card.Text>
 							<Button
 								variant="warning"
 								onClick={() => {
