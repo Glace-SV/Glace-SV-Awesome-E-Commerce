@@ -16,7 +16,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// Use getActions to call a function within a fuction
 			login: (email, password) => {
-
 				fetch(process.env.BACKEND_URL.concat("/api/login"), {
 					method: "POST",
 					mode: "cors",
@@ -125,18 +124,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
 				if (!validate) {
-
 					item["quantity"] = 1;
 
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
 
-
 			deleteFromCart: id => {
 				const store = getStore();
 				const updatedList = [...store.cart];
 				updatedList.splice(id, 1);
+			},
 
 			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
@@ -167,7 +165,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setUser: user => {
 				setStore({ user: user });
-
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {
@@ -180,7 +177,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
 				}).then(response => response.json());
-
 			}
 		}
 	};
