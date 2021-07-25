@@ -53,8 +53,7 @@ const Layout = () => {
 						</Route>
 
 						<Route exact path="/eventforms" />
-							<Eventforms />
-						</Route>
+					
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

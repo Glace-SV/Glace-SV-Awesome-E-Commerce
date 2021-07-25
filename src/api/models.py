@@ -95,7 +95,7 @@ class Products(db.Model, BasicMode):
     name = db.Column(db.String(80), unique = True)
     description = db.Column(db.String(250), nullable=False)
     category = db.Column(db.String(250), unique=False, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.String(250), nullable=False)
     size = db.Column(db.String(250), nullable=False)
 
 
