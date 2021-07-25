@@ -53,7 +53,7 @@ export const GlazedInfoCard = () => {
 							<Button
 								variant="warning"
 								onClick={() => {
-									actions.addToCart(glaze.name);
+									actions.addToCart(glaze);
 								}}>
 								Comprar
 							</Button>

@@ -6,7 +6,7 @@ import AddToCart from "../component/addtocart";
 export const NavBarTwo = () => {
 	return (
 		<Navbar expand="sm" bg="dark" variant="dark">
-			<Navbar.Brand href="/">
+			<Navbar.Brand as={Link} to="/">
 				<img
 					className="navimage"
 					src="https://svglace.s3.eu-west-3.amazonaws.com/GLACE+SV+E-COMMERCE/glace+nuevo.jpg"
@@ -24,6 +24,9 @@ export const NavBarTwo = () => {
 					</Nav.Link>
 					<Nav.Link as={Link} to="/#events" className="text-warning">
 						EVENTOS
+					</Nav.Link>
+					<Nav.Link as={Link} to="/carrito" className="text-warning">
+						VER CARRITO
 					</Nav.Link>
 				</Nav>
 				<div>

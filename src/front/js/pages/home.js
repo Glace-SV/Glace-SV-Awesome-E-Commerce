@@ -1,6 +1,6 @@
 //import rendergifts???
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -23,7 +23,12 @@ import {
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	let history = useHistory();
+	const [formName, setFormName] = useState();
+	const [formEmail, setFormEmail] = useState();
+	const [formPhone, setFormPhone] = useState();
+	const [formEvent, setFormEvent] = useState();
+	const [formPax, setFormPax] = useState();
+	const [formDate, setFormDate] = useState();
 
 	return (
 		<div>
@@ -154,26 +159,68 @@ export const Home = () => {
 				</p>
 				<Form className="col-lg-6 col-10 mx-auto">
 					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Control type="text" placeholder="Nombre" required />
+						<Form.Control
+							type="text"
+							placeholder="Nombre"
+							required
+							value={formName}
+							onChange={e => setFormName(e.target.value)}
+						/>
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Control type="email" placeholder="Email" required />
+						<Form.Control
+							type="email"
+							placeholder="Email"
+							required
+							value={formEmail}
+							onChange={e => setFormEmail(e.target.value)}
+						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Control type="text" placeholder="Teléfono" required />
+						<Form.Control
+							type="text"
+							placeholder="Teléfono"
+							required
+							value={formPhone}
+							onChange={e => setFormPhone(e.target.value)}
+						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Control type="text" placeholder="Tipo de evento" required />
+						<Form.Control
+							type="text"
+							placeholder="Tipo de evento"
+							required
+							value={formEvent}
+							onChange={e => setFormEvent(e.target.value)}
+						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Control type="text" placeholder="N° personas" required />
+						<Form.Control
+							type="text"
+							placeholder="N° personas"
+							required
+							value={formPax}
+							onChange={e => setFormPax(e.target.value)}
+						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Control type="text" placeholder="Fecha de tu evento" required />
+						<Form.Control
+							type="text"
+							placeholder="Fecha de tu evento"
+							required
+							value={formDate}
+							onChange={e => setFormDate(e.target.value)}
+						/>
 					</Form.Group>
 
-					<Button variant="warning" type="Enviar" className="text-center mx-auto">
+					<Button
+						variant="warning"
+						type="Enviar"
+						className="text-center mx-auto"
+						onClick={() => {
+							actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
+						}}>
 						Enviar
 					</Button>
 				</Form>

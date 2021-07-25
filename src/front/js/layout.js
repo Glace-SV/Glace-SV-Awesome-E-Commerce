@@ -51,6 +51,7 @@ const Layout = () => {
 						<Route exact path="/carrito">
 							<ShoppingCart />
 						</Route>
+						<Route exact path="/eventforms" />
 						<Route exact path="/register">
 							<Register />
 						</Route>
