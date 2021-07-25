@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
 import React, { useContext } from "react";
+import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { GiftsInfoCard } from "./pages/Gifts";
 import { CakesInfoCard } from "./pages/Cakes";
@@ -51,9 +51,9 @@ const Layout = () => {
 						<Route exact path="/carrito">
 							<ShoppingCart />
 						</Route>
+
 						<Route exact path="/eventforms" />
-						<Route exact path="/register">
-							<Register />
+							<Eventforms />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

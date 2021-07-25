@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import AddToCart from "../component/addtocart";
+import Logout from "./logout";
 
 export const NavBarTwo = () => {
 	return (
@@ -25,8 +26,10 @@ export const NavBarTwo = () => {
 					<Nav.Link as={Link} to="/#events" className="text-warning">
 						EVENTOS
 					</Nav.Link>
+
 					<Nav.Link as={Link} to="/carrito" className="text-warning">
 						VER CARRITO
+
 					</Nav.Link>
 				</Nav>
 				<div>

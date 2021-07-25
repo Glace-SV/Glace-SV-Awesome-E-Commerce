@@ -1,7 +1,7 @@
   
 from datetime import timedelta
 
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -34,7 +34,7 @@ def new_register():
 
     pas_encrypted = generate_password_hash(json.get("password"), method='plain', salt_length=1)
 
-    new_user = User (email = json.get("email"), password= pas_encrypted,username= json.get("username"), name= json.get("name"), last_name= json.get("last_name"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
+    new_user = User (email = json.get("email"), password= pas_encrypted,username= json.get("username"), name= json.get("name"), last_name= json.get("lastname"), adress= json.get("adress"), city= json.get("city"), phone= json.get("phone"), is_active= json.get("is_active"))
     try:
         new_user.db_post()
         return jsonify(new_user.to_dict()), 201
@@ -42,32 +42,31 @@ def new_register():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
-
-    token_user = localStorage.setItem('token')
-    
+ 
   
 @api.route("/login", methods=['POST'])
 def handlin_login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
-    if not (email and password):
+    body = request.get_json(force=True)
+    email = body['email']
+    password = body['password']
+    if not email and  not password:
         return {'error': 'Missing info'}, 400   
 
     user = User.get_by_email(email)
-
-    if user and check_password_hash(user.password, password) is True:
+   
+    if user and check_password_hash(user.password, password) == True:
         token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
         return {'token': token}, 200
     else:
         return {'error': 'Some parameter is wrong'}, 400
+    
 
-    get_token_user=localStorage.getItem('token')
 
-
-@api.route('/logout', methods=["DELETE"])
+@api.route("/logout", methods=["DELETE"])
 def logout():
-    delete_token_user=localStorage.removeItem('token')
-    return jsonify(msg="Logout successful")
+    token = request.get_json("token")
+    delete_token = token.remove("jwt-token")
+    return jsonify(delete_token)
 
 
 @api.route('/products',methods=['GET']) 

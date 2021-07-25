@@ -7,7 +7,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			glazed: [],
 			cart: [],
 			token: "",
-			baseURL: "https://3001-violet-leopard-dmvn32sk.ws-eu10.gitpod.io",
 			currentUser: {}
 		},
 
@@ -17,6 +16,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// Use getActions to call a function within a fuction
 			login: (email, password) => {
+
+				fetch(process.env.BACKEND_URL.concat("/api/login"), {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ email: email, password: password })
+				})
+					.then(response => response.json())
+					.then(data => {
+						// guarda tu token en el localStorag
+						localStorage.setItem("jwt-token", data.token);
+					});
+
 				fetch(getStore().baseURL.concat("/login"), {
 					method: "POST",
 					mode: "no-cors",
@@ -32,31 +47,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			register: (email, password, username, name, lastName, adress, city, phone) => {
-				fetch(getStore().baseURL.concat("/register"), {
+			register: (email, password, username, name, lastname, adress, city, phone) => {
+				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
-					mode: "no-cors",
+					mode: "cors",
 					headers: {
-						"Content-Type": "application/json",
-						Authoritation: "bearer " + token
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
 						email: email,
 						password: password,
 						username: username,
 						name: name,
-						lastName: lastName,
+						lastname: lastname,
 						adress: adress,
 						city: city,
 						phone: phone
 					})
-				}).then(response => {
-					if (response.ok) {
-						response = response.json();
-						console.log(response);
-					}
-				});
+				}).then(response => response.json());
 			},
+
+			logout: () => {
+				fetch(process.env.BACKEND_URL + "/api/logout", {
+					method: "DELETE",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => response.json())
+					.then(() => {
+						localStorage.removeItem("jwt-token");
+					});
+			},
+
 			getToken: () => {
 				const store = getStore();
 				if (store.token) {
@@ -100,10 +125,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const validate = store.cart.includes(item);
 				if (!validate) {
+
 					item["quantity"] = 1;
+
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
+
+
+			deleteFromCart: id => {
+				const store = getStore();
+				const updatedList = [...store.cart];
+				updatedList.splice(id, 1);
 
 			sumCartItem: (index, quantity, price) => {
 				const store = getStore();
@@ -128,11 +161,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const updatedList = store.cart;
 				updatedList.splice(index, 1);
+
 				setStore({ cart: [...updatedList] });
 			},
 
 			setUser: user => {
 				setStore({ user: user });
+
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {
@@ -145,6 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
 				}).then(response => response.json());
+
 			}
 		}
 	};
