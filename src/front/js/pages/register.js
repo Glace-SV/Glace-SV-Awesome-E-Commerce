@@ -35,7 +35,6 @@ const Register = () => {
 								onChange={e => setEmail(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicPasswordRegister">
 							<Form.Label>Contraseña</Form.Label>
 							<Form.Control
@@ -56,7 +55,6 @@ const Register = () => {
 								onChange={e => setUsername(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicName">
 							<Form.Label>Nombre</Form.Label>
 							<Form.Control
@@ -77,7 +75,6 @@ const Register = () => {
 								onChange={e => setLastName(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicadress">
 							<Form.Label>Dirección</Form.Label>
 							<Form.Control
@@ -98,7 +95,6 @@ const Register = () => {
 								onChange={e => setCity(e.target.value)}
 							/>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="formBasicPhone">
 							<Form.Label>Teléfono</Form.Label>
 							<Form.Control

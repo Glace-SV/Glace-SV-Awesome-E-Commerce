@@ -2,7 +2,6 @@ import requests
 import base64
 
 from datetime import timedelta
-
 from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
@@ -114,7 +113,7 @@ def product_delete(product_id):
         Products.delete(product)
         return jsonify(product.serialize())
 
-@api.route('/eventforms' ,methods=['POST'])
+@api.route('/eventform' ,methods=['POST'])
 def adding_form():
         body = request.get_json(force=True)
         name = body['name']
@@ -128,8 +127,7 @@ def adding_form():
             body_Dic.append(data.serialize())
             
         return jsonify(res)
-
-       
+  
     
    
 @api.route('/payment', methods=['POST'])
