@@ -16,16 +16,16 @@ const AddToCart = () => {
 						{store.cart.length > 0 ? (
 							store.cart.map((item, index) => {
 								return (
-									<li key={index}>
+									<div key={index} className="row">
 										<p href="#">{item.name}</p>
 										<i
 											id="delete"
-											className="far fa-trash-alt pointer trash px-3"
+											className="far fa-trash-alt pointer trash pl-2 mt-1"
 											onClick={() => {
 												actions.deleteFromCart(index);
 											}}
 										/>
-									</li>
+									</div>
 								);
 							})
 						) : (

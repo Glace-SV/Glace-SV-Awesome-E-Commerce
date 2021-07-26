@@ -41,7 +41,7 @@ export const CakesInfoCard = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{cake.name}</Card.Title>

@@ -14,7 +14,7 @@ export const NavBarTwo = () => {
 			</Navbar.Brand>
 			<Navbar.Toggle />
 			<Navbar.Collapse id="responsive-navbar-nav">
-				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
+				<Nav className="mr-auto my-2 my-lg-0" style={{ maxHeight: "200px" }}>
 					<Nav.Link as={Link} to="/login" className="text-warning">
 						ACCEDE
 					</Nav.Link>
@@ -27,7 +27,11 @@ export const NavBarTwo = () => {
 					<Nav.Link as={Link} to="/carrito" className="text-warning">
 						VER CARRITO
 					</Nav.Link>
+					<Nav.Link>
+						<AddToCart />
+					</Nav.Link>
 				</Nav>
+
 				<div>
 					<AddToCart />
 				</div>
@@ -35,6 +39,7 @@ export const NavBarTwo = () => {
 				<div>
 					<LogOut />
 				</div>
+
 			</Navbar.Collapse>
 		</Navbar>
 	);
