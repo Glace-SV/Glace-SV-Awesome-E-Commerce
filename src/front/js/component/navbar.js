@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import LogOut from "./logout";
 import AddToCart from "../component/addtocart";
 export const NavBarTwo = () => {
 	return (
@@ -27,6 +28,14 @@ export const NavBarTwo = () => {
 						VER CARRITO
 					</Nav.Link>
 				</Nav>
+				<div>
+					<div className="mx-auto" id="categories">
+						<div className="row mb-4">
+							<h1 className="mt-3 mx-auto viewstitle" />
+						</div>
+						<div>{LogOut ? null : <LogOut />}</div>
+					</div>
+				</div>
 				<div>
 					<AddToCart />
 				</div>

@@ -64,8 +64,12 @@ def handlin_login():
 @api.route("/logout", methods=["DELETE"])
 def logout():
     token = request.get_json("token")
-    delete_token = token.remove("jwt-token")
-    return jsonify(delete_token)
+    token_dic = []    
+    if token in token_dic:
+        token_dic.remove(token)
+    return jsonify(token_dic)
+    
+		
 
 
 @api.route('/products',methods=['GET']) 

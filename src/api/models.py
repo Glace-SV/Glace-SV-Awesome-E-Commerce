@@ -36,7 +36,7 @@ class User(db.Model, BasicMode):
     adress = db.Column(db.String(250), unique=False, nullable=False)
     city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
-    token = db.Column(db.String(250), unique=True, nullable=True)
+    token = db.Column(db.String(250), unique=True, nullable=True) 
     is_active = db.Column(db.Boolean(), unique=False, nullable=True)
 
 

@@ -9,7 +9,7 @@ import { GlazedInfoCard } from "./pages/Glazed";
 import { ShoppingCart } from "./pages/ShoppingCart";
 import { Login } from "./pages/login";
 import Register from "./pages/register";
-import Logout from "./component/logout";
+import LogOut from "./component/logout";
 import FilledCart from "./component/filledCart";
 import injectContext from "./store/appContext";
 import { NavBarTwo } from "./component/navbar";
@@ -51,7 +51,7 @@ const Layout = () => {
 							<Register />
 						</Route>
 						<Route exact path="/logout">
-							<Logout />
+							<LogOut />
 						</Route>
 						<Route exact path="/carrito">
 							<ShoppingCart />
