@@ -36,7 +36,7 @@ class User(db.Model, BasicMode):
     adress = db.Column(db.String(250), unique=False, nullable=False)
     city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
-    token = db.Column(db.String(250), unique=True, nullable=True)
+    token = db.Column(db.String(8000), unique=True, nullable=True) 
     is_active = db.Column(db.Boolean(), unique=False, nullable=True)
 
 
@@ -61,8 +61,6 @@ class User(db.Model, BasicMode):
         user = cls.query.filter_by(email=email).one_or_none()
         return user
         
-    def user_have_token(self,token):
-        return User.query.filter_by(token=self.token).first()
    
     def assign_token(self,token):
         self.token = token
@@ -87,6 +85,7 @@ class User(db.Model, BasicMode):
             "phone": self.phone,
             "username": self.name,
             "email": self.email,
+            "token": self.token
            
             # do not serialize the password, its a security breach
         }

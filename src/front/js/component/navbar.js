@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import LogOut from "./logout";
 import AddToCart from "../component/addtocart";
 export const NavBarTwo = () => {
 	return (
@@ -30,6 +31,15 @@ export const NavBarTwo = () => {
 						<AddToCart />
 					</Nav.Link>
 				</Nav>
+
+				<div>
+					<AddToCart />
+				</div>
+
+				<div>
+					<LogOut />
+				</div>
+
 			</Navbar.Collapse>
 		</Navbar>
 	);
