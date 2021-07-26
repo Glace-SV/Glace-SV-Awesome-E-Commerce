@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
-import PropTypes from "prop-types";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
@@ -29,14 +28,14 @@ const PaypalCheckoutButton = ({ order }) => {
 						total: order.total,
 						currency: paypalConf.currency
 					},
-					description: "Compra en Test App",
+					description: "Compra en Glacé SV",
 					custom: order.customer || "",
 					item_list: {
 						items: order.items
 					}
 				}
 			],
-			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra."
+			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra. +503 77 36 24 84"
 		};
 
 		// console.log(payment);
@@ -50,11 +49,11 @@ const PaypalCheckoutButton = ({ order }) => {
 			.execute()
 			.then(response => {
 				console.log(response);
-				alert(`El Pago fue procesado correctamente, ID: ${response.id}`);
+				alert(`El Pago con PayPal se ha realizado correctamente, guarde el siguiente ID: ${response.id}`);
 			})
 			.catch(error => {
 				console.log(error);
-				alert("Ocurrió un error al procesar el pago con Paypal");
+				alert("Ocurrió un error en el proceso de pago con Paypal, vuelva a intentarlo.");
 			});
 	};
 
