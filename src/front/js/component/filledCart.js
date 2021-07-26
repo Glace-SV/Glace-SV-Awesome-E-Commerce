@@ -7,9 +7,9 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const email = store.email;
-
 	const cart = store.cart;
-
+	const total = store.orderTotal;
+	console.log(total);
 	console.log(cart);
 	const order = {
 		customer: "",
@@ -74,16 +74,7 @@ export const FilledCart = () => {
 								}}>
 								Eliminar
 							</Button>
-							<div>
-								<Button
-									className="mt-4"
-									variant="warning"
-									onClick={() => {
-										actions.updateItemPrice(index, item.quantity, item.price);
-									}}>
-									Actualizar total
-								</Button>
-							</div>
+							<div />
 						</Card.Body>
 					</Card>
 				</div>
@@ -92,16 +83,36 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
 				</div>
-				<h3 className="text-center">Gran total: $</h3>
+				<div className="row mb-4">
+					<p className="mx-auto mt-3">
+						Recuerda hacer click en el botón cada vez que actualices las cantidades de los productos en tu
+						carrito.
+					</p>
+				</div>
+				<div className="row">
+					<Button
+						className="mr-4 "
+						variant="warning"
+						onClick={() => {
+							actions.getOrderTotal();
+						}}>
+						Haz click para ver el total de tu orden
+					</Button>
+					<h2>${total}</h2>
+				</div>
 			</div>
 			<div className="mx-auto" id="categories">
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
-				<h3 className="text-center">Nombre: {}</h3>
+			</div>
+			<div className="mx-auto" id="categories">
+				<div className="row mb-4">
+					<h1 className="mt-3 mx-auto viewstitle">Procede al check out</h1>
+				</div>
 			</div>
 			<>
-				<header className="App-header">
+				<header className="App-header text-center">
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
