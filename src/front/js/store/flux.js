@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
-				setStore({ email: email });
+				setStore({ email: email });	
 			},
 
 			logout: () => {
