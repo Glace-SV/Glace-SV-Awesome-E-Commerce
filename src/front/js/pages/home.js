@@ -36,7 +36,7 @@ export const Home = () => {
 				<Carousel.Item>
 					<img
 						className="d-block imgsizing"
-						src="https://unsplash.com/photos/8LtrMQfeDkQ/download?force=true&w=2400"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/jasmine-bartel-8LtrMQfeDkQ-unsplash.jpg"
 						alt="First slide"
 					/>
 					<Carousel.Caption>
@@ -50,7 +50,7 @@ export const Home = () => {
 				<Carousel.Item>
 					<img
 						className="d-block imgsizing"
-						src="https://unsplash.com/photos/-uRrBqB53So/download?force=true&w=2400"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/zahra-tavakoli-fard--uRrBqB53So-unsplash.jpg"
 						alt="Second slide"
 					/>
 
@@ -75,7 +75,7 @@ export const Home = () => {
 					<Card.Img
 						variant="top"
 						className="imgsizingcategory"
-						src="https://unsplash.com/photos/s7Vh1kg-clM/download?force=true&w=2400"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/taylor-kiser-s7Vh1kg-clM-unsplash.jpg"
 					/>
 					<Card.Body>
 						<Card.Title>GLAZE ME UP!</Card.Title>
@@ -90,7 +90,7 @@ export const Home = () => {
 					<Card.Img
 						variant="top"
 						className="imgsizingcategory"
-						src="https://unsplash.com/photos/90HdOlGbjck/download?force=true&w=2400"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/jr-r-90HdOlGbjck-unsplash.jpg"
 					/>
 					<Card.Body>
 						<Card.Title>TREAT YO SELF!</Card.Title>
@@ -104,7 +104,7 @@ export const Home = () => {
 					<Card.Img
 						variant="top"
 						className="imgsizingcategory"
-						src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
 					/>
 					<Card.Body>
 						<Card.Title>CAKES & MORE!</Card.Title>
@@ -118,7 +118,7 @@ export const Home = () => {
 					<Card.Img
 						variant="top"
 						className="imgsizingcategory"
-						src="https://unsplash.com/photos/dcPNZeSY3yk/download?force=true"
+						src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/food-photographer-jennifer-pallian-dcPNZeSY3yk-unsplash.jpg"
 					/>
 					<Card.Body>
 						<Card.Title>SPREAD THE LOVE!</Card.Title>

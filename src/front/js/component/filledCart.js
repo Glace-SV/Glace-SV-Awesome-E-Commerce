@@ -6,16 +6,14 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
-	useEffect(() => {
-		actions.getUser();
-	}, []);
+	const email = store.email;
+
 	const cart = store.cart;
-	const user = store.currentUser;
-	console.log(user);
+	console.log("user", user);
 	console.log(cart);
 	const order = {
-		customer: "Nombre",
-		total: "550.00",
+		customer: "",
+		total: "",
 		items: [
 			{
 				sku: "112",
@@ -42,7 +40,7 @@ export const FilledCart = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{item.name}</Card.Title>
@@ -100,7 +98,7 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
-				<h3 className="text-center">Nombre: {user.name}</h3>
+				<h3 className="text-center">Nombre: {}</h3>
 			</div>
 			<>
 				<header className="App-header">
