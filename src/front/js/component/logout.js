@@ -4,9 +4,9 @@ import { Context } from "../store/appContext";
 
 function LogOut() {
 	const { actions } = useContext(Context);
-	const isLoggedIn = localStorage.getItem("jwt-token");
+	const isLogedIn = localStorage.getItem("jwt-token");
 
-	if (isLoggedIn)
+	if (isLogedIn)
 		return (
 			<div>
 				<button as={Link} to="/logout" className="text-warning">
