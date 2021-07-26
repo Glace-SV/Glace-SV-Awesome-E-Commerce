@@ -1,20 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
+import PropTypes from "prop-types";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
-		currency: "EUR",
+		currency: "USD",
 		env: "sandbox",
 		client: {
-			sandbox: "Ac3uyiGQcVdZw2DMeOAZ-rWJx6XumP5TkMutCTCxXdBXc8utKdcw0phFWu034jw-FtjzL7IeQMquJ_pa",
+			sandbox: "AawvPTlvCFkpEpR0OeqXS5k-6qsgHXQHg0zViBMqM4gZpmEh0J_lw9ti5hF0Ykn6nCFZKtX9bp9fC5Tf",
 			production: "--"
 		},
 		style: {
 			label: "pay",
 			size: "small", // small | medium | large | responsive
 			shape: "pill", // pill | rect
-			color: "black" // gold | blue | silver | black
+			color: "blue" // gold | blue | silver | black
 		}
 	};
 
@@ -28,7 +29,7 @@ const PaypalCheckoutButton = ({ order }) => {
 						total: order.total,
 						currency: paypalConf.currency
 					},
-					description: "Compra en Glacé SV",
+					description: "Su compra en Glacé SV",
 					custom: order.customer || "",
 					item_list: {
 						items: order.items
@@ -49,11 +50,11 @@ const PaypalCheckoutButton = ({ order }) => {
 			.execute()
 			.then(response => {
 				console.log(response);
-				alert(`El Pago con PayPal se ha realizado correctamente, guarde el siguiente ID: ${response.id}`);
+				alert(`El pago con PayPal se ha realizado correctamente, guarde el siguiente ID: ${response.id}`);
 			})
 			.catch(error => {
 				console.log(error);
-				alert("Ocurrió un error en el proceso de pago con Paypal, vuelva a intentarlo.");
+				alert("Ocurrió un error en el proceso de pago con PayPal, vuelva a intentarlo.");
 			});
 	};
 
@@ -78,6 +79,10 @@ const PaypalCheckoutButton = ({ order }) => {
 			locale="es_SV"
 		/>
 	);
+};
+
+PaypalCheckoutButton.propTypes = {
+	order: PropTypes.object
 };
 
 export default PaypalCheckoutButton;
