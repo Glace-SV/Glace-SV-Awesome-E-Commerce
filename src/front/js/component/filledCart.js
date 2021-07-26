@@ -101,7 +101,6 @@ export const FilledCart = () => {
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
 				<h3 className="text-center">Nombre: {user.name}</h3>
-				<h3 className="text-center">Dirección: {user.adress}</h3>
 			</div>
 			<>
 				<header className="App-header">

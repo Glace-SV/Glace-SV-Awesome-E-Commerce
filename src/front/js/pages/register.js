@@ -18,6 +18,7 @@ const Register = () => {
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
 		history.push("/");
+		console.log("success!");
 	};
 
 	return (
@@ -107,7 +108,7 @@ const Register = () => {
 						</Form.Group>
 
 						<Button variant="warning" onClick={handle_acceder}>
-							Acceder
+							Registrarme
 						</Button>
 					</div>
 				</Tab.Content>
