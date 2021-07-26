@@ -9,7 +9,7 @@ export const FilledCart = () => {
 	const email = store.email;
 
 	const cart = store.cart;
-	console.log("user", user);
+
 	console.log(cart);
 	const order = {
 		customer: "",
