@@ -49,18 +49,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then(response => response.json());
 			},
 
-			logout: () => {
-				fetch(process.env.BACKEND_URL + "/api/logout", {
-					method: "DELETE",
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-						"Content-Type": "application/json"
-					}
-				})
-					.then(response => response.json())
-					.then(() => {
-						localStorage.removeItem("jwt-token");
-					});
+			logout() {
+				localStorage.removeItem("jwt-token");
 			},
 
 			getToken: () => {

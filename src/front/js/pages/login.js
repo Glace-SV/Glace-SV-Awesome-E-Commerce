@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Register from "./register";
-import ModalLogin from "../component/loginModal";
+import { useHistory } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
@@ -21,16 +21,18 @@ import {
 	Tab,
 	Row,
 	Col,
-	Nav,
-	Modal
+	Nav
 } from "react-bootstrap";
 
 export const Login = () => {
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const history = useHistory();
 	const Loged = () => {
 		actions.login(email, password);
+		history.push("/");
+		alert("ya tienes acceso, disfruta de tu compra");
 	};
 
 	return (
@@ -72,7 +74,7 @@ export const Login = () => {
 										onChange={e => setPassword(e.target.value)}
 									/>
 								</Form.Group>
-								<Button variant="warning" onClick={Loged} onChange={ModalLogin}>
+								<Button variant="warning" onClick={Loged}>
 									Acceder
 								</Button>
 							</Form>

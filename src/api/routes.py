@@ -4,14 +4,14 @@ from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
-from api.models import db, User, Products
+from api.models import db, User, Products, EventForm
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
 @api.route("/login",methods=['GET'])
 def all_users():
-    user = User.get_all()
+    user = User.get_by_email(User, mail)
     user_dic = []
     for user in user :
         user_dic.append(user.serialize())
@@ -41,35 +41,26 @@ def new_register():
     except exc.IntegrityError:
         
         return {'error': 'Something went wrong'}, 409
- 
+     
   
 @api.route("/login", methods=['POST'])
+
 def handlin_login():
     body = request.get_json(force=True)
     email = body['email']
     password = body['password']
     if not email and  not password:
-        return {'error': 'Missing info'}, 400   
+        return {'error': 'Missing info'}, 400
+
 
     user = User.get_by_email(email)
-   
+
     if user and check_password_hash(user.password, password) == True:
-        token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=100))
+        token = create_access_token(identity=user.email, expires_delta=timedelta(minutes=100))
         return {'token': token}, 200
+
     else:
         return {'error': 'Some parameter is wrong'}, 400
-    
-
-
-@api.route("/logout", methods=["DELETE"])
-def logout():
-    token = request.get_json("token")
-    token_dic = []    
-    if token in token_dic:
-        token_dic.remove(token)
-    return jsonify(token_dic)
-    
-		
 
 
 @api.route('/products',methods=['GET']) 

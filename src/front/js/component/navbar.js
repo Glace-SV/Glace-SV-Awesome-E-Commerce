@@ -29,15 +29,11 @@ export const NavBarTwo = () => {
 					</Nav.Link>
 				</Nav>
 				<div>
-					<div className="mx-auto" id="categories">
-						<div className="row mb-4">
-							<h1 className="mt-3 mx-auto viewstitle" />
-						</div>
-						<div>{LogOut ? null : <LogOut />}</div>
-					</div>
-				</div>
-				<div>
 					<AddToCart />
+				</div>
+
+				<div>
+					<LogOut />
 				</div>
 			</Navbar.Collapse>
 		</Navbar>
