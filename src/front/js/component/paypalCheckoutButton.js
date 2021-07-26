@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
+import PropTypes from "prop-types";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
@@ -78,6 +79,10 @@ const PaypalCheckoutButton = ({ order }) => {
 			locale="es_SV"
 		/>
 	);
+};
+
+PaypalCheckoutButton.propTypes = {
+	order: PropTypes.object
 };
 
 export default PaypalCheckoutButton;
