@@ -16,6 +16,7 @@ import { NavBarTwo } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Context } from "./store/appContext";
 import { Fab } from "./component/fab";
+import { PaypalCheckoutButton } from "./component/paypalCheckoutButton";
 
 //create your first component
 const Layout = () => {

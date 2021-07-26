@@ -1,4 +1,6 @@
-import base64 
+import requests
+import base64
+
 from datetime import timedelta
 from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
@@ -128,6 +130,30 @@ def adding_form():
   
     
    
+@api.route('/payment', methods=['POST'])
+def auth_paypal():
+
+    client_id = ""
+    client_secret = ""
+    credentials = "%s:%s" % (client_id, client_secret)
+    encode_credential = base64.b64encode(credentials.encode('utf-8')).decode('utf-8').replace("\n", "")
+    
+    headers = {
+        "Authorization": ("Basic QWMzdXlpR1FjVmRadzJETWVPQVotcldKeDZYdW1QNVRrTXV0Q1RDeFhkQlhjOHV0S2RjdzBwaEZXdTAzNGp3LUZ0anpMN0llUU1xdUpfcGE6RUxQblc0Ykd2M2I4d2JmUDQ2U04zR2hPOVNDMDJTY1N1cHp2bVcxNEdfR0o0THRZWVBWaG1zNE8tbVlPU3dHdnFtSGJ4TUR2ekJTUzNOTFM %s" % encode_credential),
+        'Accept': 'application/json'
+        }
+
+    param = {
+        'grant_type': 'client_credentials',
+    }
+
+    url = 'https://api-m.sandbox.paypal.com/v1/oauth2/token'
+
+    r = requests.post(url, headers=headers, data=param)
+
+    print(r.text, "@@@@@@@@")
+    return "##"
+
 @api.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code

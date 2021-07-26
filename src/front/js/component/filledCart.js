@@ -2,6 +2,7 @@ import { Card, Button, FormControl } from "react-bootstrap";
 import "../../styles/home.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
@@ -12,6 +13,26 @@ export const FilledCart = () => {
 	const user = store.currentUser;
 	console.log(user);
 	console.log(cart);
+	const order = {
+		customer: "Nombre",
+		total: "550.00",
+		items: [
+			{
+				sku: "112",
+				name: "Camisa ReactJS",
+				price: "300.00",
+				quantity: 1,
+				currency: "EUR"
+			},
+			{
+				sku: "99",
+				name: "Camisa JS",
+				price: "125.00",
+				quantity: 2,
+				currency: "EUR"
+			}
+		]
+	};
 
 	return (
 		<div>
@@ -69,7 +90,6 @@ export const FilledCart = () => {
 					</Card>
 				</div>
 			))}
-			;
 			<div className="mx-auto" id="categories">
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
@@ -80,10 +100,14 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
-				<h3 className="text-center">Gran total: $</h3>
+				<h3 className="text-center">Nombre: {user.name}</h3>
+				<h3 className="text-center">Dirección: {user.adress}</h3>
 			</div>
+			<>
+				<header className="App-header">
+					<PaypalCheckoutButton order={order} />
+				</header>
+			</>
 		</div>
 	);
 };
-
-export default FilledCart;
