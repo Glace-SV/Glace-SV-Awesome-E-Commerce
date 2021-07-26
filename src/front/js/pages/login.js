@@ -32,6 +32,7 @@ export const Login = () => {
 	const Loged = () => {
 		actions.login(email, password);
 		history.push("/");
+		alert("ya tienes acceso, disfruta de tu compra");
 	};
 
 	return (

@@ -17,7 +17,8 @@ const Register = () => {
 	const history = useHistory();
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
-		history.push("/");
+		history.push("/login");
+		alert("Ya estás registrado, por favor accede a tu cuenta para continuar.");
 	};
 
 	return (
@@ -107,7 +108,7 @@ const Register = () => {
 						</Form.Group>
 
 						<Button variant="warning" onClick={handle_acceder}>
-							Acceder
+							Registrarme
 						</Button>
 					</div>
 				</Tab.Content>

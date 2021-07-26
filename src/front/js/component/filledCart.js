@@ -6,16 +6,14 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
-	useEffect(() => {
-		actions.getUser();
-	}, []);
+	const email = store.email;
 	const cart = store.cart;
-	const user = store.currentUser;
-	console.log(user);
+	const total = store.orderTotal;
+	console.log(total);
 	console.log(cart);
 	const order = {
-		customer: "Nombre",
-		total: "550.00",
+		customer: "",
+		total: "",
 		items: [
 			{
 				sku: "112",
@@ -42,7 +40,7 @@ export const FilledCart = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{item.name}</Card.Title>
@@ -76,16 +74,7 @@ export const FilledCart = () => {
 								}}>
 								Eliminar
 							</Button>
-							<div>
-								<Button
-									className="mt-4"
-									variant="warning"
-									onClick={() => {
-										actions.updateItemPrice(index, item.quantity, item.price);
-									}}>
-									Actualizar total
-								</Button>
-							</div>
+							<div />
 						</Card.Body>
 					</Card>
 				</div>
@@ -94,17 +83,36 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
 				</div>
-				<h3 className="text-center">Gran total: $</h3>
+				<div className="row mb-4">
+					<p className="mx-auto mt-3">
+						Recuerda hacer click en el botón cada vez que actualices las cantidades de los productos en tu
+						carrito.
+					</p>
+				</div>
+				<div className="row">
+					<Button
+						className="mr-4 "
+						variant="warning"
+						onClick={() => {
+							actions.getOrderTotal();
+						}}>
+						Haz click para ver el total de tu orden
+					</Button>
+					<h2>${total}</h2>
+				</div>
 			</div>
 			<div className="mx-auto" id="categories">
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
-				<h3 className="text-center">Nombre: {user.name}</h3>
-				<h3 className="text-center">Dirección: {user.adress}</h3>
+			</div>
+			<div className="mx-auto" id="categories">
+				<div className="row mb-4">
+					<h1 className="mt-3 mx-auto viewstitle">Procede al check out</h1>
+				</div>
 			</div>
 			<>
-				<header className="App-header">
+				<header className="Paypal-header text-center">
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
