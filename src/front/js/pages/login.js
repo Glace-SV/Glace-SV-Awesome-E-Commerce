@@ -1,26 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState,  useContext } from "react";
 import Register from "./register";
-import { useHistory } from "react-router-dom";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import {
-	Carousel,
-	Item,
-	Caption,
-	Card,
-	Img,
-	Title,
-	Text,
-	ImgOverlay,
 	Button,
 	Form,
-	Group,
-	Label,
-	Control,
-	Check,
 	Tab,
-	Row,
-	Col,
 	Nav
 } from "react-bootstrap";
 
@@ -28,10 +13,10 @@ export const Login = () => {
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const history = useHistory();
+;
 	const Loged = () => {
 		actions.login(email, password);
-		history.push("/");
+		window.location.replace("/");
 		alert("ya tienes acceso, disfruta de tu compra");
 	};
 
