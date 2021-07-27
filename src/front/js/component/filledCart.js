@@ -6,9 +6,11 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
+
+	const [total, setTotal] = useState(store.orderTotal);
 	const email = store.email;
 	const cart = store.cart;
-	const total = store.orderTotal;
+
 	console.log(total);
 	console.log(cart);
 	const order = {
@@ -53,6 +55,8 @@ export const FilledCart = () => {
 									variant="warning"
 									onClick={() => {
 										actions.subsCartItem(index, item.quantity);
+										actions.getOrderTotal();
+										setTotal(store.orderTotal);
 									}}>
 									-
 								</Button>
@@ -62,6 +66,8 @@ export const FilledCart = () => {
 									variant="warning"
 									onClick={() => {
 										actions.sumCartItem(index, item.quantity, item.price);
+										actions.getOrderTotal();
+										setTotal(store.orderTotal);
 									}}>
 									+
 								</Button>
@@ -71,6 +77,8 @@ export const FilledCart = () => {
 								variant="warning"
 								onClick={() => {
 									actions.deleteFromCart(index);
+									actions.getOrderTotal();
+									setTotal(store.orderTotal);
 								}}>
 								Eliminar
 							</Button>
@@ -84,21 +92,7 @@ export const FilledCart = () => {
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
 				</div>
 				<div className="row mb-4">
-					<p className="mx-auto mt-3">
-						Recuerda hacer click en el botón cada vez que actualices las cantidades de los productos en tu
-						carrito.
-					</p>
-				</div>
-				<div className="row">
-					<Button
-						className="mr-4 "
-						variant="warning"
-						onClick={() => {
-							actions.getOrderTotal();
-						}}>
-						Haz click para ver el total de tu orden
-					</Button>
-					<h2>${total}</h2>
+					<h2 className="mx-auto mt-3">${total}</h2>
 				</div>
 			</div>
 			<div className="mx-auto" id="categories">

@@ -1,12 +1,13 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 
 export const TreatsInfoCard = () => {
 	const { store, actions } = useContext(Context);
+	const [total, setTotal] = useState();
 	useEffect(() => {
 		actions.loadTreats();
 	}, []);
@@ -52,6 +53,8 @@ export const TreatsInfoCard = () => {
 								variant="warning"
 								onClick={() => {
 									actions.addToCart(treat);
+									actions.getOrderTotal();
+									setTotal(store.orderTotal);
 								}}>
 								Comprar
 							</Button>
