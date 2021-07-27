@@ -6,9 +6,10 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
+	const [total, setTotal] = useState("0");
 	const email = store.email;
 	const cart = store.cart;
-	const total = store.orderTotal;
+
 	console.log(total);
 	console.log(cart);
 	const order = {
@@ -53,6 +54,7 @@ export const FilledCart = () => {
 									variant="warning"
 									onClick={() => {
 										actions.subsCartItem(index, item.quantity);
+										actions.getOrderTotal();
 									}}>
 									-
 								</Button>
@@ -62,6 +64,8 @@ export const FilledCart = () => {
 									variant="warning"
 									onClick={() => {
 										actions.sumCartItem(index, item.quantity, item.price);
+										actions.getOrderTotal();
+										setTotal(store.orderTotal);
 									}}>
 									+
 								</Button>
@@ -71,6 +75,7 @@ export const FilledCart = () => {
 								variant="warning"
 								onClick={() => {
 									actions.deleteFromCart(index);
+									actions.getOrderTotal();
 								}}>
 								Eliminar
 							</Button>
@@ -90,14 +95,14 @@ export const FilledCart = () => {
 					</p>
 				</div>
 				<div className="row">
-					<Button
+					{/* <Button
 						className="mr-4 "
 						variant="warning"
 						onClick={() => {
 							actions.getOrderTotal();
 						}}>
 						Haz click para ver el total de tu orden
-					</Button>
+					</Button> */}
 					<h2>${total}</h2>
 				</div>
 			</div>

@@ -53,6 +53,7 @@ export const GiftsInfoCard = () => {
 								variant="warning"
 								onClick={() => {
 									actions.addToCart(gift);
+									actions.getOrderTotal();
 								}}>
 								Comprar
 							</Button>
