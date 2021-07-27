@@ -51,20 +51,20 @@ const PaypalCheckoutButton = ({ order }) => {
 			.execute()
 			.then(response => {
 				console.log(response);
-				alert(`El Pago con PayPal se ha realizado correctamente, guarde el siguiente ID: ${response.id}`);
+				alert(`Tu pago se ha realizado correctamente, gracias por tu compra.`);
 			})
 			.catch(error => {
 				console.log(error);
-				alert("Ocurrió un error en el proceso de pago con Paypal, vuelva a intentarlo.");
+				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");
 			});
 	};
 
 	const onError = error => {
-		alert("El pago con PayPal no fue realizado, vuelva a intentarlo.");
+		alert("El pago no fue realizado, vuelva a intentarlo.");
 	};
 
 	const onCancel = (data, actions) => {
-		alert("El pago con PayPal no fue realizado, el usuario canceló el proceso.");
+		alert("El pago no fue realizado, el usuario canceló el proceso.");
 	};
 
 	return (

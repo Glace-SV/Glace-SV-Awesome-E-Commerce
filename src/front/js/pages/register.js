@@ -47,7 +47,7 @@ const Register = () => {
 							/>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicUsername">
-							<Form.Label>Username</Form.Label>
+							<Form.Label>Usuario</Form.Label>
 							<Form.Control
 								type="username"
 								placeholder="Nombre de Usuario"
