@@ -10,19 +10,24 @@ function LogOut() {
 	const exit = () => {
 		actions.logout("jwt-token");
 		history.push("/login");
+		window.location.replace("/login");
 		alert("Has cerrado tu sesión esperamos verte pronto");
 	};
 
-	if (isLogedIn)
+	if (isLogedIn) {
 		return (
-			<div>
-				<Button className="ml-2" variant="warning" onClick={exit}>
-					<i className="fas fa-sign-out-alt" />
-					Cerrar Sesion
-				</Button>
-			</div>
+			<Button className="ml-2" variant="warning" onClick={exit}>
+				<i className="fas fa-sign-out-alt" />
+				Cerrar Sesion
+			</Button>
 		);
-	else return <> </>;
+	}
+	// else if (isLogedIn == false){
+
+	// }
+	else {
+		return <> </>;
+	}
 }
 
 export default LogOut;

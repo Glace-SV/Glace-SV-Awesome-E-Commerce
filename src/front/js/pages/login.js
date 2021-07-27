@@ -31,8 +31,10 @@ export const Login = () => {
 	const history = useHistory();
 	const Loged = () => {
 		actions.login(email, password);
-		history.push("/");
 		alert("ya tienes acceso, disfruta de tu compra");
+		window.location.replace("/login");
+		// alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
+		// history.push("/login");
 	};
 
 	return (

@@ -11,7 +11,7 @@ api = Blueprint('api', __name__)
 
 @api.route("/login",methods=['GET'])
 def all_users():
-    user = User.get_by_email(User, mail)
+    user = User.get_all()
     user_dic = []
     for user in user :
         user_dic.append(user.serialize())
