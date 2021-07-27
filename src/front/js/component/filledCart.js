@@ -2,16 +2,35 @@ import { Card, Button, FormControl } from "react-bootstrap";
 import "../../styles/home.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import PaypalCheckoutButton from "./paypalCheckoutButton";
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
-	useEffect(() => {
-		actions.getUser();
-	}, []);
+	const email = store.email;
+
 	const cart = store.cart;
-	const user = store.currentUser;
-	console.log(user);
+
 	console.log(cart);
+	const order = {
+		customer: "",
+		total: "",
+		items: [
+			{
+				sku: "112",
+				name: "Camisa ReactJS",
+				price: "300.00",
+				quantity: 1,
+				currency: "EUR"
+			},
+			{
+				sku: "99",
+				name: "Camisa JS",
+				price: "125.00",
+				quantity: 2,
+				currency: "EUR"
+			}
+		]
+	};
 
 	return (
 		<div>
@@ -21,7 +40,7 @@ export const FilledCart = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://unsplash.com/photos/5K5Nc3AGF1w/download?force=true&w=2400"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{item.name}</Card.Title>
@@ -69,7 +88,6 @@ export const FilledCart = () => {
 					</Card>
 				</div>
 			))}
-			;
 			<div className="mx-auto" id="categories">
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
@@ -80,10 +98,13 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
 				</div>
-				<h3 className="text-center">Gran total: $</h3>
+				<h3 className="text-center">Nombre: {}</h3>
 			</div>
+			<>
+				<header className="App-header">
+					<PaypalCheckoutButton order={order} />
+				</header>
+			</>
 		</div>
 	);
 };
-
-export default FilledCart;

@@ -8,7 +8,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
-			currentUser: []
+			currentUser: [],
+			grandTotal: "",
+			email: ""
 		},
 		actions: {
 			login: (email, password) => {
@@ -26,6 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// guarda tu token en el localStorag
 						localStorage.setItem("jwt-token", data.token);
 					});
+				setStore({ email: email });
 			},
 
 			register: (email, password, username, name, lastname, adress, city, phone) => {
@@ -47,6 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
+				setStore({ email: email });	
 			},
 
 			logout() {
@@ -130,18 +134,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(newPrice);
 			},
 
-			setUser: user => {
-				setStore({ user: user });
-			},
+			// setUser: user => {
+			// 	setStore({ user: user });
+			// },
 
 			getUser: () => {
 				fetch(process.env.BACKEND_URL + "/api/login")
 					.then(resp => resp.json())
 					.then(data => setStore({ currentUser: data }));
-			},
-
-			setUser: user => {
-				setStore({ user: user });
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {

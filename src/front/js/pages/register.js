@@ -19,6 +19,7 @@ const Register = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
 		history.push("/login");
 		alert("ya estas registrado, por favor dale al botón de accede para logearte");
+
 	};
 
 	return (
@@ -108,7 +109,7 @@ const Register = () => {
 						</Form.Group>
 
 						<Button variant="warning" onClick={handle_acceder}>
-							Acceder
+							Registrarme
 						</Button>
 					</div>
 				</Tab.Content>
