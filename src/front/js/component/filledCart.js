@@ -112,7 +112,7 @@ export const FilledCart = () => {
 				</div>
 			</div>
 			<>
-				<header className="Paypal-header text-center">
+				<header className="Paypal-header text-center my-5">
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
