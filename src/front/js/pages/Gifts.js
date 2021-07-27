@@ -1,12 +1,13 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 
 export const GiftsInfoCard = () => {
 	const { store, actions } = useContext(Context);
+	const [total, setTotal] = useState();
 	useEffect(() => {
 		actions.loadGifts();
 	}, []);
@@ -54,6 +55,7 @@ export const GiftsInfoCard = () => {
 								onClick={() => {
 									actions.addToCart(gift);
 									actions.getOrderTotal();
+									setTotal(store.orderTotal);
 								}}>
 								Comprar
 							</Button>
