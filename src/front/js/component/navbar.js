@@ -39,7 +39,6 @@ export const NavBarTwo = () => {
 				<div>
 					<LogOut />
 				</div>
-
 			</Navbar.Collapse>
 		</Navbar>
 	);
