@@ -92,7 +92,7 @@ export const FilledCart = () => {
 					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
 				</div>
 				<div className="row mb-4">
-					<h2 className="mx-auto mt-3">${total}</h2>
+					<h2 className="mx-auto mt-3">Gran Total: ${total}</h2>
 				</div>
 			</div>
 			<div className="mx-auto" id="categories">
