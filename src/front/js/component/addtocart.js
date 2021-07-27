@@ -17,11 +17,11 @@ const AddToCart = () => {
 						{store.cart.length > 0 ? (
 							store.cart.map((item, index) => {
 								return (
-									<div key={index} className="row">
-										<p className="col-9">{item.name}</p>
+									<div key={index} className="row" style={{ width: "auto" }}>
+										<p>{item.name}</p>
 										<i
 											id="delete"
-											className="far fa-trash-alt pointer trash mt-1 col-2"
+											className="far fa-trash-alt pointer trash mt-1 ml-2"
 											onClick={() => {
 												actions.deleteFromCart(index);
 												actions.getOrderTotal();
