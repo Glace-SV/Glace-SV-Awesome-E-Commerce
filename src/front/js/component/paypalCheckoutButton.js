@@ -5,17 +5,18 @@ import PropTypes from "prop-types";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
-		currency: "EUR",
+		currency: "USD",
 		env: "sandbox",
 		client: {
 			sandbox: "Ac3uyiGQcVdZw2DMeOAZ-rWJx6XumP5TkMutCTCxXdBXc8utKdcw0phFWu034jw-FtjzL7IeQMquJ_pa",
 			production: "--"
 		},
 		style: {
-			label: "pay",
-			size: "small", // small | medium | large | responsive
+			label: "pay", // checkout | credit | pay | buynow | paypal | installment (Note: The installment feature is available only in these locales: en_MX, es_MX, en_BR, pt_BR)
+			size: "responsive", // small | medium | large | responsive
 			shape: "pill", // pill | rect
-			color: "black" // gold | blue | silver | black
+			color: "gold", // gold | blue | silver | black
+			tagline: "false" // false | true
 		}
 	};
 

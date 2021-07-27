@@ -13,21 +13,21 @@ export const FilledCart = () => {
 	console.log(cart);
 	const order = {
 		customer: "",
-		total: "",
+		total: "550",
 		items: [
 			{
 				sku: "112",
 				name: "Camisa ReactJS",
 				price: "300.00",
 				quantity: 1,
-				currency: "EUR"
+				currency: "USD"
 			},
 			{
 				sku: "99",
 				name: "Camisa JS",
 				price: "125.00",
 				quantity: 2,
-				currency: "EUR"
+				currency: "USD"
 			}
 		]
 	};
@@ -112,7 +112,7 @@ export const FilledCart = () => {
 				</div>
 			</div>
 			<>
-				<header className="App-header text-center">
+				<header className="Paypal-header text-center">
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
