@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 
 const AddToCart = () => {
 	const { store, actions } = useContext(Context);
+	const [total, setTotal] = useState();
 	console.log("cart 1", store.cart);
 	return (
 		<div>
@@ -16,13 +17,15 @@ const AddToCart = () => {
 						{store.cart.length > 0 ? (
 							store.cart.map((item, index) => {
 								return (
-									<div key={index} className="row">
-										<p href="#">{item.name}</p>
+									<div key={index} className="row" style={{ width: "auto" }}>
+										<p>{item.name}</p>
 										<i
 											id="delete"
-											className="far fa-trash-alt pointer trash pl-2 mt-1"
+											className="far fa-trash-alt pointer trash mt-1 ml-2"
 											onClick={() => {
 												actions.deleteFromCart(index);
+												actions.getOrderTotal();
+												setTotal(store.orderTotal);
 											}}
 										/>
 									</div>

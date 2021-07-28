@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export const CakesInfoCard = () => {
 	const { store, actions } = useContext(Context);
+	const [total, setTotal] = useState();
 	useEffect(() => {
 		actions.loadCakes();
 	}, []);
@@ -52,6 +53,8 @@ export const CakesInfoCard = () => {
 								variant="warning"
 								onClick={() => {
 									actions.addToCart(cake);
+									actions.getOrderTotal();
+									setTotal(store.orderTotal);
 								}}>
 								Comprar
 							</Button>

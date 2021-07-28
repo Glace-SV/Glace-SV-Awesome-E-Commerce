@@ -18,13 +18,14 @@ const Register = () => {
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
 		window.location.replace("/login");
-		alert("ya estas registrado, por favor dale al botón de accede para logearte");
+		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
+
 	};
 
 	return (
 		<div className="container-fluid">
 			<div className="row rowdesign2">
-				<Tab.Content className="col-lg-6 col-12 mx-auto">
+				<Tab.Content className="col-lg-12 col-12 mx-auto">
 					<div className="formcolor">
 						<Form.Group className="mb-3" controlId="formBasicEmailRegister">
 							<Form.Label>Email</Form.Label>
@@ -47,10 +48,10 @@ const Register = () => {
 							/>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicUsername">
-							<Form.Label>Username</Form.Label>
+							<Form.Label>Usuario</Form.Label>
 							<Form.Control
 								type="username"
-								placeholder="Username"
+								placeholder="Nombre de Usuario"
 								required
 								value={username}
 								onChange={e => setUsername(e.target.value)}
@@ -113,7 +114,7 @@ const Register = () => {
 					</div>
 				</Tab.Content>
 			</div>
-			<p>
+			<p className="mt-3 col-12">
 				Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web,
 				gestionar el acceso a tu cuenta y otros propósitos.
 			</p>

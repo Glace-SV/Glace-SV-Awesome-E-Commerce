@@ -31,11 +31,6 @@ export const NavBarTwo = () => {
 						<AddToCart />
 					</Nav.Link>
 				</Nav>
-
-				<div>
-					<AddToCart />
-				</div>
-
 				<div>
 					<LogOut />
 				</div>

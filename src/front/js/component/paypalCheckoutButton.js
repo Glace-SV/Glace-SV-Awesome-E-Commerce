@@ -5,17 +5,18 @@ import PropTypes from "prop-types";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
-		currency: "EUR",
+		currency: "USD",
 		env: "sandbox",
 		client: {
-			sandbox: "Ac3uyiGQcVdZw2DMeOAZ-rWJx6XumP5TkMutCTCxXdBXc8utKdcw0phFWu034jw-FtjzL7IeQMquJ_pa",
+			sandbox: "AawvPTlvCFkpEpR0OeqXS5k-6qsgHXQHg0zViBMqM4gZpmEh0J_lw9ti5hF0Ykn6nCFZKtX9bp9fC5Tf",
 			production: "--"
 		},
 		style: {
-			label: "pay",
-			size: "small", // small | medium | large | responsive
+			label: "pay", // checkout | credit | pay | buynow | paypal | installment (Note: The installment feature is available only in these locales: en_MX, es_MX, en_BR, pt_BR)
+			size: "responsive", // small | medium | large | responsive
 			shape: "pill", // pill | rect
-			color: "black" // gold | blue | silver | black
+			color: "gold", // gold | blue | silver | black
+			tagline: "false" // false | true
 		}
 	};
 
@@ -50,20 +51,20 @@ const PaypalCheckoutButton = ({ order }) => {
 			.execute()
 			.then(response => {
 				console.log(response);
-				alert(`El Pago con PayPal se ha realizado correctamente, guarde el siguiente ID: ${response.id}`);
+				alert(`Tu pago se ha realizado correctamente, gracias por tu compra.`);
 			})
 			.catch(error => {
 				console.log(error);
-				alert("Ocurrió un error en el proceso de pago con Paypal, vuelva a intentarlo.");
+				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");
 			});
 	};
 
 	const onError = error => {
-		alert("El pago con PayPal no fue realizado, vuelva a intentarlo.");
+		alert("El pago no fue realizado, vuelva a intentarlo.");
 	};
 
 	const onCancel = (data, actions) => {
-		alert("El pago con PayPal no fue realizado, el usuario canceló el proceso.");
+		alert("El pago no fue realizado, el usuario canceló el proceso.");
 	};
 
 	return (

@@ -40,7 +40,7 @@ export const Footer = () => {
 										<br />
 										Sábados
 										<br />
-										9:00H - 15:00h
+										9:00h - 15:00h
 									</p>
 								</div>
 							</div>

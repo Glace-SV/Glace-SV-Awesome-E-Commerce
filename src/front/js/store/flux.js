@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cartPrice: [],
 			token: "",
 			currentUser: [],
-			grandTotal: "",
+			orderTotal: "",
 			email: ""
 		},
 		actions: {
@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ cart: [...store.cart, item] });
 				}
 			},
-			sumCartItem: (index, quantity, price) => {
+			sumCartItem: (index, quantity) => {
 				const store = getStore();
 				let item = store.cart[index];
 				item.quantity = quantity++;
@@ -114,10 +114,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let item = store.cart[index];
 				item.quantity = quantity--;
+				item["quantity"] = quantity;
 				const updatedList = store.cart;
 				updatedList.splice(index, 1, item);
 				setStore({ cart: [...updatedList] });
 			},
+
+			getOrderTotal: () => {
+				const store = getStore();
+				let cart = store.cart;
+				let aux = [];
+				for (let i in cart) {
+					let newVar = cart[i].price * cart[i].quantity;
+					aux.splice(1, 0, newVar);
+				}
+				let sum = 0;
+				for (let i = 0; i < aux.length; i++) {
+					sum += aux[i];
+				}
+				console.log(sum);
+				console.log(aux);
+				setStore({ orderTotal: sum });
+			},
+
 			deleteFromCart: index => {
 				const store = getStore();
 				const updatedList = store.cart;
