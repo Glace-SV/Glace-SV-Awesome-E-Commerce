@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
+			formEmail: "",
 			currentUser: {},
 			orderTotal: "",
 			email: ""
@@ -176,7 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {
-				fetch(process.env.BACKEND_URL.concat("/api/eventforms"), {
+				fetch(process.env.BACKEND_URL + "/api/eventform", {
 					method: "POST",
 					mode: "cors",
 					headers: {

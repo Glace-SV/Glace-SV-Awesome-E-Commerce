@@ -4,22 +4,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Link, useParams, useHistory } from "react-router-dom";
-import {
-	Carousel,
-	Item,
-	Caption,
-	Card,
-	Img,
-	Title,
-	Text,
-	ImgOverlay,
-	Button,
-	Form,
-	Group,
-	Label,
-	Control,
-	Check
-} from "react-bootstrap";
+import { Carousel, Card, Button, Form } from "react-bootstrap";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -29,6 +14,11 @@ export const Home = () => {
 	const [formEvent, setFormEvent] = useState();
 	const [formPax, setFormPax] = useState();
 	const [formDate, setFormDate] = useState();
+	const handle_form = () => {
+		console.log(formName, formEmail, formPhone, formEvent, formPax, formDate);
+		actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
+		alert("formulario enviado. Garcias por su confianza");
+	};
 
 	return (
 		<div>
@@ -214,13 +204,7 @@ export const Home = () => {
 						/>
 					</Form.Group>
 
-					<Button
-						variant="warning"
-						type="Enviar"
-						className="text-center mx-auto"
-						onClick={() => {
-							actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
-						}}>
+					<Button variant="warning" type="Enviar" className="text-center mx-auto" onClick={handle_form}>
 						Enviar
 					</Button>
 				</Form>
