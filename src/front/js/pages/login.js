@@ -1,4 +1,4 @@
-import React, { useState,  useContext } from "react";
+import React, { useState, useContext } from "react";
 import Register from "./register";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
@@ -11,10 +11,13 @@ export const Login = () => {
 	const [password, setPassword] = useState("");
 
 	const Loged = () => {
-		actions.login(email, password);
-		alert("ya tienes acceso, disfruta de tu compra");
-		window.location.replace("/");
-		// alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
+		let log = actions.login(email, password);
+
+		if (log == { email: email, password: password }) {
+			return alert("ya tienes acceso, disfruta de tu compra"), window.location.replace("/");
+		} else {
+			return alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
+		}
 	};
 
 	return (

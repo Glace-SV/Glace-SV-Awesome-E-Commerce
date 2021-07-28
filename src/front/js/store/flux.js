@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			login: (email, password) => {
-				fetch(process.env.BACKEND_URL.concat("/api/login"), {
+				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					mode: "cors",
 					headers: {
