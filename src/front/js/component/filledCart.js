@@ -7,10 +7,11 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const email = store.email;
-
 	const cart = store.cart;
-
 	console.log(cart);
+	actions.getUser();
+	console.log("store", store.currentUser[0]);
+
 	const order = {
 		customer: "",
 		total: "",
@@ -105,6 +106,7 @@ export const FilledCart = () => {
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
+			<div> {store.currentUser} </div>
 		</div>
 	);
 };

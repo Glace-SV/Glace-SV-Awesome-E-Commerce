@@ -9,7 +9,6 @@ function LogOut() {
 	const history = useHistory();
 	const exit = () => {
 		actions.logout("jwt-token");
-		history.push("/login");
 		window.location.replace("/login");
 		alert("Has cerrado tu sesión esperamos verte pronto");
 	};
