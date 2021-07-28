@@ -11,6 +11,8 @@ export const FilledCart = () => {
 	const total = store.orderTotal;
 	console.log(total);
 	console.log(cart);
+	actions.getUser();
+	console.log("store", store.currentUser[0]);
 	const order = {
 		customer: "",
 		total: "",
@@ -116,6 +118,7 @@ export const FilledCart = () => {
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
+			<div> {store.currentUser} </div>
 		</div>
 	);
 };

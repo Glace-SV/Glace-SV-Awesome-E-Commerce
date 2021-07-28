@@ -13,7 +13,7 @@ api = Blueprint('api', __name__)
 
 @api.route("/login",methods=['GET'])
 def all_users():
-    user = User.get_by_email(User, mail)
+    user = User.get_all()
     user_dic = []
     for user in user :
         user_dic.append(user.serialize())
@@ -111,16 +111,15 @@ def product_delete(product_id):
 @api.route('/eventform' ,methods=['POST'])
 def adding_form():
         body = request.get_json(force=True)
-        name = body['name']
-        email = body['email']
-        phone = body['phone']
-        event = body['event']
-        pax = body['pax']
-        date = body['date']
+        res = []
+        try:
+            for element in body:
+                form = EventForm(name = element.get("name"), email = element.get("email"), phone= element.get("phone"), event= element.get("event"), pax= element.get("pax"), date=element.get("date"))
+                form.db_post()
+                res.append(form.serialize())
+        except Exception as inst:
+            print(inst)
         
-        for data in body:
-            body_Dic.append(data.serialize())
-            
         return jsonify(res)
   
     
