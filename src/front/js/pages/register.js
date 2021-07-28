@@ -17,8 +17,9 @@ const Register = () => {
 	const history = useHistory();
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
-		history.push("/login");
+		window.location.replace("/login");
 		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
+
 	};
 
 	return (

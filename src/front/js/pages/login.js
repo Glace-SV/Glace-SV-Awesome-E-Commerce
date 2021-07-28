@@ -2,22 +2,19 @@ import React, { useState,  useContext } from "react";
 import Register from "./register";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
-import {
-	Button,
-	Form,
-	Tab,
-	Nav
-} from "react-bootstrap";
+
+import { Button, Form, Tab, Nav } from "react-bootstrap";
 
 export const Login = () => {
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-;
+
 	const Loged = () => {
 		actions.login(email, password);
-		window.location.replace("/");
 		alert("ya tienes acceso, disfruta de tu compra");
+		window.location.replace("/");
+		// alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
 	};
 
 	return (
