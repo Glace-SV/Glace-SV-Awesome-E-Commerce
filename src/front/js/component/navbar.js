@@ -4,6 +4,22 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-boots
 import LogOut from "./logout";
 import AddToCart from "../component/addtocart";
 export const NavBarTwo = () => {
+	let history = useHistory();
+	function scrollToDiv1() {
+		history.push("/");
+		setTimeout(function() {
+			const elmnt = document.getElementById("categories");
+			elmnt.scrollIntoView({ block: "start" });
+		}, 10);
+	}
+	function scrollToDiv2() {
+		history.push("/");
+		setTimeout(function() {
+			const elmnt = document.getElementById("events");
+			elmnt.scrollIntoView({ block: "start" });
+		}, 10);
+	}
+
 	return (
 		<Navbar expand="sm" bg="dark" variant="dark">
 			<Navbar.Brand as={Link} to="/">
@@ -18,10 +34,22 @@ export const NavBarTwo = () => {
 					<Nav.Link as={Link} to="/login" className="text-warning">
 						ACCEDE
 					</Nav.Link>
-					<Nav.Link as={Link} to="/#categories" className="text-warning">
+					<Nav.Link
+						as={Link}
+						to="/#categories"
+						className="text-warning"
+						onClick={() => {
+							scrollToDiv1();
+						}}>
 						PRODUCTOS
 					</Nav.Link>
-					<Nav.Link as={Link} to="/#events" className="text-warning">
+					<Nav.Link
+						as={Link}
+						to="/#events"
+						className="text-warning"
+						onClick={() => {
+							scrollToDiv2();
+						}}>
 						EVENTOS
 					</Nav.Link>
 					<Nav.Link as={Link} to="/carrito" className="text-warning">
