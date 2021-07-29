@@ -119,6 +119,8 @@ def adding_form():
                 res.append(form.serialize())
         except Exception as inst:
             print(inst)
+
+        return jsonify(res)
   
     
    

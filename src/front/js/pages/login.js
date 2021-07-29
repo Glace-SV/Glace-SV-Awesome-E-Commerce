@@ -11,13 +11,11 @@ export const Login = () => {
 	const [password, setPassword] = useState("");
 
 	const Loged = () => {
-		let log = actions.login(email, password);
-
-		if (log == { email: email, password: password }) {
-			return alert("ya tienes acceso, disfruta de tu compra"), window.location.replace("/");
-		} else {
-			return alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
-		}
+		actions.login(email, password);
+		actions.makeRequestWithJWT();
+		alert("ya tienes acceso, disfruta de tu compra");
+		window.location.replace("/");
+		// alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
 	};
 
 	return (

@@ -9,12 +9,10 @@ export const FilledCart = () => {
 	const [total, setTotal] = useState(store.orderTotal);
 	const email = store.email;
 	const cart = store.cart;
-
 	console.log(total);
-
 	console.log(cart);
 	actions.getUser();
-	console.log("store", store.currentUser[0]);
+	console.log("store", store.currentUser);
 
 	const order = {
 		customer: "",

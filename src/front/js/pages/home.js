@@ -15,8 +15,8 @@ export const Home = () => {
 	const [formPax, setFormPax] = useState();
 	const [formDate, setFormDate] = useState();
 	const handle_form = () => {
-		console.log(formName, formEmail, formPhone, formEvent, formPax, formDate);
 		actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
+		console.log(formName, formEmail, formPhone, formEvent, formPax, formDate);
 		alert("formulario enviado. Garcias por su confianza");
 	};
 	return (

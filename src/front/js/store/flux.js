@@ -8,7 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
-			currentUser: [],
+			currentUser: {},
 			orderTotal: "",
 			email: ""
 		},
@@ -55,6 +55,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout() {
 				localStorage.removeItem("jwt-token");
+			},
+			makeRequestWithJWT() {
+				const auth = ({
+					method: "post",
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("jwt-token")}`
+					}
+				}.then = () =>
+					(fetch(process.env.BACKEND_URL + "/api/login", auth).then = response => response.json()));
 			},
 
 			getToken: () => {
@@ -160,7 +169,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUser: () => {
 				fetch(process.env.BACKEND_URL + "/api/login")
 					.then(resp => resp.json())
-					.then(data => setStore({ currentUser: data }));
+					.then(data =>
+						setStore({
+							currentUser: {
+								name: data[0].name,
+								email: data[0].email,
+								lastname: data[0].lastname,
+								adress: data[0].adress,
+								city: data[0].city,
+								phone: data[0].phone
+							}
+						})
+					);
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {
