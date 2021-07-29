@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			login: (email, password) => {
-				fetch(process.env.BACKEND_URL.concat("/api/login"), {
+				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					mode: "cors",
 					headers: {
@@ -25,8 +25,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						// guarda tu token en el localStorag
-						localStorage.setItem("jwt-token", data.token);
+						if (data.token == undefined) {
+							alert("UPPS!!! ha habido algun error");
+						} else {
+							localStorage.setItem("jwt-token", data.token);
+							alert("ya tienes acceso, disfruta de tu compra");
+							window.location.replace("/");
+						}
 					});
 				setStore({ email: email });
 			},
@@ -55,6 +60,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout() {
 				localStorage.removeItem("jwt-token");
+			},
+			makeRequestWithJWT() {
+				const auth = ({
+					method: "post",
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("jwt-token")}`
+					}
+				}.then = () =>
+					(fetch(process.env.BACKEND_URL + "/api/login", auth).then = response => response.json()));
 			},
 
 			getToken: () => {

@@ -14,12 +14,10 @@ const Register = () => {
 	const [adress, setAdress] = useState("");
 	const [city, setCity] = useState("");
 	const [phone, setPhone] = useState("");
-	const history = useHistory();
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, adress, city, phone);
 		window.location.replace("/login");
 		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
-
 	};
 
 	return (
