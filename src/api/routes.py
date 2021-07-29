@@ -57,7 +57,7 @@ def handlin_login():
 
     user = User.get_by_email(email)
 
-    if user and check_password_hash(user.password, password) == True:
+    if user and check_password_hash(user.password, password):
         token = create_access_token(identity=user.email, expires_delta=timedelta(minutes=100))
         return {'token': token}, 200
 

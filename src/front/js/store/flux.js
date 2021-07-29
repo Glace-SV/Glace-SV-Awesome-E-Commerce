@@ -25,8 +25,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						// guarda tu token en el localStorag
-						localStorage.setItem("jwt-token", data.token);
+						if (data.token == undefined) {
+							alert("UPPS!!! ha habido algun error");
+						} else {
+							localStorage.setItem("jwt-token", data.token);
+							alert("ya tienes acceso, disfruta de tu compra");
+							window.location.replace("/");
+						}
 					});
 				setStore({ email: email });
 			},

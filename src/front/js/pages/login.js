@@ -12,10 +12,8 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
-		actions.makeRequestWithJWT();
-		alert("ya tienes acceso, disfruta de tu compra");
-		window.location.replace("/");
-		// alert("UPPS!!! algo ha ido mal, inténtalo de nuevo por favor.");
+		// alert("ya tienes acceso, disfruta de tu compra");
+		// window.location.replace("/");
 	};
 
 	return (
