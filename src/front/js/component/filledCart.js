@@ -11,6 +11,22 @@ export const FilledCart = () => {
 	const cart = store.cart;
 	console.log(total);
 	console.log(cart);
+	const infoUser = (getStore, actions) => {
+		switch (actions.getUser()) {
+			case "name":
+				return { getStore: currentUser.name };
+			case "lastname":
+				return { getStore: currentUser.Lastname };
+			case "email":
+				return { getStore: currentUser.email };
+			case "adress":
+				return { getStore: currentUser.adress };
+			case "city":
+				return { getStore: currentUser.city };
+			case "phone":
+				return { getStore: currentUser.phone };
+		}
+	};
 	actions.getUser();
 	console.log("store", store.currentUser);
 
@@ -111,7 +127,7 @@ export const FilledCart = () => {
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
-			<div> {store.currentUser} </div>
+			<div> {infoUser} </div>
 		</div>
 	);
 };
