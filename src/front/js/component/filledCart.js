@@ -1,4 +1,4 @@
-import { Card, Button, FormControl } from "react-bootstrap";
+import { Card, Button, FormControl, Badge } from "react-bootstrap";
 import "../../styles/home.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
@@ -7,6 +7,9 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const [total, setTotal] = useState(store.orderTotal);
+	useEffect(() => {
+		actions.getUser();
+	}, []);
 	const email = store.email;
 	const cart = store.cart;
 	console.log(total);
@@ -88,35 +91,64 @@ export const FilledCart = () => {
 					</Card>
 				</div>
 			))}
-			<div className="mx-auto" id="categories">
-				<div className="row mb-4">
-					<h1 className="mt-3 mx-auto viewstitle">Verifica el total de tu orden</h1>
-				</div>
-				<div className="row mb-4">
-					<h2 className="mx-auto mt-3">Gran Total: ${total}</h2>
+
+			<div className="row mx-4 mt-2 mb-4">
+				<h1 className=" mx-auto text-center viewstitle">Verifica el total de tu orden</h1>
+			</div>
+
+			<div>
+				<div className="row mx-auto mb-5">
+					<h1 className="mx-auto mt-1 text-center">
+						<Badge bg="warning" variant="warning" text="dark">
+							Gran Total: ${total}
+						</Badge>
+					</h1>
 				</div>
 			</div>
-			<div className="mx-auto" id="categories">
-				<div className="row mb-4">
-					<h1 className="mt-3 mx-auto viewstitle">Verifica los datos de tu orden</h1>
-				</div>
+
+			<div className="row m-4">
+				<h1 className=" mx-auto text-center viewstitle">Verifica los datos de tu orden</h1>
 			</div>
+			<div className="col-lg-6 mx-auto col-12">
+				<h4 className="text-left">
+					<Badge bg="warning" variant="warning" text="dark" className="mr-2">
+						Nombre:
+					</Badge>
+					{user.name} {user.lastname}
+				</h4>
+				<h4 className="text-left">
+					<Badge bg="warning" variant="warning" text="dark" className="mr-2">
+						Email:
+					</Badge>
+
+					{user.email}
+				</h4>
+				<h4 className="text-left">
+					<Badge bg="warning" variant="warning" text="dark" className="mr-2">
+						Teléfono de contacto:
+					</Badge>
+
+					{user.phone}
+				</h4>
+				<h4 className="text-left">
+					<Badge bg="warning" variant="warning" text="dark" className="mr-2">
+						Dirección de envío:
+					</Badge>
+					{user.adress} {user.city}
+				</h4>
+			</div>
+
 			<div className="mx-auto" id="categories">
-				<div className="row mb-4">
+				<div className="row mt-5">
 					<h1 className="mt-3 mx-auto viewstitle">Procede al check out</h1>
-					<h1>{user.name}</h1>
-					<h1>{user.lastname}</h1>
-					<h1>{user.email}</h1>
-					<h1>{user.adress}</h1>
-					<h1>{user.city}</h1>
-					<h1>{user.phone}</h1>
 				</div>
 			</div>
 			<>
-				<header className="Paypal-header text-center my-5">
+				<header className="Paypal-header text-center mt-5 mb-5 mx-auto" style={{ width: "300px" }}>
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
+			<div className="air" />
 		</div>
 	);
 };

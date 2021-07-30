@@ -17,7 +17,7 @@ const AddToCart = () => {
 						{store.cart.length > 0 ? (
 							store.cart.map((item, index) => {
 								return (
-									<div key={index} className="row" style={{ width: "auto" }}>
+									<div key={index} className="row" style={{ width: "320px" }}>
 										<p>{item.name}</p>
 										<i
 											id="delete"

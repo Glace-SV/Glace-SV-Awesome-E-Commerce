@@ -46,18 +46,14 @@ export const Home = () => {
 					<Carousel.Caption>
 						<div className="scrim">
 							<h2 className="slideonecolor hometitle">The art of Bakery</h2>
-							<p className="homepara slideonecolor">Passion for creating delicious desserts</p>
-							<p className="homepara slideonecolor">Delivery service only </p>
+							<p className="homepara slideonecolor">Passion for creating</p>
+							<p className="homepara slideonecolor">delicious desserts</p>
 						</div>
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
 			<div className="row mx-auto" id="categories">
-				<h2 className="mt-5 mx-auto categorytitle">
-					<span className="emoji">🍰</span>
-					Nuestras especialidades
-					<span className="emoji">🍰</span>
-				</h2>
+				<h2 className="mt-5 mx-auto text-center categorytitle">Nuestras Especialidades</h2>
 			</div>
 			<div className="row mt-4 mx-auto">
 				<Card style={{ width: "10rem" }} className="col-lg-3 col-12">
@@ -120,11 +116,9 @@ export const Home = () => {
 				</Card>
 			</div>
 			<div className="mt-5 bckgrndimg eventcontainer" id="events">
-				<h2 className="pt-4 mt-3 eventtitle scrim text-center">
-					<span className="emoji">🍰</span>
-					El evento perfecto
-					<span className="emoji">🍰</span>
-				</h2>
+				<div className="row">
+					<h2 className="mt-5 mx-auto text-center eventtitle">El Evento Perfecto</h2>
+				</div>
 				<h3 className="eventtitle3 mt-4 scrim slideonecolor">We design delicious events.</h3>
 				<p className="eventpara scrim slideonecolor">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore

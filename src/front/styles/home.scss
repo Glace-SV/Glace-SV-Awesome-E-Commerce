@@ -1,7 +1,7 @@
 
 //Styles for carousel title
 .hometitle {
-    font-size: 70px;
+    font-size: 60px;
     margin-bottom: 70px;
     opacity: 0.90;
 }
@@ -55,6 +55,7 @@
     object-fit: cover;
     display: block;
     object-position: 10% 40%;
+    border-bottom: 5px solid #EEBA0B;
 
 }
 
@@ -65,6 +66,7 @@
 //Styles for category title
 .categorytitle {
     font-size: 30px;
+    border-bottom: 5px solid #EEBA0B;
 }
 
 //Styles for category card animation
@@ -91,7 +93,7 @@
 //Styles for span emojis
 .emoji {
     font-size: 20px;
-    margin: 10px;
+    
 }
 
 //Styles for the background on events section
@@ -108,6 +110,8 @@ height: auto;
 .eventtitle {
     color: white;
     padding: 0 30px 0 30px;
+    border-bottom: 5px solid #EEBA0B;
+   
 }
 
 //Styles for event section h3 title
@@ -115,6 +119,7 @@ height: auto;
     color: white;
     padding: 0 30px 0 30px;
     font-size: 25px;
+    
 
 }
 
@@ -152,6 +157,8 @@ height: auto;
     font-size: 35px;
     border-bottom: 5px solid #EEBA0B;
 }
+
+
 
 .viewspara {
     font-family: 'Playfair Display', serif;
