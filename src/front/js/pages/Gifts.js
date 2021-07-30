@@ -17,7 +17,7 @@ export const GiftsInfoCard = () => {
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
-				<h1 className="mt-3 mx-auto viewstitle">
+				<h1 className="mt-3 mx-auto viewstitle " style={{ fontSize: "33px" }}>
 					<Link to="/cakes">
 						<i className="changesection mr-4 fas fa-arrow-left" />
 					</Link>
