@@ -32,7 +32,7 @@ class User(db.Model, BasicMode):
     username = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(500), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
-    last_name = db.Column(db.String(80), unique=False, nullable=False)
+    lastname = db.Column(db.String(80), unique=False, nullable=False)
     adress = db.Column(db.String(250), unique=False, nullable=False)
     city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
@@ -48,7 +48,7 @@ class User(db.Model, BasicMode):
             "id": self.id,
             "email": self.email,
             "name": self.name,
-            "last_name": self.last_name,
+            "lastname": self.lastname,
         }
 
      
@@ -79,7 +79,7 @@ class User(db.Model, BasicMode):
         return {
             "id": self.id,
             "name": self.name,
-            "last_name": self.last_name,
+            "lastname": self.lastname,
             "adress": self.adress,
             "city": self.city,
             "phone": self.phone,

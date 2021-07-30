@@ -11,7 +11,6 @@ export const FilledCart = () => {
 	const cart = store.cart;
 	console.log(total);
 	console.log(cart);
-	actions.getUser();
 	let user = store.currentUser;
 	console.log("store", store.currentUser);
 
@@ -106,6 +105,7 @@ export const FilledCart = () => {
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Procede al check out</h1>
 					<h1>{user.name}</h1>
+					<h1>{user.lastname}</h1>
 					<h1>{user.email}</h1>
 					<h1>{user.adress}</h1>
 					<h1>{user.city}</h1>
