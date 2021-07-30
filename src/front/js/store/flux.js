@@ -61,15 +61,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout() {
 				localStorage.removeItem("jwt-token");
 			},
-			makeRequestWithJWT() {
-				const auth = ({
-					method: "post",
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("jwt-token")}`
-					}
-				}.then = () =>
-					(fetch(process.env.BACKEND_URL + "/api/login", auth).then = response => response.json()));
-			},
 
 			getToken: () => {
 				const store = getStore();
