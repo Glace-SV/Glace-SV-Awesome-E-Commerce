@@ -12,6 +12,7 @@ export const FilledCart = () => {
 	console.log(total);
 	console.log(cart);
 	actions.getUser();
+	let user = store.currentUser;
 	console.log("store", store.currentUser);
 
 	const order = {
@@ -104,6 +105,11 @@ export const FilledCart = () => {
 			<div className="mx-auto" id="categories">
 				<div className="row mb-4">
 					<h1 className="mt-3 mx-auto viewstitle">Procede al check out</h1>
+					<h1>{user.name}</h1>
+					<h1>{user.email}</h1>
+					<h1>{user.adress}</h1>
+					<h1>{user.city}</h1>
+					<h1>{user.phone}</h1>
 				</div>
 			</div>
 			<>
@@ -111,7 +117,6 @@ export const FilledCart = () => {
 					<PaypalCheckoutButton order={order} />
 				</header>
 			</>
-			<div> {store.currentUser} </div>
 		</div>
 	);
 };

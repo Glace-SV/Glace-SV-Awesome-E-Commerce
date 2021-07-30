@@ -177,12 +177,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data =>
 						setStore({
 							currentUser: {
-								name: data[0].name,
-								email: data[0].email,
-								lastname: data[0].lastname,
-								adress: data[0].adress,
-								city: data[0].city,
-								phone: data[0].phone
+								name: data[0].name.toString(),
+								email: data[0].email.toString(),
+								adress: data[0].adress.toString(),
+								city: data[0].city.toString(),
+								phone: data[0].phone.toString()
 							}
 						})
 					);
