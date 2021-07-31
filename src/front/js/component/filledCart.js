@@ -134,7 +134,7 @@ export const FilledCart = () => {
 					<Badge bg="warning" variant="warning" text="dark" className="mr-2">
 						Dirección de envío:
 					</Badge>
-					{user.adress} {user.city}
+					{user.address} {user.city}
 				</h4>
 			</div>
 

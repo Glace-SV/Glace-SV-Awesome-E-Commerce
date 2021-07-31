@@ -54,7 +54,7 @@ def upgrade():
     sa.Column('password', sa.String(length=500), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('last_name', sa.String(length=80), nullable=False),
-    sa.Column('adress', sa.String(length=250), nullable=False),
+    sa.Column('address', sa.String(length=250), nullable=False),
     sa.Column('city', sa.String(length=80), nullable=False),
     sa.Column('phone', sa.Integer(), nullable=False),
     sa.Column('token', sa.String(length=250), nullable=True),

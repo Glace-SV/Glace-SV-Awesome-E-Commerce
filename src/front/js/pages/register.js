@@ -11,11 +11,11 @@ const Register = () => {
 	const [username, setUsername] = useState("");
 	const [name, setName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [adress, setAdress] = useState("");
+	const [address, setaddress] = useState("");
 	const [city, setCity] = useState("");
 	const [phone, setPhone] = useState("");
 	const handle_acceder = () => {
-		actions.register(email, password, username, name, lastName, adress, city, phone);
+		actions.register(email, password, username, name, lastName, address, city, phone);
 		window.location.replace("/login");
 		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
 	};
@@ -75,14 +75,14 @@ const Register = () => {
 								onChange={e => setLastName(e.target.value)}
 							/>
 						</Form.Group>
-						<Form.Group className="mb-3" controlId="formBasicadress">
+						<Form.Group className="mb-3" controlId="formBasicaddress">
 							<Form.Label>Dirección</Form.Label>
 							<Form.Control
-								type="adress"
+								type="address"
 								placeholder="Dirección"
 								required
-								value={adress}
-								onChange={e => setAdress(e.target.value)}
+								value={address}
+								onChange={e => setaddress(e.target.value)}
 							/>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicCity">

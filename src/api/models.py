@@ -33,7 +33,7 @@ class User(db.Model, BasicMode):
     password = db.Column(db.String(500), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     lastname = db.Column(db.String(80), unique=False, nullable=False)
-    adress = db.Column(db.String(250), unique=False, nullable=False)
+    address = db.Column(db.String(250), unique=False, nullable=False)
     city = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
     token = db.Column(db.String(8000), unique=True, nullable=True) 
@@ -80,7 +80,7 @@ class User(db.Model, BasicMode):
             "id": self.id,
             "name": self.name,
             "lastname": self.lastname,
-            "adress": self.adress,
+            "address": self.address,
             "city": self.city,
             "phone": self.phone,
             "username": self.name,

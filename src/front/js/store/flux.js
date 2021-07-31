@@ -26,17 +26,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						if (data.token == undefined) {
-							alert("UPPS!!! ha habido algun error");
+							alert("OOPS!!! Ha habido algún error.");
 						} else {
 							localStorage.setItem("jwt-token", data.token);
-							alert("ya tienes acceso, disfruta de tu compra");
+							alert("Ya tienes acceso, disfruta de tu compra.");
 							window.location.replace("/");
 						}
 					});
 				setStore({ email: email });
 			},
 
-			register: (email, password, username, name, lastname, adress, city, phone) => {
+			register: (email, password, username, name, lastname, address, city, phone) => {
 				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					mode: "cors",
@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						username: username,
 						name: name,
 						lastname: lastname,
-						adress: adress,
+						address: address,
 						city: city,
 						phone: phone
 					})
@@ -169,9 +169,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							currentUser: {
 								name: data[0].name.toString(),
-								lastname: data[0].name.toString(),
+								lastname: data[0].lastname.toString(),
 								email: data[0].email.toString(),
-								adress: data[0].adress.toString(),
+								address: data[0].address.toString(),
 								city: data[0].city.toString(),
 								phone: data[0].phone.toString()
 							}
