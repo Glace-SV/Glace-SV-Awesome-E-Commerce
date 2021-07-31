@@ -43,7 +43,7 @@ export const GiftsInfoCard = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/food-photographer-jennifer-pallian-dcPNZeSY3yk-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{gift.name}</Card.Title>

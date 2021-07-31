@@ -42,7 +42,7 @@ export const TreatsInfoCard = () => {
 						<Card.Img
 							variant="top"
 							className="imgsizingcategory categoryline"
-							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/american-heritage-chocolate-5K5Nc3AGF1w-unsplash.jpg"
+							src="https://svglace.s3.eu-west-3.amazonaws.com/ULTIMA/jr-r-90HdOlGbjck-unsplash.jpg"
 						/>
 						<Card.Body>
 							<Card.Title>{treat.name}</Card.Title>
