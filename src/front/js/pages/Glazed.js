@@ -12,7 +12,6 @@ export const GlazedInfoCard = () => {
 		actions.loadGlazed();
 	}, []);
 	const glazed = store.glazed;
-	console.log(glazed);
 
 	return (
 		<>

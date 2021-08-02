@@ -12,30 +12,18 @@ export const FilledCart = () => {
 	}, []);
 	const email = store.email;
 	const cart = store.cart;
-	console.log(total);
-	console.log(cart);
 	let user = store.currentUser;
-	console.log("store", store.currentUser);
 
 	const order = {
-		customer: "",
-		total: "550",
-		items: [
-			{
-				sku: "112",
-				name: "Camisa ReactJS",
-				price: "300.00",
-				quantity: 1,
+		total: total,
+		items: cart.map((item, index) => {
+			return {
+				name: item.name,
+				quantity: item.quantity,
+				price: item.price,
 				currency: "USD"
-			},
-			{
-				sku: "99",
-				name: "Camisa JS",
-				price: "125.00",
-				quantity: 2,
-				currency: "USD"
-			}
-		]
+			};
+		})
 	};
 
 	return (

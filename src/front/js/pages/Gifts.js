@@ -12,7 +12,6 @@ export const GiftsInfoCard = () => {
 		actions.loadGifts();
 	}, []);
 	const gifts = store.gifts;
-	console.log(gifts);
 
 	return (
 		<>

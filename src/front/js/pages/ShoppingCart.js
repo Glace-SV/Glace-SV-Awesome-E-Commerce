@@ -6,7 +6,6 @@ import { FilledCart } from "../component/filledCart";
 export const ShoppingCart = () => {
 	const { store, actions } = useContext(Context);
 	const cart = store.cart;
-	console.log(cart);
 	const isEmpty = cart.length === 0;
 	const emptyCart = (
 		<p className="mx-auto text-center">

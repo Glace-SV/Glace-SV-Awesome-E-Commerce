@@ -137,8 +137,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				for (let i = 0; i < aux.length; i++) {
 					sum += aux[i];
 				}
-				console.log(sum);
-				console.log(aux);
 				setStore({ orderTotal: sum });
 			},
 
@@ -155,12 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				quantity = item.quantity;
 				price = item.price;
 				let newPrice = quantity * price;
-				console.log(newPrice);
 			},
-
-			// setUser: user => {
-			// 	setStore({ user: user });
-			// },
 
 			getUser: () => {
 				fetch(process.env.BACKEND_URL + "/api/login")

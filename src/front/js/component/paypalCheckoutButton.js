@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
 		currency: "USD",
-		env: "sandbox",
+		env: process.env.PAYPAL_ENV,
 		client: {
-			sandbox: "AawvPTlvCFkpEpR0OeqXS5k-6qsgHXQHg0zViBMqM4gZpmEh0J_lw9ti5hF0Ykn6nCFZKtX9bp9fC5Tf",
-			production: "--"
+			sandbox: process.env.PAYPAL_KEY,
+			production: process.env.PAYPAL_KEY
 		},
 		style: {
 			label: "pay", // checkout | credit | pay | buynow | paypal | installment (Note: The installment feature is available only in these locales: en_MX, es_MX, en_BR, pt_BR)
@@ -40,7 +40,6 @@ const PaypalCheckoutButton = ({ order }) => {
 			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra. +503 77 36 24 84"
 		};
 
-		// console.log(payment);
 		return actions.payment.create({
 			payment
 		});
@@ -50,11 +49,9 @@ const PaypalCheckoutButton = ({ order }) => {
 		return actions.payment
 			.execute()
 			.then(response => {
-				console.log(response);
 				alert(`Tu pago se ha realizado correctamente, gracias por tu compra.`);
 			})
 			.catch(error => {
-				console.log(error);
 				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");
 			});
 	};

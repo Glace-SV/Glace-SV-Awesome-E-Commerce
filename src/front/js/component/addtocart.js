@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 const AddToCart = () => {
 	const { store, actions } = useContext(Context);
 	const [total, setTotal] = useState();
-	console.log("cart 1", store.cart);
 	return (
 		<div>
 			<Dropdown>
