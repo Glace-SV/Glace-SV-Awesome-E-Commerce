@@ -30,9 +30,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						} else {
 							localStorage.setItem("jwt-token", data.token);
 							alert("Ya tienes acceso, disfruta de tu compra.");
-							window.location.replace("/");
+							// window.location.replace("/");
 						}
 					});
+				console.log(email);
 				setStore({ email: email });
 			},
 
@@ -55,7 +56,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						phone: phone
 					})
 				}).then(response => response.json());
-				setStore({ email: email });
 			},
 
 			logout() {
@@ -160,16 +160,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						if (data) {
-							setStore({
-								currentUser: {
-									name: data[0].name.toString(),
-									lastname: data[0].lastname.toString(),
-									email: data[0].email.toString(),
-									address: data[0].address.toString(),
-									city: data[0].city.toString(),
-									phone: data[0].phone.toString()
+							data.map(user => {
+								const store = getStore();
+								console.log("user email", user.email, "store email", store.email);
+								if (user.email === store.email) {
+									setStore({ currentUser: user });
+									console.log(user);
 								}
 							});
+							// setStore({
+							// 	currentUser: {
+							// 		name: data[0].name.toString(),
+							// 		lastname: data[0].lastname.toString(),
+							// 		email: data[0].email.toString(),
+							// 		address: data[0].address.toString(),
+							// 		city: data[0].city.toString(),
+							// 		phone: data[0].phone.toString()
+							// 	}
+							// });
 						}
 					});
 			},

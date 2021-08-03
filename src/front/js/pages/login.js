@@ -12,8 +12,7 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
-		// alert("ya tienes acceso, disfruta de tu compra");
-		// window.location.replace("/");
+	
 	};
 
 	return (
