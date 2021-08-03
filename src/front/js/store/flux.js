@@ -158,18 +158,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUser: () => {
 				fetch(process.env.BACKEND_URL + "/api/login")
 					.then(resp => resp.json())
-					.then(data =>
-						setStore({
-							currentUser: {
-								name: data[0].name.toString(),
-								lastname: data[0].lastname.toString(),
-								email: data[0].email.toString(),
-								address: data[0].address.toString(),
-								city: data[0].city.toString(),
-								phone: data[0].phone.toString()
-							}
-						})
-					);
+					.then(data => {
+						if (data) {
+							setStore({
+								currentUser: {
+									name: data[0].name.toString(),
+									lastname: data[0].lastname.toString(),
+									email: data[0].email.toString(),
+									address: data[0].address.toString(),
+									city: data[0].city.toString(),
+									phone: data[0].phone.toString()
+								}
+							});
+						}
+					});
 			},
 
 			addForm: (name, email, phone, event, pax, date) => {
