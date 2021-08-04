@@ -11,13 +11,13 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-@api.route("/login",methods=['GET'])
-def all_users():
-    user = User.get_all()
-    user_dic = []
-    for user in user :
-        user_dic.append(user.serialize())
-    return jsonify(user_dic),200
+@api.route("/user",methods=['GET'])
+@jwt_required()
+def get_current_user():
+    identity = get_jwt_identity()
+    user = User.get_by_email(identity)
+    
+    return jsonify(user.serialize()),200
 
 @api.route("/register", methods=['POST'])
 def new_register():

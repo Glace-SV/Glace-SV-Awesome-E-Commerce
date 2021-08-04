@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: "",
 			currentUser: {},
 			orderTotal: "",
-			email: ""
+		
 		},
 		actions: {
 			login: (email, password) => {
@@ -33,8 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							// window.location.replace("/");
 						}
 					});
-				console.log(email);
-				setStore({ email: email });
+			
 			},
 
 			register: (email, password, username, name, lastname, address, city, phone) => {
@@ -74,9 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.setItem("token", token);
 				setStore({ token: token });
 			},
-			getMessage: () => {
-				fetch(process.env.BACKEND_URL + "/api/login");
-			},
+		
 
 			loadGifts: () => {
 				fetch(process.env.BACKEND_URL + "/api/products/Gifts")
@@ -156,28 +153,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getUser: () => {
-				fetch(process.env.BACKEND_URL + "/api/login")
+				fetch(process.env.BACKEND_URL + "/api/user", {
+					headers: {
+						authorization: "Bearer " + localStorage.getItem("jwt-token")
+					}
+				})
 					.then(resp => resp.json())
-					.then(data => {
-						if (data) {
-							data.map(user => {
-								const store = getStore();
-								console.log("user email", user.email, "store email", store.email);
-								if (user.email === store.email) {
-									setStore({ currentUser: user });
-									console.log(user);
-								}
-							});
-							// setStore({
-							// 	currentUser: {
-							// 		name: data[0].name.toString(),
-							// 		lastname: data[0].lastname.toString(),
-							// 		email: data[0].email.toString(),
-							// 		address: data[0].address.toString(),
-							// 		city: data[0].city.toString(),
-							// 		phone: data[0].phone.toString()
-							// 	}
-							// });
+					.then(user => {
+						if (user) {
+							const store = getStore();
+							console.log("user email", user.email, "store email", store.email);
+							setStore({ currentUser: user });
+							console.log(user);
 						}
 					});
 			},
