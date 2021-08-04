@@ -9,8 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cartPrice: [],
 			token: "",
 			currentUser: {},
-			orderTotal: "",
-			email: ""
+			orderTotal: ""
 		},
 		actions: {
 			login: (email, password) => {
@@ -33,8 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							window.location.replace("/");
 						}
 					});
-				console.log(email);
-				setStore({ email: email });
 			},
 
 			register: (email, password, username, name, lastname, address, city, phone) => {
