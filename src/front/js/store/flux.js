@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						} else {
 							localStorage.setItem("jwt-token", data.token);
 							alert("Ya tienes acceso, disfruta de tu compra.");
-							// window.location.replace("/");
+							window.location.replace("/");
 						}
 					});
 				console.log(email);

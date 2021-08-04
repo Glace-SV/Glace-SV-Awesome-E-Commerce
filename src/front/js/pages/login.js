@@ -12,7 +12,6 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
-	
 	};
 
 	return (
