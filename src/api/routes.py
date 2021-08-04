@@ -11,7 +11,6 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
 @api.route("/user",methods=['GET'])
 @jwt_required()
 def get_current_user():
@@ -19,7 +18,6 @@ def get_current_user():
     user = User.get_by_email(identity)
     
     return jsonify(user.serialize()),200
-    
 
 @api.route("/register", methods=['POST'])
 def new_register():

@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: "",
 			currentUser: {},
 			orderTotal: ""
+
 		},
 		actions: {
 			login: (email, password) => {
