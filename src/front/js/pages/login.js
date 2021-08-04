@@ -12,6 +12,7 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
+		// window.location.replace("/");
 	};
 
 	return (
