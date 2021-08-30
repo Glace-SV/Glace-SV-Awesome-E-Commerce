@@ -1,23 +1,38 @@
 //import rendergifts???
 
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+import React from "react";
 import "../../styles/home.scss";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Carousel, Card, Button, Form } from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-	const [formName, setFormName] = useState();
-	const [formEmail, setFormEmail] = useState();
-	const [formPhone, setFormPhone] = useState();
-	const [formEvent, setFormEvent] = useState();
-	const [formPax, setFormPax] = useState();
-	const [formDate, setFormDate] = useState();
-	const handle_form = () => {
-		actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
-		alert("formulario enviado. Garcias por su confianza");
-	};
+	// const { store, actions } = useContext(Context);
+	// const [formName, setFormName] = useState();
+	// const [formEmail, setFormEmail] = useState();
+	// const [formPhone, setFormPhone] = useState();
+	// const [formEvent, setFormEvent] = useState();
+	// const [formPax, setFormPax] = useState();
+	// const [formDate, setFormDate] = useState();
+	// const handle_form = () => {
+	// 	actions.addForm(formName, formEmail, formPhone, formEvent, formPax, formDate);
+	// 	alert("formulario enviado. Garcias por su confianza");
+	// };
+	function sendEmail(e) {
+		e.preventDefault();
+
+		emailjs.sendForm("service_71kh9c1", "template_asj42kq", e.target, "user_1BqDn49vev8kqzjK7Nldu").then(
+			result => {
+				console.log(result.text);
+			},
+			error => {
+				console.log(error.text);
+			}
+		);
+		// alert("formulario enviado. Garcias por su confianza");
+		e.target.reset();
+	}
+
 	return (
 		<div>
 			<Carousel>
@@ -139,14 +154,15 @@ export const Home = () => {
 				<p className="eventpara scrim slideonecolor">
 					Déjanos tus datos y nos pondremos en contacto contigo lo más pronto posible.
 				</p>
-				<Form className="col-lg-6 col-10 mx-auto">
+				<Form className="col-lg-6 col-10 mx-auto" onSubmit={sendEmail}>
 					<Form.Group className="mb-3" controlId="formBasicEmail">
 						<Form.Control
 							type="text"
 							placeholder="Nombre"
+							name="name"
 							required
-							value={formName}
-							onChange={e => setFormName(e.target.value)}
+							// value={formName}
+							// onChange={e => setFormName(e.target.value)}
 						/>
 					</Form.Group>
 
@@ -154,50 +170,61 @@ export const Home = () => {
 						<Form.Control
 							type="email"
 							placeholder="Email"
+							name="email"
 							required
-							value={formEmail}
-							onChange={e => setFormEmail(e.target.value)}
+
+							// value={formEmail}
+							// onChange={e => setFormEmail(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Control
 							type="text"
 							placeholder="Teléfono"
+							name="phone"
 							required
-							value={formPhone}
-							onChange={e => setFormPhone(e.target.value)}
+
+							// value={formPhone}
+							// onChange={e => setFormPhone(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Control
 							type="text"
 							placeholder="Tipo de evento"
+							name="event"
 							required
-							value={formEvent}
-							onChange={e => setFormEvent(e.target.value)}
+
+							// value={formEvent}
+							// onChange={e => setFormEvent(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Control
 							type="text"
 							placeholder="N° personas"
+							name="pax"
 							required
-							value={formPax}
-							onChange={e => setFormPax(e.target.value)}
+
+							// value={formPax}
+							// onChange={e => setFormPax(e.target.value)}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Control
 							type="text"
 							placeholder="Fecha de tu evento"
+							name="date"
 							required
-							value={formDate}
-							onChange={e => setFormDate(e.target.value)}
+
+							// value={formDate}
+							// onChange={e => setFormDate(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Button variant="warning" type="Enviar" className="text-center mx-auto" onClick={handle_form}>
+					<Button variant="warning" type="Enviar" className="text-center mx-auto" onSubmit={sendEmail}>
 						Enviar
+						{/* onClick={handle_form} */}
 					</Button>
 				</Form>
 				<div className="air" />
