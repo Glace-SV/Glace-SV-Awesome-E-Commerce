@@ -5,6 +5,7 @@ import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 import { Carousel, Card, Button, Form } from "react-bootstrap";
 import emailjs from "emailjs-com";
+import { EventModal } from "../component/eventformmodal";
 
 export const Home = () => {
 	// const { store, actions } = useContext(Context);
@@ -30,6 +31,9 @@ export const Home = () => {
 			}
 		);
 		// alert("formulario enviado. Garcias por su confianza");
+		{
+			EventModal;
+		}
 		e.target.reset();
 	}
 
