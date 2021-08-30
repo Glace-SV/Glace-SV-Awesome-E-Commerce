@@ -164,19 +164,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.log(user);
 						}
 					});
-			},
-
-			addForm: (name, email, phone, event, pax, date) => {
-				fetch(process.env.BACKEND_URL + "/api/eventform", {
-					method: "POST",
-					mode: "cors",
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
-				}).then(response => response.json());
 			}
+
+			// addForm: (name, email, phone, event, pax, date) => {
+			// 	fetch(process.env.BACKEND_URL + "/api/eventform", {
+			// 		method: "POST",
+			// 		mode: "cors",
+			// 		headers: {
+			// 			"Access-Control-Allow-Origin": "*",
+			// 			"Content-Type": "application/json"
+			// 		},
+			// 		body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
+			// 	}).then(response => response.json());
+			// }
 		}
 	};
 };
