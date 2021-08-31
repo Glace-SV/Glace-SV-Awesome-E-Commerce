@@ -28,11 +28,9 @@ export const GlazedInfoCard = () => {
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-					culpa qui officia deserunt mollit anim id est laborum.
+					Pastry dessert cotton candy cupcake sugar plum bear claw. Cake sesame snaps muffin powder bonbon
+					tootsie roll chocolate. I love candy tart cookie halvah jelly-o I love croissant. Chocolate dragée
+					powder sugar plum toffee.
 				</p>
 				<h3 className="lead mx-auto buynow my-3">COMPRA AHORA!</h3>
 			</div>

@@ -135,11 +135,11 @@ export const Home = () => {
 				</div>
 				<h3 className="eventtitle3 mt-4 scrim slideonecolor">We design delicious events.</h3>
 				<p className="eventpara scrim slideonecolor">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-					culpa qui officia deserunt mollit anim id est laborum.
+					Nuestras tartas personalizadas son originales y deliciosas a la misma vez. Utilizamos ingredientes
+					100% naturales. En nuestro amplio catálogo de pasteles decorados puedes encontrar tartas para toda
+					clase de ocasiones. Pasteles para bodas, cumpleaños infantiles, bautizos, primera comunión, y
+					empresas. Tratamos endulzar los días para que puedas olvidar, por un momento, el estrés de la vida
+					cotidiana. Un dulce, una sonrisa con los mejores pasteles personalizados en El Salvador.
 				</p>
 				<Button variant="warning" className="text-center mx-auto">
 					<a

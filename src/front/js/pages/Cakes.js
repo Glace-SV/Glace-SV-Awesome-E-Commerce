@@ -28,11 +28,10 @@ export const CakesInfoCard = () => {
 			</div>
 			<div className="row mx-auto ">
 				<p className="mx-5 mt-3 viewspara">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-					culpa qui officia deserunt mollit anim id est laborum.
+					Cupcake ipsum dolor sit amet. Halvah donut candy I love ice cream lemon drops jelly-o jelly I love.
+					Biscuit tart tiramisu jelly oat cake I love pudding tootsie roll. Bonbon shortbread cake candy canes
+					carrot cake cupcake powder. Liquorice marshmallow soufflé jelly-o wafer carrot cake sweet danish
+					chocolate. Apple pie gummi bears chocolate cake chocolate cake muffin.
 				</p>
 				<h3 className="lead mx-auto buynow my-3">COMPRA AHORA!</h3>
 			</div>

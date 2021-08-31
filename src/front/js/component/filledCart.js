@@ -28,6 +28,9 @@ export const FilledCart = () => {
 
 	return (
 		<div>
+			<div className="row mb-4">
+				<h1 className="mt-3 mx-auto viewstitle">Tu carrito de compra</h1>
+			</div>
 			{cart.map((item, index) => (
 				<div key={index} className="row d-inline-block mx-4">
 					<Card style={{ width: "17rem" }} className="col-12 m-3">
@@ -88,7 +91,7 @@ export const FilledCart = () => {
 				<div className="row mx-auto mb-5">
 					<h1 className="mx-auto mt-1 text-center">
 						<Badge bg="warning" variant="warning" text="dark">
-							Gran Total: ${total}
+							Total: ${total}
 						</Badge>
 					</h1>
 				</div>
