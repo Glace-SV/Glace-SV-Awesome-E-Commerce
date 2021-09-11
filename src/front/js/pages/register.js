@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import "../../styles/register.scss";
 import { Context } from "../store/appContext";
 import { Button, Form, Tab } from "react-bootstrap";
-import GoogleLogin from "react-google-login";
 
 const Register = () => {
 	const { actions } = useContext(Context);
@@ -20,10 +19,6 @@ const Register = () => {
 		window.location.replace("/login");
 		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
 	};
-	const responseGoogle = response => {
-		console.log(response);
-	};
-
 	return (
 		<div className="container-fluid">
 			<div className="row rowdesign2">
@@ -114,14 +109,6 @@ const Register = () => {
 							Registrarme
 						</Button>
 					</div>
-					<br />
-					<GoogleLogin
-						clientId="776161745124-plhjr67aqqg91uqn23gv90tl6q795i9a.apps.googleusercontent.com"
-						buttonText="Accede con Google"
-						onSuccess={responseGoogle}
-						onFailure={responseGoogle}
-						cookiePolicy={"single_host_origin"}
-					/>
 				</Tab.Content>
 			</div>
 			<p className="mt-3 col-12">

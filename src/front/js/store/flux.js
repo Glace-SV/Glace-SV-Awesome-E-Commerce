@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
+			id_token: "",
 			currentUser: {},
 			orderTotal: ""
 		},

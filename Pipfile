@@ -20,6 +20,9 @@ flask-admin = "*"
 flask-jwt-extended = "*"
 requests = "*"
 requestes = "*"
+flask-oauthlib = "*"
+flask-login = "*"
+google-auth-oauthlib = "*"
 
 [requires]
 python_version = "3.8"

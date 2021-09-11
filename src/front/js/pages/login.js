@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import Register from "./register";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
-
 import { Button, Form, Tab, Nav } from "react-bootstrap";
+import GoogleLogin from "react-google-login";
 
 export const Login = () => {
 	const { actions } = useContext(Context);
@@ -12,6 +12,9 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
+	};
+	const responseGoogle = response => {
+		console.log(response);
 	};
 
 	return (
@@ -57,6 +60,15 @@ export const Login = () => {
 									Acceder
 								</Button>
 							</Form>
+							<br />
+							<GoogleLogin
+								clientId="776161745124-ui1mu3hu3fp6u1o9hu7uu38cqrmdnfat.apps.googleusercontent.com"
+								buttonText="Accede con Google"
+								onSuccess={responseGoogle}
+								onFailure={responseGoogle}
+								isSignedIn={true}
+								cookiePolicy={"single_host_origin"}
+							/>
 						</Tab.Pane>
 						<Tab.Pane eventKey="second">
 							<Form className="formcolor">

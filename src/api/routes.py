@@ -19,6 +19,8 @@ def get_current_user():
     
     return jsonify(user.serialize()),200
 
+
+
 @api.route("/register", methods=['POST'])
 def new_register():
 
