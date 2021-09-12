@@ -13,18 +13,6 @@ export const Login = () => {
 
 	const Loged = () => {
 		actions.login(email, password);
-		setTimeout(function() {
-			window.location.replace("/");
-		}, 4000);
-		toast.warn("Ya estás logeado! Disfruta de tu compra", {
-			position: "top-right",
-			autoClose: 4000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined
-		});
 	};
 
 	return (
