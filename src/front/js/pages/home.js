@@ -224,7 +224,6 @@ export const Home = () => {
 
 					<Button variant="warning" type="Enviar" className="text-center mx-auto" onSubmit={sendEmail}>
 						Enviar
-						{/* onClick={handle_form} */}
 					</Button>
 				</Form>
 				<div className="air" />

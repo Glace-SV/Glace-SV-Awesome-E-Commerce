@@ -49,7 +49,7 @@ const PaypalCheckoutButton = ({ order }) => {
 		return actions.payment
 			.execute()
 			.then(response => {
-				alert(`Tu pago se ha realizado correctamente, gracias por tu compra.`);
+				alert("Tu pago se ha realizado correctamente, gracias por tu compra.");
 			})
 			.catch(error => {
 				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");
