@@ -3,8 +3,10 @@ import "../../styles/home.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import PaypalCheckoutButton from "./paypalCheckoutButton";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
@@ -27,6 +29,20 @@ export const FilledCart = () => {
 			};
 		})
 	};
+	function sendEmail(e) {
+		e.preventDefault();
+
+		emailjs.sendForm("service_71kh9c1", "template_pev5dw8", e.target, "user_1BqDn49vev8kqzjK7Nldu").then(
+			result => {
+				console.log(result.text);
+			},
+			error => {
+				console.log(error.text);
+			}
+		);
+	
+		e.target.reset();
+	}
 
 	return (
 		<div>
@@ -158,7 +174,7 @@ export const FilledCart = () => {
 			</div>
 			<>
 				<header className="Paypal-header text-center mt-5 mb-5 mx-auto" style={{ width: "300px" }}>
-					<PaypalCheckoutButton order={order} />
+					<PaypalCheckoutButton order={order} onSubmit={sendEmail} />
 				</header>
 			</>
 			<div className="air" />

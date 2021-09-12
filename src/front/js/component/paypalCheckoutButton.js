@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
 import PropTypes from "prop-types";
+import emailjs from "emailjs-com";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
@@ -39,6 +40,7 @@ const PaypalCheckoutButton = ({ order }) => {
 			],
 			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra. +503 77 36 24 84"
 		};
+		
 
 		return actions.payment.create({
 			payment
@@ -49,7 +51,7 @@ const PaypalCheckoutButton = ({ order }) => {
 		return actions.payment
 			.execute()
 			.then(response => {
-				alert(`Tu pago se ha realizado correctamente, gracias por tu compra.`);
+				alert("Tu pago se ha realizado correctamente, gracias por tu compra.");
 			})
 			.catch(error => {
 				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");

@@ -139,7 +139,7 @@ const Register = () => {
 			</div>
 			<p className="mt-3 col-12">
 				Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web,
-				gestionar el acceso a tu cuenta y otros propósitos.
+				gestionar el acceso a tu cuenta y otros propósitos privados.
 			</p>
 		</div>
 	);
