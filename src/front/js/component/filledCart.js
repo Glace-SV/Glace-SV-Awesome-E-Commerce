@@ -3,7 +3,10 @@ import "../../styles/home.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import PaypalCheckoutButton from "./paypalCheckoutButton";
-import emailjs from "emailjs-com";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
@@ -43,6 +46,17 @@ export const FilledCart = () => {
 
 	return (
 		<div>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<div className="row mb-4">
 				<h1 className="mt-3 mx-auto viewstitle">Tu carrito de compra</h1>
 			</div>
@@ -89,6 +103,15 @@ export const FilledCart = () => {
 									actions.deleteFromCart(index);
 									actions.getOrderTotal();
 									setTotal(store.orderTotal);
+									toast.warn("Producto eliminado con éxito", {
+										position: "top-right",
+										autoClose: 4000,
+										hideProgressBar: false,
+										closeOnClick: true,
+										pauseOnHover: true,
+										draggable: true,
+										progress: undefined
+									});
 								}}>
 								Eliminar
 							</Button>

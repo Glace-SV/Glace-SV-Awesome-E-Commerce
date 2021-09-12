@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import Register from "./register";
 import "../../styles/login.scss";
 import { Context } from "../store/appContext";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button, Form, Tab, Nav } from "react-bootstrap";
 
 export const Login = () => {
@@ -16,6 +17,17 @@ export const Login = () => {
 
 	return (
 		<div className="loginbckgrndimg">
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<Tab.Container id="left-tabs-example" defaultActiveKey="first">
 				<div className="row rowdesign1">
 					<Nav variant="pills" className="mt-3 mb-3 mx-auto">

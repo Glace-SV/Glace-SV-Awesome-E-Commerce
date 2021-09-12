@@ -1,3 +1,6 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -25,11 +28,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						if (data.token == undefined) {
-							alert("OOPS!!! Ha habido algún error.");
+							setTimeout(function() {
+								window.location.replace("/login");
+							}, 4000);
+							toast.warn("Ha ocurrido un error. Inténtalo de nuevo", {
+								position: "top-right",
+								autoClose: 4000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined
+							});
 						} else {
+							setTimeout(function() {
+								window.location.replace("/");
+							}, 4000);
+							toast.warn("Ya estás logeado! Disfruta de tu compra", {
+								position: "top-right",
+								autoClose: 4000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined
+							});
 							localStorage.setItem("jwt-token", data.token);
-							alert("Ya tienes acceso, disfruta de tu compra.");
-							window.location.replace("/");
 						}
 					});
 			},
@@ -165,19 +189,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 			}
-
-			// addForm: (name, email, phone, event, pax, date) => {
-			// 	fetch(process.env.BACKEND_URL + "/api/eventform", {
-			// 		method: "POST",
-			// 		mode: "cors",
-			// 		headers: {
-			// 			"Access-Control-Allow-Origin": "*",
-			// 			"Content-Type": "application/json"
-			// 		},
-			// 		body: JSON.stringify({ name: name, email: email, phone: phone, event: event, pax: pax, date: date })
-			// 	}).then(response => response.json());
-			// }
 		}
 	};
 };
+
 export default getState;

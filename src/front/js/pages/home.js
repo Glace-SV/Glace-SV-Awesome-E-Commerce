@@ -5,6 +5,8 @@ import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 import { Carousel, Card, Button, Form } from "react-bootstrap";
 import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Home = () => {
 	// const { store, actions } = useContext(Context);
@@ -30,11 +32,31 @@ export const Home = () => {
 			}
 		);
 		// alert("formulario enviado. Garcias por su confianza");
+		toast.warn("Tu formulario se ha enviado correctamente. Te contactaremos dentro de las próximas 24 horas.", {
+			position: "top-right",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined
+		});
 		e.target.reset();
 	}
 
 	return (
 		<div>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<Carousel>
 				<Carousel.Item>
 					<img

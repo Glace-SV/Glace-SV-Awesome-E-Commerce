@@ -2,6 +2,8 @@ import { Card, Button } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 
@@ -16,6 +18,17 @@ export const CakesInfoCard = () => {
 	return (
 		<>
 			<div className="row mx-auto" id="categories">
+				<ToastContainer
+					position="top-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 				<h1 className="mt-3 mx-auto viewstitle">
 					<Link to="/treats">
 						<i className="changesection mr-4 fas fa-arrow-left" />
@@ -54,6 +67,15 @@ export const CakesInfoCard = () => {
 									actions.addToCart(cake);
 									actions.getOrderTotal();
 									setTotal(store.orderTotal);
+									toast.warn("Producto agregado al carrito!", {
+										position: "top-right",
+										autoClose: 4000,
+										hideProgressBar: false,
+										closeOnClick: true,
+										pauseOnHover: true,
+										draggable: true,
+										progress: undefined
+									});
 								}}>
 								Comprar
 							</Button>

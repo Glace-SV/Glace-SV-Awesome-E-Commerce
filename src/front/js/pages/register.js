@@ -4,8 +4,11 @@ import "../../styles/register.scss";
 import { Context } from "../store/appContext";
 import { Button, Form, Tab } from "react-bootstrap";
 import GoogleLogin from "react-google-login";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+	// let history = useHistory();
 	const { actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -17,16 +20,34 @@ const Register = () => {
 	const [phone, setPhone] = useState("");
 	const handle_acceder = () => {
 		actions.register(email, password, username, name, lastName, address, city, phone);
-		window.location.replace("/login");
-		alert("Ya estás registrado, por favor haz click en el botón 'Accede' para logearte");
-	};
-	const responseGoogle = response => {
-		console.log(response);
+		setTimeout(function() {
+			window.location.replace("/login");
+		}, 4000);
+		toast.warn('Te has registrado correctamente. Haz click en el botón "Accede" para logearte', {
+			position: "top-right",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined
+		});
 	};
 
 	return (
 		<div className="container-fluid">
 			<div className="row rowdesign2">
+				<ToastContainer
+					position="top-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 				<Tab.Content className="col-lg-12 col-12 mx-auto">
 					<div className="formcolor">
 						<Form.Group className="mb-3" controlId="formBasicEmailRegister">
@@ -114,14 +135,6 @@ const Register = () => {
 							Registrarme
 						</Button>
 					</div>
-					<br />
-					<GoogleLogin
-						clientId="776161745124-plhjr67aqqg91uqn23gv90tl6q795i9a.apps.googleusercontent.com"
-						buttonText="Accede con Google"
-						onSuccess={responseGoogle}
-						onFailure={responseGoogle}
-						cookiePolicy={"single_host_origin"}
-					/>
 				</Tab.Content>
 			</div>
 			<p className="mt-3 col-12">
