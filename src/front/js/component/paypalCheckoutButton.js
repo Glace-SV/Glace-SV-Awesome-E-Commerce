@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
 import PropTypes from "prop-types";
+import emailjs from "emailjs-com";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
@@ -39,6 +40,7 @@ const PaypalCheckoutButton = ({ order }) => {
 			],
 			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra. +503 77 36 24 84"
 		};
+		
 
 		return actions.payment.create({
 			payment
