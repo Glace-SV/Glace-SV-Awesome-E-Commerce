@@ -8,7 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cart: [],
 			cartPrice: [],
 			token: "",
-			id_token: "",
+			access_token: "",
 			currentUser: {},
 			orderTotal: ""
 		},
@@ -154,6 +154,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(process.env.BACKEND_URL + "/api/user", {
 					headers: {
 						authorization: "Bearer " + localStorage.getItem("jwt-token")
+					}
+				})
+					.then(resp => resp.json())
+					.then(user => {
+						if (user) {
+							const store = getStore();
+							console.log("user email", user.email, "store email", store.email);
+							setStore({ currentUser: user });
+							console.log(user);
+						}
+					});
+			},
+			getGoogleUser: () => {
+				fetch(process.env.BACKEND_URL + "/api/user", {
+					headers: {
+						Authorization: "Bearer" + localStorage.getItem("token")
 					}
 				})
 					.then(resp => resp.json())

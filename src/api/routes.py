@@ -49,7 +49,7 @@ def new_register():
   
 @api.route("/login", methods=['POST'])
 
-def handlin_login():
+def handlin_google_login():
     body = request.get_json(force=True)
     email = body['email']
     password = body['password']
@@ -65,7 +65,36 @@ def handlin_login():
 
     else:
         return {'error': 'Some parameter is wrong'}, 400
+    
+@api.route("/GoogleUser", methods=['POST'])
 
+def handlin_login():
+    json=request.get_json()
+
+    if json is None: 
+        raise APIException("You shoulld be return a json")
+
+    if "email" not in json:
+        raise APIException("That's not an email in json")
+
+    if "password" not in json:
+        raise APIException("That's not a password in json")
+    
+    print(json["email"],json["password"])
+   
+    email = json["email"]
+    password = json["password"]
+
+    user = User.query.filter_by(email=email).one_or_none()
+
+    if user is None:
+         raise APIException("User not found")
+
+    if not user.check_password(password):
+      return jsonify("Your credentials are wrong, please try again"), 401
+
+    access_token = create_access_token(identity=user.serialize())
+    return jsonify(accessToken=access_token)
 
 @api.route('/products',methods=['GET']) 
 def all_products():

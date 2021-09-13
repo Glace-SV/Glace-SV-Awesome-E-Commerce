@@ -126,6 +126,70 @@ class Products(db.Model, BasicMode):
     @classmethod
     def get_all_by_category(cls, model_category):
         return cls.query.filter_by(category = model_category).all()
+    
+    class GoogleUser(db.Model, BasicMode):
+        __tablename__ = 'googleuser'
+        id = db.Column(db.Integer,unique=True, primary_key=True)
+        email = db.Column(db.String(120), unique=True, nullable=False)
+        name = db.Column(db.String(120), unique=False, nullable=False)
+        password = db.Column(db.String(500), unique=False, nullable=False)
+        familyName = db.Column(db.String(80), unique=False, nullable=False)
+        givenName = db.Column(db.String(80), unique=False, nullable=False)
+        googleId = db.Column(db.String(8000), unique=True, nullable=False)
+        # imageUrl = db.Column(db.String(1000), unique=True, nullable=False)
+        tokenId = db.Column(db.String(8000), unique=True, nullable=True) 
+        is_active = db.Column(db.Boolean(), unique=False, nullable=True)
+
+
+        def __repr__(self):
+            return '<googleuser %r>' % self.name
+
+        def to_dict(self):
+            return {
+                "id": self.id,
+                "name": self.name,
+                "familyName": self.familyName,
+                "givenName": self.givenName,
+                "email": self.email,
+            
+            }
+
+        
+        @staticmethod
+        def login_credentials(email,password):
+            return User.query.filter_by(email=email).filter_by(password=password).first()
+        
+        @classmethod
+        def get_by_email(cls, email):
+            user = cls.query.filter_by(email=email).one_or_none()
+            return user
+            
+    
+        def assign_token(self,token):
+            self.token = token
+            db.session.add(self)
+            db.session.commit()
+        
+        def check_password(self, password_param):
+            return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
+
+        def db_post(self): 
+            print(self)       
+            db.session.add(self)
+            db.session.commit()
+            
+        def serialize(self):
+            return {
+                "id": self.id,
+                "name": self.name,
+                "familyName": self.familyName,
+                "givenName": self.givenName,
+                "email": self.email,
+                "tokenId": self.tokenId,
+                "googleId": self.googleId
+            
+                # do not serialize the password, its a security breach
+            }
 
 
 # class EventForm(db.Model, BasicMode):

@@ -4,6 +4,7 @@ import "../../styles/login.scss";
 import { Context } from "../store/appContext";
 import { Button, Form, Tab, Nav } from "react-bootstrap";
 import GoogleLogin from "react-google-login";
+import { useGoogleLogin } from "react-google-login";
 
 export const Login = () => {
 	const { actions } = useContext(Context);
@@ -15,6 +16,7 @@ export const Login = () => {
 	};
 	const responseGoogle = response => {
 		console.log(response);
+		actions.login(email, password);
 	};
 
 	return (
