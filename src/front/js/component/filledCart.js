@@ -7,7 +7,6 @@ import PaypalCheckoutButton from "./paypalCheckoutButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export const FilledCart = () => {
 	const { store, actions } = useContext(Context);
 	const [total, setTotal] = useState(store.orderTotal);
@@ -40,7 +39,7 @@ export const FilledCart = () => {
 				console.log(error.text);
 			}
 		);
-	
+
 		e.target.reset();
 	}
 

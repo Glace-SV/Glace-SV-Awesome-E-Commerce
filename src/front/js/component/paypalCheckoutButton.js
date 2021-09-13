@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
 import PropTypes from "prop-types";
-import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PaypalCheckoutButton = ({ order }) => {
 	const paypalConf = {
@@ -40,7 +41,6 @@ const PaypalCheckoutButton = ({ order }) => {
 			],
 			note_to_payer: "Contáctanos para cualquier aclaración sobre tu compra. +503 77 36 24 84"
 		};
-		
 
 		return actions.payment.create({
 			payment
@@ -51,19 +51,54 @@ const PaypalCheckoutButton = ({ order }) => {
 		return actions.payment
 			.execute()
 			.then(response => {
-				alert("Tu pago se ha realizado correctamente, gracias por tu compra.");
+				setTimeout(function() {
+					window.location.replace("/");
+				}, 4000);
+				toast.warn("Tu pago se ha realizado correctamente, gracias por tu compra.", {
+					position: "top-right",
+					autoClose: 4000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
 			})
 			.catch(error => {
-				alert("Ocurrió un error en el proceso de pago, vuelva a intentarlo.");
+				toast.warn("Ocurrió un error en el proceso de pago, vuelva a intentarlo.", {
+					position: "top-right",
+					autoClose: 4000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
 			});
 	};
 
 	const onError = error => {
-		alert("El pago no fue realizado, vuelva a intentarlo.");
+		toast.warn("El pago no fue realizado, vuelva a intentarlo.", {
+			position: "top-right",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined
+		});
 	};
 
 	const onCancel = (data, actions) => {
-		alert("El pago no fue realizado, el usuario canceló el proceso.");
+		toast.warn("El pago no fue realizado, el usuario canceló el proceso.", {
+			position: "top-right",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined
+		});
 	};
 
 	return (
