@@ -16,7 +16,7 @@ export const Login = () => {
 	};
 	const responseGoogle = response => {
 		console.log(response);
-		actions.login(email, password);
+		actions.googleLogin(email, password);
 	};
 
 	return (

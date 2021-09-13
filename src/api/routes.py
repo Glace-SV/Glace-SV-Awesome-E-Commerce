@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from sqlalchemy import exc
 from werkzeug.security import check_password_hash, generate_password_hash
-from api.models import db, User, Products
+from api.models import db, User, Products, GoogleUser
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -66,7 +66,7 @@ def handlin_google_login():
     else:
         return {'error': 'Some parameter is wrong'}, 400
     
-@api.route("/GoogleUser", methods=['POST'])
+@api.route("/googleUser", methods=['POST'])
 
 def handlin_login():
     json=request.get_json()

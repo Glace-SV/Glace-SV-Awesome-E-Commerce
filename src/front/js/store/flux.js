@@ -34,7 +34,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 			},
-
+			googleLogin: (email, password) => {
+				fetch(process.env.BACKEND_URL + "/api/googleLogin", {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ email: email, password: password })
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.token == undefined) {
+							alert("OOPS!!! Ha habido algún error.");
+						} else {
+							localStorage.setItem("jwt-token", data.token);
+							alert("Ya tienes acceso, disfruta de tu compra.");
+							window.location.replace("/");
+						}
+					});
+			},
 			register: (email, password, username, name, lastname, address, city, phone) => {
 				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
@@ -167,7 +187,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			getGoogleUser: () => {
-				fetch(process.env.BACKEND_URL + "/api/user", {
+				fetch(process.env.BACKEND_URL + "/api/googleLogin", {
 					headers: {
 						Authorization: "Bearer" + localStorage.getItem("token")
 					}
